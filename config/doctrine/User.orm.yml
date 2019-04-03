@@ -1,0 +1,54 @@
+App\Entity\User:
+    type: entity
+    repositoryClass: App\Repository\UserRepository
+    table: npd_user
+    id:
+        id:
+            column: uuid
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        email:
+            type: string
+            length: 180
+            unique: true
+        roles:
+            type: json
+        password:
+            type: string
+        firstName:
+            type: string
+        lastName:
+            type: string
+        passwordNeedToBeChanged:
+            type: boolean
+            nullable: true
+        created:
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
+    manyToMany:
+        courses:
+            targetEntity: App\Entity\Course
+            fetch: EAGER
+            joinTable:
+                name: user_course
+                joinColumns:
+                    user_id:
+                        referencedColumnName: uuid
+                inverseJoinColumns:
+                    course_id:
+                        referencedColumnName: id
+            cascade:
+                - all

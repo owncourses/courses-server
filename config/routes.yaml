@@ -1,0 +1,11 @@
+api_login_check:
+    path: /api/login_check
+
+admin_logout:
+    path: /admin/logout
+    methods: GET
+
+admin_login:
+    path: /admin/login
+    methods: GET
+    controller: App\Controller\AdminSecurityController::login

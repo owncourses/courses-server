@@ -1,0 +1,40 @@
+version: 2
+jobs:
+    build:
+        working_directory: ~/npd-courses-server
+        docker:
+            - image: circleci/php:7.2-browsers
+        steps:
+            - checkout
+
+            - run: sudo apt update
+            - run: sudo apt install zlib1g-dev libsqlite3-dev
+            - run: sudo docker-php-ext-install zip
+
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "composer.lock" }}
+                      - v1-dependencies-
+
+            - run: composer install -n --prefer-dist
+
+            - save_cache:
+                  key: v1-dependencies-{{ checksum "composer.lock" }}
+                  paths:
+                      - ./vendor
+            - run:
+                  name: Setup database
+                  command: |
+                      php bin/console doctrine:schema:update --force -e test
+
+            - run: php ./vendor/bin/behat
+
+            - run: php ./vendor/bin/phpspec run
+
+            - run: php vendor/bin/phpstan analyse src/ --level=4 -vvv
+
+workflows:
+    version: 2
+    build-and-deploy:
+        jobs:
+            - build

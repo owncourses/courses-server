@@ -1,0 +1,23 @@
+services:
+    app.s3_client:
+        class: Aws\S3\S3Client
+        arguments:
+            -   version: '2006-03-01'
+                region: '%env(AWS_S3_REGION)%'
+                credentials:
+                    key: '%env(AWS_S3_KEY)%'
+                    secret: '%env(AWS_S3_SECRET)%'
+
+oneup_flysystem:
+    adapters:
+        app.flysystem_adapter:
+            awss3v3:
+                client: app.s3_client
+                bucket: '%env(AWS_S3_BUCKET)%'
+                prefix: '%env(AWS_S3_PREFIX)%'
+                options:
+                    ACL: 'public-read'
+    filesystems:
+        app.filesystem:
+            adapter: app.flysystem_adapter
+            mount:   app.filesystem

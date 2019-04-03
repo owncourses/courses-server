@@ -1,0 +1,12 @@
+vich_uploader:
+    db_driver: orm
+    storage: flysystem
+    metadata:
+        auto_detection: false
+        directories:
+            - {path: '%kernel.project_dir%/config/vich_uploader', namespace_prefix: 'App\Entity'}
+    mappings:
+        course_covers:
+            uri_prefix: "https://s3.%env(AWS_S3_REGION)%.amazonaws.com/%env(AWS_S3_BUCKET)%/%env(AWS_S3_PREFIX)%"
+            upload_destination: app.filesystem
+            namer: vich_uploader.namer_base64

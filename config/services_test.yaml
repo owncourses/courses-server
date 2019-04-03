@@ -1,0 +1,12 @@
+parameters:
+    locale: 'en'
+    security_secret: '%env(SECURITY_SECRET)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Tests\Behat\:
+        resource: '../tests/Behat/*'
+        exclude: '../tests/Behat/RestJwtContext.php'

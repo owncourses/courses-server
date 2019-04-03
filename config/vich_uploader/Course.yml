@@ -1,0 +1,4 @@
+App\Entity\Course:
+    coverImageFile:
+        mapping: course_covers
+        filename_property: coverImageName

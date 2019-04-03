@@ -1,0 +1,18 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    default_locale: en
+    session:
+        handler_id: ~
+        cookie_secure: auto
+        cookie_samesite: lax
+    php_errors:
+        log: true
+    validation:
+        email_validation_mode: html5
+        mapping:
+            paths: ['%kernel.project_dir%/config/validation/']
+    serializer:
+        name_converter: 'serializer.name_converter.camel_case_to_snake_case'
+        enabled: true
+        mapping:
+            paths: ['%kernel.project_dir%/config/serialization/']

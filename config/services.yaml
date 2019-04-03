@@ -1,0 +1,49 @@
+parameters:
+    locale: 'en'
+    security_secret: '%env(SECURITY_SECRET)%'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $securitySecret: '%security_secret%'
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    app.uploader.storage:
+        alias: vich_uploader.storage
+        public: true
+
+    admin.course:
+        class: App\Admin\CourseAdmin
+        arguments: [~, App\Entity\Course, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: courses, label: Courses }
+
+    admin.module:
+        class: App\Admin\ModuleAdmin
+        arguments: [~, App\Entity\Module,'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: courses, label: Modules }
+
+    admin.lesson:
+        class: App\Admin\LessonAdmin
+        arguments: [~, App\Entity\Lesson,'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: courses, label: Lessons }
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: users, label: Users }
+        calls:
+            - ["setEncoder", ['@security.password_encoder']]
+        public: true

@@ -1,0 +1,18 @@
+App\Entity\Lesson:
+    attributes:
+        id:
+            groups: ['list', 'lesson_details', 'course_modules']
+        title:
+            groups: ['list', 'lesson_details', 'course_modules']
+        description:
+            groups: ['lesson_details']
+        embedCode:
+            groups: ['lesson_details']
+        module:
+            groups: ['lesson_details']
+        position:
+            groups: ['list', 'lesson_details']
+        created:
+            groups: ['lesson_details']
+        updated:
+            groups: ['lesson_details']

@@ -1,0 +1,26 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/public/assets/
+!/public/assets/.gitignore
+/var/
+!/var/log/.gitignore
+!/var/cache/.gitignore
+/vendor/
+###< symfony/framework-bundle ###
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
+
+docker/.data
+docker/logs

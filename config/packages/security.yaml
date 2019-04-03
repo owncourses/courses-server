@@ -1,0 +1,74 @@
+security:
+    providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, app_user_provider]
+        in_memory:
+            memory:
+                users:
+                    johndoe: { password: test }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        App\Entity\User:
+            algorithm: bcrypt
+
+    firewalls:
+        api_login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            json_login:
+                provider:                 chain_provider
+                check_path:               /api/login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+
+        api_doc:
+            pattern:   ^/api/doc(.*)
+            security: false
+
+        user_register_api:
+            pattern:   ^/api/users/register
+            stateless: true
+            guard:
+                provider: chain_provider
+                authenticators:
+                    - App\Security\SignedRequestAuthenticator
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            guard:
+                provider: chain_provider
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        admin:
+            pattern:   ^/admin
+            anonymous: true
+            logout:
+                path:   admin_logout
+                target: admin_login
+            guard:
+                provider: chain_provider
+                authenticators:
+                    - App\Security\AdminAuthenticator
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/*,       roles: [ROLE_ADMIN] }
+        - { path: ^/api/login,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,         roles: IS_AUTHENTICATED_FULLY }

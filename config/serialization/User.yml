@@ -1,0 +1,18 @@
+App\Entity\User:
+    attributes:
+        id:
+            groups: ['user_details']
+        email:
+            groups: ['user_details']
+        roles:
+            groups: ['user_details']
+        firstName:
+            groups: ['user_details']
+        lastName:
+            groups: ['user_details']
+        courses:
+            groups: ['user_details']
+        created:
+            groups: ['user_details']
+        updated:
+            groups: ['user_details']

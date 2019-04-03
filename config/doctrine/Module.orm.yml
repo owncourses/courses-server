@@ -1,0 +1,47 @@
+App\Entity\Module:
+    type: entity
+    repositoryClass: App\Repository\ModuleRepository
+    table: npd_module
+    id:
+        id:
+            column: uuid
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: text
+        created:
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
+        position:
+            type: integer
+            gedmo:
+                - sortablePosition
+            options:
+                default: 0
+    manyToOne:
+        course:
+            targetEntity: App\Entity\Course
+            joinColumn:
+                nullable: false
+            gedmo:
+                - sortableGroup
+    oneToMany:
+        lessons:
+            targetEntity: App\Entity\Lesson
+            mappedBy: module

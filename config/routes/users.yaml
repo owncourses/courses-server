@@ -1,0 +1,9 @@
+api_users_me:
+    path: /api/users/me
+    methods: GET
+    controller: App\Controller\ApiUsersController::me
+
+api_users_register:
+    path: /api/users/register
+    methods: POST
+    controller: App\Controller\ApiUsersController::registerUser

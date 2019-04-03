@@ -1,0 +1,4 @@
+api_courses:
+    path: /api/courses
+    methods: GET
+    controller: App\Controller\ApiCoursesController::getAll

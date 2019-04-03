@@ -1,0 +1,18 @@
+App\Entity\Module:
+    attributes:
+        id:
+            groups: ['list', 'course_modules', 'lesson_details']
+        title:
+            groups: ['list', 'course_modules', 'lesson_details']
+        description:
+            groups: ['list', 'course_modules']
+        position:
+            groups: ['list', 'course_modules']
+        lessons:
+            groups: ['course_modules']
+        created:
+            groups: ['course_modules']
+        updated:
+            groups: ['course_modules']
+        course:
+            groups: ['course_modules', 'lesson_details']
