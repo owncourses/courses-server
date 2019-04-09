@@ -1,7 +1,7 @@
 version: 2
 jobs:
     build:
-        working_directory: ~/npd-courses-server
+        working_directory: ~/owncourses
         docker:
             - image: circleci/php:7.2-browsers
         steps:
@@ -33,8 +33,37 @@ jobs:
 
             - run: php vendor/bin/phpstan analyse src/ --level=4 -vvv
 
+    deploy:
+        docker:
+            -   image: circleci/php:7.2-browsers
+        working_directory: ~/owncourses
+        environment:
+            setup: lowest
+        steps:
+            - checkout
+            - add_ssh_keys:
+                  fingerprints:
+                      - "ea:b5:56:00:2e:bc:1f:c1:a7:38:eb:50:e1:3f:a6:a4"
+            - run:
+                  name: Install Deployer
+                  command: |
+                      curl -LO https://deployer.org/deployer.phar
+                      sudo mv deployer.phar /usr/local/bin/dep
+                      sudo chmod +x /usr/local/bin/dep
+            - run:
+                  name: Deploy
+                  command: |
+                      echo -e "Host deploy.owncourses.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+                      dep deploy -n
+
 workflows:
     version: 2
     build-and-deploy:
         jobs:
             - build
+            - deploy:
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only: master
