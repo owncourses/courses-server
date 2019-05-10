@@ -5,6 +5,8 @@ namespace App\Command;
 use App\Entity\User;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,10 +44,15 @@ class UserCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $email = $role = $input->getArgument('email');
+        $email = $input->getArgument('email');
+
+        if (!is_string($email)) {
+            throw new InvalidArgumentException('Provided email must be string!');
+        }
+
         $user = $this->userRepository->getOneByEmail($email);
         if (null !== $user) {
-            throw new \Exception('User with provided email already exists!');
+            throw new Exception('User with provided email already exists!');
         }
 
         $user = new User();
