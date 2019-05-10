@@ -64,6 +64,6 @@ class Module implements ModuleInterface
 
     public function __toString()
     {
-        return (string) '['.$this->course->getTitle().'] '.$this->title;
+        return '['.$this->course->getTitle().'] '.$this->title;
     }
 }

@@ -36,6 +36,9 @@ App\Entity\Lesson:
                 - sortablePosition
             options:
                 default: 0
+        completed:
+            type: boolean
+            nullable: true
     manyToOne:
         module:
             targetEntity: App\Entity\Module

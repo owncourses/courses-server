@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 interface ModuleInterface extends TimestampableInterface, SortableInterface, PersistableInterface
 {
     public function getTitle(): ?string;
@@ -17,4 +19,6 @@ interface ModuleInterface extends TimestampableInterface, SortableInterface, Per
     public function getCourse(): ?CourseInterface;
 
     public function setCourse(?CourseInterface $course): void;
+
+    public function getLessons(): Collection;
 }

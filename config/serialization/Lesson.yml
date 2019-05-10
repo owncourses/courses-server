@@ -16,3 +16,5 @@ App\Entity\Lesson:
             groups: ['lesson_details']
         updated:
             groups: ['lesson_details']
+        completed:
+            groups: ['list', 'lesson_details', 'course_modules']

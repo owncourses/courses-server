@@ -2,3 +2,8 @@ api_lessons_get_single:
     path: /api/lessons/{lessonId}
     methods: GET
     controller: App\Controller\ApiLessonsController::getSingleModule
+
+api_lessons_set_completed:
+    path: /api/lessons/{lessonId}/progress
+    methods: PATCH
+    controller: App\Controller\ApiLessonsController::setProgress

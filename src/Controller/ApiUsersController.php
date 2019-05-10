@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use function random_int;
 use App\Model\UserInterface;
 use App\Form\RegisterUserType;
 use App\Repository\UserRepositoryInterface;
@@ -44,26 +45,22 @@ final class ApiUsersController extends AbstractController
         $form = $formFactory->create(RegisterUserType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $existingUser = $userRepository->getOneByEmail($user->getEmail());
-                if (null !== $existingUser) {
-                    return new JsonResponse(['message' => 'User with provided email already exists'], Response::HTTP_CONFLICT);
-                }
-
-                $generatedPassword = $passwordEncoder->encodePassword($user, $this->randomStr(7));
-                $user->setPassword($generatedPassword);
-                $user->setPasswordNeedToBeChanged(true);
-
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                $eventDispatcher->dispatch(UserInterface::EVENT_USER_CREATED, new GenericEvent($user));
-
-                return new Response($serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $existingUser = $userRepository->getOneByEmail($user->getEmail());
+            if (null !== $existingUser) {
+                return new JsonResponse(['message' => 'User with provided email already exists'], Response::HTTP_CONFLICT);
             }
 
-            return new Response($serializer->serialize($form, 'json'), Response::HTTP_BAD_REQUEST);
+            $generatedPassword = $passwordEncoder->encodePassword($user, $this->randomStr(7));
+            $user->setPassword($generatedPassword);
+            $user->setPasswordNeedToBeChanged(true);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $eventDispatcher->dispatch(UserInterface::EVENT_USER_CREATED, new GenericEvent($user));
+
+            return new Response($serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }
 
         return new Response($serializer->serialize($form, 'json'), Response::HTTP_BAD_REQUEST);
@@ -75,7 +72,7 @@ final class ApiUsersController extends AbstractController
         $str = '';
         $max = mb_strlen($keyspace, '8bit') - 1;
         for ($i = 0; $i < $length; ++$i) {
-            $str .= $keyspace[\random_int(0, $max)];
+            $str .= $keyspace[random_int(0, $max)];
         }
 
         return $str;
