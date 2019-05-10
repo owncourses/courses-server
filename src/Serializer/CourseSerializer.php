@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Serializer;
 
 use App\Model\CourseInterface;
+use function array_key_exists;
+use function is_array;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -30,10 +32,11 @@ class CourseSerializer implements NormalizerInterface
     {
         $data = $this->normalizer->normalize($course, $format, $context);
 
-        if (\is_array($data) && \array_key_exists('cover_image_name', $data)) {
+        if (is_array($data) && array_key_exists('cover_image_name', $data)) {
             $imagePath = $this->uploaderHelper->asset($course, 'coverImageFile');
-            if (null !== $imagePath && false === strpos($imagePath, '://')) {
-                $imagePath = $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost().$imagePath;
+            $currentRequest = $this->requestStack->getCurrentRequest();
+            if (null !== $imagePath && null !== $currentRequest && false === strpos($imagePath, '://')) {
+                $imagePath = $currentRequest->getSchemeAndHttpHost().$imagePath;
             }
             $data['href']['coverImageUrl'] = $imagePath;
         }
@@ -41,7 +44,7 @@ class CourseSerializer implements NormalizerInterface
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof CourseInterface;
     }

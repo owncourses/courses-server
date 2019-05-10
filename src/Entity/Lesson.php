@@ -19,6 +19,8 @@ class Lesson implements LessonInterface
 
     private $module;
 
+    private $completed;
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -57,5 +59,15 @@ class Lesson implements LessonInterface
     public function setModule(?Module $module): void
     {
         $this->module = $module;
+    }
+
+    public function getCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(?bool $completed): void
+    {
+        $this->completed = $completed;
     }
 }

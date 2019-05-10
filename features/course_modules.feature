@@ -28,6 +28,7 @@ Feature:
     Then the JSON node "[1].lessons" should have 2 elements
     Then the JSON node "[1].lessons[0].title" should be equal to "Test lesson"
     Then the JSON node "[1].lessons[0].embed_code" should not exist
+    Then the JSON node "[1].lessons[0].completed" should be null
     Then the JSON node "[0].title" should be equal to "Test Module 2"
     Then the JSON node "[0].description" should be equal to "Second module module description"
     Then the JSON node "[0].position" should be equal to "0"
