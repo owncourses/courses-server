@@ -73,6 +73,6 @@ class Course implements CourseInterface
 
     public function __toString()
     {
-        return (string) ($this->title ?? 'Nowy Kurs');
+        return (string) ($this->title ?? 'New course');
     }
 }
