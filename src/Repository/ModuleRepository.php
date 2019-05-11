@@ -23,6 +23,7 @@ class ModuleRepository extends ServiceEntityRepository implements ModuleReposito
     public function getAllForCourse(Course $course): array
     {
         return $this->createQueryBuilder('m')
+            ->addSelect('l')
             ->where('m.course = :course')
             ->setParameter('course', $course)
             ->orderBy('m.position', 'ASC')

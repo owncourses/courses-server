@@ -52,7 +52,7 @@ final class LessonAdmin extends AbstractAdmin
         $listMapper->add('description');
         $listMapper->add('module.course');
         $listMapper->add('position');
-        $listMapper->add('coverImageFile');
+        $listMapper->add('coverImageName');
         $listMapper->add('_action', null, [
             'actions' => [
                 'move' => [
