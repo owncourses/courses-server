@@ -5,10 +5,18 @@ App\Entity\Course:
         title:
             groups: ['list_courses', 'course_details', 'course_modules', 'lesson_details']
         description:
-            groups: ['course_details']
+            groups: ['course_details', 'course_details', 'course_modules', 'lesson_details']
         coverImageName:
             groups: ['course_details']
         created:
             groups: ['course_details']
         updated:
             groups: ['course_details']
+        visible:
+            groups: ['course_details']
+        startDate:
+            groups: ['list_courses', 'course_details']
+        endDate:
+            groups: ['list_courses', 'course_details']
+        active:
+            groups: ['list_courses', 'course_details']
