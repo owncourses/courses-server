@@ -17,7 +17,11 @@ Feature:
     """
     <iframe width='500px' height='294px' src='https://player.vimeo.com/video/225434434?'></iframe>
     """
-    When I am authenticated as "johndoe"
+    Given the following Users:
+      | firstName | lastName | email            | password     |
+      | Test      | User     | test@example.com | testPassword |
+    Given that "test@example.com" user have "Test course" course
+    When I am authenticated as "test@example.com"
     And I send a "GET" request to "/api/courses/1/modules"
     Then the response should be in JSON
     Then the response status code should be 200

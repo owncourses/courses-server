@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Model;
 
 use App\Entity\Module;
+use Symfony\Component\HttpFoundation\File\File;
 
 interface LessonInterface extends TimestampableInterface, SortableInterface, PersistableInterface
 {
@@ -24,7 +25,11 @@ interface LessonInterface extends TimestampableInterface, SortableInterface, Per
 
     public function setModule(?Module $module): void;
 
-    public function getCompleted(): ?bool;
+    public function getCoverImageName(): ?string;
 
-    public function setCompleted(?bool $completed): void;
+    public function setCoverImageName(?string $coverImageName): void;
+
+    public function setCoverImageFile(?File $coverImageFile = null): void;
+
+    public function getCoverImageFile(): ?File;
 }

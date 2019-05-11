@@ -36,9 +36,6 @@ App\Entity\Lesson:
                 - sortablePosition
             options:
                 default: 0
-        completed:
-            type: boolean
-            nullable: true
         coverImageName:
             type: string
             length: 255
