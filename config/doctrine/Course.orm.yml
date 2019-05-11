@@ -31,3 +31,14 @@ App\Entity\Course:
             gedmo:
                 timestampable:
                     on: update
+        visible:
+            type: boolean
+            nullable: true
+
+        startDate:
+            type: datetime
+            nullable: true
+
+        endDate:
+            type: datetime
+            nullable: true

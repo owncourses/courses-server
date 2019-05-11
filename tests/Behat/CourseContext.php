@@ -10,6 +10,7 @@ use App\Repository\CourseRepositoryInterface;
 use function array_key_exists;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use function sys_get_temp_dir;
@@ -44,6 +45,30 @@ final class CourseContext extends AbstractObjectContext implements Context
                 copy(__DIR__.'/../Resources/assets/'.$columns['coverImage'], $temp);
                 $columns['coverImageFile'] = new UploadedFile($temp, $columns['coverImage'], null, null, true);
                 unset($columns['coverImage']);
+            }
+
+            if (array_key_exists('startDate', $columns)) {
+                if ('null' === $columns['startDate']) {
+                    unset($columns['startDate']);
+                } else {
+                    $date = new DateTime();
+                    $date->modify($columns['startDate']);
+                    $columns['startDate'] = $date;
+                }
+            }
+
+            if (array_key_exists('endDate', $columns)) {
+                if ('null' === $columns['endDate']) {
+                    unset($columns['endDate']);
+                } else {
+                    $date = new DateTime();
+                    $date->modify($columns['endDate']);
+                    $columns['endDate'] = $date;
+                }
+            }
+
+            if (array_key_exists('visible', $columns)) {
+                $columns['visible'] = 'true' === $columns['visible'];
             }
 
             $this->fillObject($course, $columns);

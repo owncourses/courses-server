@@ -23,7 +23,7 @@ Feature:
     Then the response status code should be 200
     Then the JSON node "[1].title" should be equal to "Test Module"
     Then the JSON node "[1].description" should be equal to "Test module description"
-    Then the JSON node "[1].course.description" should not exist
+    Then the JSON node "[1].course.description" should exist
     Then the JSON node "[1].position" should be equal to "1"
     Then the JSON node "[1].lessons" should have 2 elements
     Then the JSON node "[1].lessons[0].title" should be equal to "Test lesson"

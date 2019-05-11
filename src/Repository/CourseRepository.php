@@ -24,6 +24,7 @@ class CourseRepository extends ServiceEntityRepository implements CourseReposito
     public function getAll(): array
     {
         return $this->createQueryBuilder('c')
+            ->where('c.visible = true')
             ->getQuery()
             ->getResult()
         ;
@@ -33,6 +34,7 @@ class CourseRepository extends ServiceEntityRepository implements CourseReposito
     {
         return $this->createQueryBuilder('c')
             ->where('c.id = :courseId')
+            ->andWhere('c.visible = true')
             ->setParameter('courseId', $courseId)
             ->getQuery()
             ->getOneOrNullResult()

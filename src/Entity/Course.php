@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Model\CourseInterface;
+use App\Model\TimeLimitedAwareTrait;
 use App\Model\TimestampableAwareTrait;
+use App\Model\VisibilityAwareTrait;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Course implements CourseInterface
 {
-    use TimestampableAwareTrait;
+    use TimestampableAwareTrait, VisibilityAwareTrait, TimeLimitedAwareTrait;
 
     private $id;
 
@@ -24,6 +26,11 @@ class Course implements CourseInterface
      * @var null
      */
     private $coverImageFile;
+
+    public function __construct()
+    {
+        $this->visible = true;
+    }
 
     public function getId(): ?int
     {

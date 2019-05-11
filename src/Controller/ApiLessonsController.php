@@ -54,8 +54,8 @@ final class ApiLessonsController extends AbstractController
 
     private function getLessonById(string $lessonId): LessonInterface
     {
-        $lesson = $this->lessonsRepository->findOneBy(['id' => $lessonId]);
-        if (null === $lesson) {
+        $lesson = $this->lessonsRepository->getOneById($lessonId);
+        if (null === $lesson || !$lesson->getModule()->getCourse()->isActive()) {
             throw new NotFoundHttpException('Lesson was not found');
         }
 

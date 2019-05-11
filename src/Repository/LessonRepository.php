@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Lesson;
+use App\Model\LessonInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,5 +18,18 @@ class LessonRepository extends ServiceEntityRepository implements LessonReposito
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Lesson::class);
+    }
+
+    public function getOneById(string $id): ?LessonInterface
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.id = :id')
+            ->leftJoin('l.module', 'm')
+            ->leftJoin('m.course', 'c')
+            ->andWhere('c.visible != false')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 }

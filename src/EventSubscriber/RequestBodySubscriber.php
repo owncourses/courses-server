@@ -29,7 +29,7 @@ class RequestBodySubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-           'kernel.request' => 'onKernelRequest',
+            'kernel.request' => 'onKernelRequest',
         ];
     }
 }

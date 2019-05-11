@@ -6,7 +6,7 @@ namespace App\Model;
 
 use Symfony\Component\HttpFoundation\File\File;
 
-interface CourseInterface extends TimestampableInterface
+interface CourseInterface extends TimestampableInterface, VisibilityInterface, TimeLimitedInterface
 {
     public function getId(): ?int;
 
