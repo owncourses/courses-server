@@ -1,0 +1,40 @@
+App\Entity\UserLesson:
+    type: entity
+    repositoryClass: App\Repository\UserLessonRepository
+    table: npd_user_lesson
+    id:
+        id:
+            column: uuid
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        completed:
+            type: boolean
+            nullable: true
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        user:
+            targetEntity: App\Entity\User
+            joinColumn:
+                name: user_uuid
+                referencedColumnName: uuid
+                nullable: false
+        lesson:
+            targetEntity: App\Entity\Lesson
+            joinColumn:
+                name: lesson_uuid
+                referencedColumnName: uuid
+                nullable: false

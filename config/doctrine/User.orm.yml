@@ -43,7 +43,7 @@ App\Entity\User:
             targetEntity: App\Entity\Course
             fetch: EAGER
             joinTable:
-                name: user_course
+                name: npd_user_course
                 joinColumns:
                     user_id:
                         referencedColumnName: uuid

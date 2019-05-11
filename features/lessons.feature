@@ -12,7 +12,11 @@ Feature:
     """
     <iframe width='500px' height='294px' src='https://player.vimeo.com/video/225434434?'></iframe>
     """
-    When I am authenticated as "johndoe"
+    Given the following Users:
+      | firstName | lastName | email            | password     |
+      | Test      | User     | test@example.com | testPassword |
+    Given that "test@example.com" user have "Test course" course
+    When I am authenticated as "test@example.com"
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc"
     Then the response should be in JSON
     Then the response status code should be 200
@@ -32,7 +36,11 @@ Feature:
     """
     <iframe width='500px' height='294px' src='https://player.vimeo.com/video/225434434?'></iframe>
     """
-    When I am authenticated as "johndoe"
+    Given the following Users:
+      | firstName | lastName | email            | password     |
+      | Test      | User     | test@example.com | testPassword |
+    Given that "test@example.com" user have "Test course" course
+    When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
     When I send a "PATCH" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
     """
@@ -42,7 +50,7 @@ Feature:
     """
     Then the response should be in JSON
     Then the response status code should be 200
-    When I am authenticated as "johndoe"
+    When I am authenticated as "test@example.com"
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc"
     Then the response should be in JSON
     Then the response status code should be 200
@@ -50,21 +58,21 @@ Feature:
 
 #    clear progress
 
-    When I am authenticated as "johndoe"
+    When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
     When I send a "PATCH" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
     """
     {
-      "completed": null
+      "completed": false
     }
     """
     Then the response should be in JSON
     Then the response status code should be 200
-    When I am authenticated as "johndoe"
+    When I am authenticated as "test@example.com"
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc"
     Then the response should be in JSON
     Then the response status code should be 200
-    And the JSON node "completed" should be null
+    And the JSON node "completed" should be false
 
   Scenario: I want to list only lessons from active courses
     Given the following Courses:
@@ -90,15 +98,19 @@ Feature:
     <iframe width='500px' height='294px' src='https://player.vimeo.com/video/225434434?'></iframe>
     """
 
-    When I am authenticated as "johndoe"
+    Given the following Users:
+      | firstName | lastName | email            | password     |
+      | Test      | User     | test@example.com | testPassword |
+    Given that "test@example.com" user have "Test course" course
+    When I am authenticated as "test@example.com"
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc"
     Then the response should be in JSON
     Then the response status code should be 200
 
-    When I am authenticated as "johndoe"
+    When I am authenticated as "test@example.com"
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f111"
     Then the response status code should be 404
 
-    When I am authenticated as "johndoe"
+    When I am authenticated as "test@example.com"
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f999"
     Then the response status code should be 404
