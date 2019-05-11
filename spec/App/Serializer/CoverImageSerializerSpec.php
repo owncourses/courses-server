@@ -3,27 +3,31 @@
 namespace spec\App\Serializer;
 
 use App\Model\CourseInterface;
+use App\Repository\UserLessonRepositoryInterface;
 use App\Serializer\CoverImageSerializer;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class CoverImageSerializerSpec extends ObjectBehavior
 {
     public function let(UploaderHelper $uploaderHelper,
+        UserLessonRepositoryInterface $userLessonRepository,
         ObjectNormalizer $normalizer,
+        Security $security,
         RequestStack $requestStack,
         Request $request,
         CourseInterface $course
-    ) {
+    ): void {
         $normalizer->normalize($course, null, [])->willReturn(['cover_image_name' => '6jswX0zcfM.png']);
         $uploaderHelper->asset($course, 'coverImageFile')->willReturn('media/6jswX0zcfM.png', 'https://s3.eu-central-1.amazonaws.com/com.owncloud/courses/6jswX0zcfM.png');
         $request->getSchemeAndHttpHost()->willReturn('http://localhost/');
         $requestStack->getCurrentRequest()->willReturn($request);
 
-        $this->beConstructedWith($uploaderHelper, $normalizer, $requestStack);
+        $this->beConstructedWith($uploaderHelper, $userLessonRepository, $normalizer, $security, $requestStack);
     }
 
     public function it_is_initializable()
