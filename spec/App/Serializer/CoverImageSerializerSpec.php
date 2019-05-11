@@ -3,14 +3,14 @@
 namespace spec\App\Serializer;
 
 use App\Model\CourseInterface;
-use App\Serializer\CourseSerializer;
+use App\Serializer\CoverImageSerializer;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
-class CourseSerializerSpec extends ObjectBehavior
+class CoverImageSerializerSpec extends ObjectBehavior
 {
     public function let(UploaderHelper $uploaderHelper,
         ObjectNormalizer $normalizer,
@@ -28,7 +28,7 @@ class CourseSerializerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(CourseSerializer::class);
+        $this->shouldHaveType(CoverImageSerializer::class);
     }
 
     public function it_supports_normalization(CourseInterface $course)

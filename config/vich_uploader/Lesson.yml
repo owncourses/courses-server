@@ -1,4 +1,4 @@
-App\Entity\Course:
+App\Entity\Lesson:
     coverImageFile:
         mapping: covers
         filename_property: coverImageName

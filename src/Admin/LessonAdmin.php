@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -23,6 +24,19 @@ final class LessonAdmin extends AbstractAdmin
         $formMapper->add('description', TextType::class);
         $formMapper->add('embedCode');
         $formMapper->add('module');
+
+        $fileFieldOptions = ['required' => false];
+        $container = $this->getConfigurationPool()->getContainer();
+        if (
+            null !== $container &&
+            null !== $this->getSubject() &&
+            null !== $this->getSubject()->getCoverImageName()
+        ) {
+            $imagePath = $container->get('vich_uploader.templating.helper.uploader_helper')->asset($this->getSubject(), 'coverImageFile');
+
+            $fileFieldOptions['help'] = '<img src="'.$imagePath.'" class="admin-preview" />';
+        }
+        $formMapper->add('coverImageFile', FileType::class, $fileFieldOptions);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -36,8 +50,9 @@ final class LessonAdmin extends AbstractAdmin
     {
         $listMapper->addIdentifier('title');
         $listMapper->add('description');
-        $listMapper->add('course');
+        $listMapper->add('module.course');
         $listMapper->add('position');
+        $listMapper->add('coverImageFile');
         $listMapper->add('_action', null, [
             'actions' => [
                 'move' => [

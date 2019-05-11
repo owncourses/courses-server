@@ -2,7 +2,6 @@
 
 namespace App\Admin;
 
-use App\Entity\Course;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -20,7 +19,6 @@ final class CourseAdmin extends AbstractAdmin
 
         $fileFieldOptions = ['required' => false];
         if (null !== $this->getSubject()->getCoverImageName()) {
-            //$imagePath = $container->get('app.uploader.storage')->resolveUri($this->getSubject(), 'coverImageFile', Course::class);
             $imagePath = $container->get('vich_uploader.templating.helper.uploader_helper')->asset($this->getSubject(), 'coverImageFile');
 
             $fileFieldOptions['help'] = '<img src="'.$imagePath.'" class="admin-preview" />';
