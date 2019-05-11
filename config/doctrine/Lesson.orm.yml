@@ -39,6 +39,10 @@ App\Entity\Lesson:
         completed:
             type: boolean
             nullable: true
+        coverImageName:
+            type: string
+            length: 255
+            nullable: true
     manyToOne:
         module:
             targetEntity: App\Entity\Module

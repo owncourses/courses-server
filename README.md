@@ -20,15 +20,15 @@ All of that can be installed on Your own server for free.
 - [x] Users
   - [x] Login
   - [x] User courses
+- [x] Lesson completion API
+- [x] Lesson covers
 
 ## Next tasks
 
 - [ ] Course status
 - [ ] Course start date/time
 - [ ] Lesson attachments
-- [ ] Lesson covers
 - [ ] Lesson homework tasks
-- [ ] Lesson completion API
 
 
 ### Development instalation (with docker)

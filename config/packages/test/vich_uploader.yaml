@@ -1,7 +1,7 @@
 vich_uploader:
     storage: file_system
     mappings:
-        course_covers:
+        covers:
             uri_prefix: /assets/images/course
             upload_destination: '%kernel.project_dir%/public/assets/images/course'
             namer:
