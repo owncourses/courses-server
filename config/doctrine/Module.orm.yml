@@ -45,3 +45,4 @@ App\Entity\Module:
         lessons:
             targetEntity: App\Entity\Lesson
             mappedBy: module
+            orderBy: { 'position': 'ASC' }
