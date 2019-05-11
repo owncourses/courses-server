@@ -19,4 +19,4 @@ App\Entity\Lesson:
         completed:
             groups: ['list', 'lesson_details', 'course_modules']
         coverImageName:
-            groups: ['lesson_details']
+            groups: ['list', 'lesson_details', 'course_modules']
