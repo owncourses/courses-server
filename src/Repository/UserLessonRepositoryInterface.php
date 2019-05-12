@@ -17,5 +17,5 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 interface UserLessonRepositoryInterface
 {
-    public function getOneByUserAndLesson(UserInterface $user, LessonInterface $lesson): ?UserLessonInterface;
+    public function getOneByUserAndLesson(?UserInterface $user, LessonInterface $lesson): ?UserLessonInterface;
 }

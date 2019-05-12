@@ -22,8 +22,12 @@ class UserLessonRepository extends ServiceEntityRepository implements UserLesson
         parent::__construct($registry, UserLesson::class);
     }
 
-    public function getOneByUserAndLesson(UserInterface $user, LessonInterface $lesson): ?UserLessonInterface
+    public function getOneByUserAndLesson(?UserInterface $user, LessonInterface $lesson): ?UserLessonInterface
     {
+        if (null === $user) {
+            return null;
+        }
+
         return $this->createQueryBuilder('ul')
             ->where('ul.lesson = :lesson')
             ->andWhere('ul.user = :user')
