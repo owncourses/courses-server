@@ -8,12 +8,13 @@ use App\Entity\Lesson;
 use App\Repository\ModuleRepositoryInterface;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class LessonContext implements Context
+final class LessonContext extends AbstractObjectContext implements Context
 {
     /**
      * @var EntityManagerInterface
@@ -45,7 +46,7 @@ final class LessonContext implements Context
     ) {
         $module = $this->moduleRepository->findOneBy(['title' => $moduleTitle]);
         if (null === $module) {
-            throw new Exception('Course was not found');
+            throw new Exception('Module was not found');
         }
 
         $metadata = $this->entityManager->getClassMetaData(Lesson::class);
@@ -67,6 +68,42 @@ final class LessonContext implements Context
         }
 
         $this->entityManager->persist($lesson);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given the following Lessons:
+     */
+    public function theFollowingLessons(TableNode $table)
+    {
+        foreach ($table as $row => $columns) {
+            $lesson = new Lesson();
+            if (array_key_exists('id', $columns)) {
+                $metadata = $this->entityManager->getClassMetaData(Lesson::class);
+                $metadata->setIdGenerator(new AssignedGenerator());
+                $lesson->setId($columns['id']);
+                unset($columns['id']);
+            }
+
+            if (array_key_exists('coverImage', $columns)) {
+                $temp = sys_get_temp_dir().DIRECTORY_SEPARATOR.$columns['coverImage'];
+                copy(__DIR__.'/../Resources/assets/'.$columns['coverImage'], $temp);
+                $columns['coverImageFile'] = new UploadedFile($temp, $columns['coverImage'], null, null, true);
+                unset($columns['coverImage']);
+            }
+
+            if (array_key_exists('module', $columns)) {
+                $module = $this->moduleRepository->findOneBy(['title' => $columns['module']]);
+                if (null === $module) {
+                    throw new Exception('Module was not found');
+                }
+                $columns['module'] = $module;
+            }
+
+            $this->fillObject($lesson, $columns);
+            $this->entityManager->persist($lesson);
+        }
+
         $this->entityManager->flush();
     }
 }

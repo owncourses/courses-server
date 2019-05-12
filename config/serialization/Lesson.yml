@@ -18,3 +18,5 @@ App\Entity\Lesson:
             groups: ['lesson_details']
         coverImageName:
             groups: ['list', 'lesson_details', 'course_modules']
+        durationInMinutes:
+            groups: ['list', 'lesson_details', 'course_modules']
