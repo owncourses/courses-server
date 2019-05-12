@@ -24,10 +24,7 @@ class LessonCompletedProcessor
     public function process($object, array $data): array
     {
         if ($object instanceof LessonInterface) {
-            $userLesson = $this->userLessonRepository->findOneBy(
-                ['user' => $this->security->getUser(), 'lesson' => $object]
-            );
-
+            $userLesson = $this->userLessonRepository->getOneByUserAndLesson($this->security->getUser(), $object);
             if (null === $userLesson) {
                 $data['completed'] = null;
             } else {

@@ -49,10 +49,7 @@ final class ApiLessonsController extends AbstractController
         $form = $formFactory->createNamed('', LessonProgressType::class, [], ['method' => Request::METHOD_PATCH]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $userLesson = $userLessonRepository->findOneBy(
-                ['user' => $security->getUser(), 'lesson' => $lesson]
-            );
-
+            $userLesson = $userLessonRepository->getOneByUserAndLesson($security->getUser(), $lesson);
             if (!$userLesson) {
                 $userLesson = new UserLesson();
                 $userLesson->setUser($security->getUser());

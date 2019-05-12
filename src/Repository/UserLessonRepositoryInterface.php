@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\UserLesson;
+use App\Model\LessonInterface;
+use App\Model\UserLessonInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method UserLesson|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,4 +17,5 @@ use App\Entity\UserLesson;
  */
 interface UserLessonRepositoryInterface
 {
+    public function getOneByUserAndLesson(UserInterface $user, LessonInterface $lesson): ?UserLessonInterface;
 }
