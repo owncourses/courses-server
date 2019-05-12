@@ -14,21 +14,24 @@ All of that can be installed on Your own server for free.
 
 - [x] Courses
   - [x] Course covers
+  - [x] Course status (visible/hidden)
+  - [x] Course start/end
 - [x] Module
 - [x] Lessons
+  - [x] Lesson completion API
+  - [x] Lesson covers
 - [x] Basic admin panel
 - [x] Users
   - [x] Login
   - [x] User courses
-- [x] Lesson completion API
-- [x] Lesson covers
+
+- [x] Lesson duration 
 
 ## Next tasks
 
-- [ ] Course status
-- [ ] Course start date/time
 - [ ] Lesson attachments
 - [ ] Lesson homework tasks
+- [ ] Module/Course progress based on completed lessons and duration
 
 
 ### Development instalation (with docker)
