@@ -32,4 +32,8 @@ interface LessonInterface extends TimestampableInterface, SortableInterface, Per
     public function setCoverImageFile(?File $coverImageFile = null): void;
 
     public function getCoverImageFile(): ?File;
+
+    public function getDurationInMinutes(): int;
+
+    public function setDurationInMinutes(int $durationInMinutes): void;
 }

@@ -23,6 +23,8 @@ class Lesson implements LessonInterface
 
     private $coverImageName;
 
+    private $durationInMinutes = 0;
+
     /**
      * Hack for PropertyInfo issues with File.
      *
@@ -89,5 +91,15 @@ class Lesson implements LessonInterface
     public function getCoverImageFile(): ?File
     {
         return $this->coverImageFile;
+    }
+
+    public function getDurationInMinutes(): int
+    {
+        return $this->durationInMinutes;
+    }
+
+    public function setDurationInMinutes(int $durationInMinutes): void
+    {
+        $this->durationInMinutes = $durationInMinutes;
     }
 }

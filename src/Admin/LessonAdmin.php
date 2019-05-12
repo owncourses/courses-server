@@ -22,6 +22,7 @@ final class LessonAdmin extends AbstractAdmin
     {
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextType::class);
+        $formMapper->add('durationInMinutes');
         $formMapper->add('embedCode');
         $formMapper->add('module');
 
@@ -50,6 +51,7 @@ final class LessonAdmin extends AbstractAdmin
     {
         $listMapper->addIdentifier('title');
         $listMapper->add('description');
+        $listMapper->add('durationInMinutes');
         $listMapper->add('module.course');
         $listMapper->add('position');
         $listMapper->add('coverImageName');

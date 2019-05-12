@@ -40,6 +40,8 @@ App\Entity\Lesson:
             type: string
             length: 255
             nullable: true
+        durationInMinutes:
+            type: integer
     manyToOne:
         module:
             targetEntity: App\Entity\Module
