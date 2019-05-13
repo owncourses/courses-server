@@ -30,11 +30,6 @@ class Lesson implements LessonInterface
 
     private $attachments;
 
-    /**
-     * Hack for PropertyInfo issues with File.
-     *
-     * @var null
-     */
     private $coverImageFile;
 
     public function __construct()

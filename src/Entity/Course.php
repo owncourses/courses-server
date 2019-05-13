@@ -20,11 +20,6 @@ class Course implements CourseInterface
 
     private $coverImageName;
 
-    /**
-     * Hack for PropertyInfo issues with File.
-     *
-     * @var null
-     */
     private $coverImageFile;
 
     public function __construct()

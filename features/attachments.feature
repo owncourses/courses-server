@@ -28,4 +28,5 @@ Feature:
     And the JSON node "attachments[0].file_name" should be equal to "test-image-attachment.png"
     And the JSON node "attachments[0].mime_type" should be equal to "image/png"
     And the JSON node "attachments[0].lesson" should not exist
+    And the JSON node "attachments[0].href.download" should not exist
 
