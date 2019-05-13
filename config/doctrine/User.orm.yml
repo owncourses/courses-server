@@ -41,7 +41,6 @@ App\Entity\User:
     manyToMany:
         courses:
             targetEntity: App\Entity\Course
-            fetch: EAGER
             joinTable:
                 name: npd_user_course
                 joinColumns:

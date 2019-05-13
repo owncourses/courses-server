@@ -42,13 +42,13 @@ final class UserContext extends AbstractObjectContext implements Context
     public function theFollowingUsers(TableNode $table)
     {
         foreach ($table as $row => $columns) {
-            $course = new User();
+            $user = new User();
             if (\array_key_exists('password', $columns)) {
-                $columns['password'] = $this->encoder->encodePassword($course, $columns['password']);
+                $columns['password'] = $this->encoder->encodePassword($user, $columns['password']);
             }
 
-            $this->fillObject($course, $columns);
-            $this->entityManager->persist($course);
+            $this->fillObject($user, $columns);
+            $this->entityManager->persist($user);
         }
 
         $this->entityManager->flush();

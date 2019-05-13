@@ -51,3 +51,8 @@ App\Entity\Lesson:
                 nullable: false
             gedmo:
                 - sortableGroup
+    oneToMany:
+        attachments:
+            targetEntity: App\Entity\Attachment
+            mappedBy: lesson
+            orderBy: { 'name': 'ASC' }

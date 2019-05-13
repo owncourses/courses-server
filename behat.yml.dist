@@ -5,6 +5,7 @@ default:
                 - App\Tests\Behat\FeatureContext
                 - App\Tests\Behat\CourseContext
                 - App\Tests\Behat\LessonContext
+                - App\Tests\Behat\AttachmentContext
                 - App\Tests\Behat\UserContext
                 - App\Tests\Behat\CommandContext
                 - Behatch\Context\JsonContext

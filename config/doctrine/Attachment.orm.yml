@@ -1,0 +1,40 @@
+App\Entity\Attachment:
+    type: entity
+    repositoryClass: App\Repository\AttachmentRepository
+    table: npd_attachment
+    id:
+        id:
+            column: uuid
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        name:
+            type: string
+            length: 255
+        fileName:
+            type: string
+            length: 255
+        mimeType:
+            type: string
+            length: 100
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        lesson:
+            targetEntity: App\Entity\Lesson
+            joinColumn:
+                name: lesson_uuid
+                referencedColumnName: uuid
+                nullable: false

@@ -1,0 +1,5 @@
+{% extends admin.getTemplate('base_list_field') %}
+
+{%- block field %}
+    <a href="{{ vich_uploader_asset(object, 'file') }}">{{ object.fileName }}</a>
+{% endblock %}

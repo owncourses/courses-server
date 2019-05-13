@@ -9,7 +9,7 @@ use function is_array;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
-final class CoverImageProcessor
+final class AttachmentHrefProcessor
 {
     private $uploaderHelper;
     private $requestStack;
@@ -24,13 +24,13 @@ final class CoverImageProcessor
 
     public function process($object, array $data): array
     {
-        if (is_array($data) && array_key_exists('cover_image_name', $data)) {
-            $imagePath = $this->uploaderHelper->asset($object, 'coverImageFile');
+        if (is_array($data) && array_key_exists('file_name', $data)) {
+            $filePath = $this->uploaderHelper->asset($object, 'file');
             $currentRequest = $this->requestStack->getCurrentRequest();
-            if (null !== $imagePath && null !== $currentRequest && false === strpos($imagePath, '://')) {
-                $imagePath = $currentRequest->getSchemeAndHttpHost().$imagePath;
+            if (null !== $filePath && null !== $currentRequest && false === strpos($filePath, '://')) {
+                $filePath = $currentRequest->getSchemeAndHttpHost().$filePath;
             }
-            $data['href']['coverImageUrl'] = $imagePath;
+            $data['href']['download'] = $filePath;
         }
 
         return $data;

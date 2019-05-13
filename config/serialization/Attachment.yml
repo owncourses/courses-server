@@ -1,0 +1,10 @@
+App\Entity\Attachment:
+    attributes:
+        id:
+            groups: ['lesson_details']
+        name:
+            groups: ['lesson_details']
+        fileName:
+            groups: ['lesson_details']
+        mimeType:
+            groups: ['lesson_details']

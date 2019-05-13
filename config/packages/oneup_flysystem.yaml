@@ -10,14 +10,25 @@ services:
 
 oneup_flysystem:
     adapters:
-        app.flysystem_adapter:
+        app.flysystem_adapter.covers:
             awss3v3:
                 client: app.s3_client
                 bucket: '%env(AWS_S3_BUCKET)%'
-                prefix: '%env(AWS_S3_PREFIX)%'
+                prefix: '%env(AWS_S3_PREFIX)%/covers'
                 options:
                     ACL: 'public-read'
+        app.flysystem_adapter.attachments:
+            awss3v3:
+                client: app.s3_client
+                bucket: '%env(AWS_S3_BUCKET)%'
+                prefix: '%env(AWS_S3_PREFIX)%/attachments'
+                options:
+                    ACL: 'public-read'
+                    ContentDisposition: 'attachment'
     filesystems:
-        app.filesystem:
-            adapter: app.flysystem_adapter
-            mount:   app.filesystem
+        app.filesystem.covers:
+            adapter: app.flysystem_adapter.covers
+            mount:   app.filesystem.covers
+        app.filesystem.attachments:
+            adapter: app.flysystem_adapter.attachments
+            mount:   app.filesystem.attachments

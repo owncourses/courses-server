@@ -8,7 +8,7 @@ use App\Model\LessonInterface;
 use App\Repository\UserLessonRepositoryInterface;
 use Symfony\Component\Security\Core\Security;
 
-class LessonCompletedProcessor
+final class LessonCompletedProcessor
 {
     private $userLessonRepository;
     private $security;

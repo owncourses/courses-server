@@ -2,8 +2,10 @@
 
 namespace App\Command;
 
+use function in_array;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,16 +38,16 @@ class UserPromoteCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $userEmail = $role = $input->getArgument('user');
-        $role = $input->getArgument('role');
+        $userEmail = (string) $input->getArgument('user');
+        $role = (string) $input->getArgument('role');
 
         $user = $this->userRepository->getOneByEmail($userEmail);
         if (null === $user) {
-            throw new \Exception('User with provided email was not found!');
+            throw new Exception('User with provided email was not found!');
         }
 
         $userRoles = $user->getRoles();
-        if (!\in_array($role, $userRoles)) {
+        if (!in_array($role, $userRoles, true)) {
             $userRoles[] = $role;
             $user->setRoles($userRoles);
             $this->entityManager->flush();

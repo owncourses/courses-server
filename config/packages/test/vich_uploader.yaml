@@ -2,8 +2,14 @@ vich_uploader:
     storage: file_system
     mappings:
         covers:
-            uri_prefix: /assets/images/course
-            upload_destination: '%kernel.project_dir%/public/assets/images/course'
+            uri_prefix: /assets/images/course/covers
+            upload_destination: '%kernel.project_dir%/public/assets/images/course/covers'
             namer:
                 service: vich_uploader.namer_property
                 options: { property: 'title', transliterate: true}
+        attachments:
+            uri_prefix: /assets/images/course/attachments
+            upload_destination: '%kernel.project_dir%/public/assets/images/course/attachments'
+            namer:
+                service: vich_uploader.namer_property
+                options: { property: 'name', transliterate: true}
