@@ -39,6 +39,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Lessons }
 
+    admin.attachment:
+        class: App\Admin\AttachmentAdmin
+        arguments: [~, App\Entity\Attachment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: courses, label: Attachments }
+
     admin.user:
         class: App\Admin\UserAdmin
         arguments: [~, App\Entity\User, ~]

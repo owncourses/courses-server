@@ -7,9 +7,10 @@ use App\Model\PersistableAwareTrait;
 use App\Model\SortableAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use DateTime;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 
-class Lesson implements LessonInterface
+class Lesson implements LessonInterface, Serializable
 {
     use TimestampableAwareTrait, SortableAwareTrait, PersistableAwareTrait;
 
@@ -101,5 +102,20 @@ class Lesson implements LessonInterface
     public function setDurationInMinutes(int $durationInMinutes): void
     {
         $this->durationInMinutes = $durationInMinutes;
+    }
+
+    public function serialize(): void
+    {
+        $this->coverImageFile = null;
+    }
+
+    public function unserialize($serialized): void
+    {
+        $this->coverImageFile = null;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getTitle();
     }
 }

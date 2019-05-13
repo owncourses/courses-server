@@ -302,6 +302,9 @@
             "config/packages/ramsey_uuid_doctrine.yaml"
         ]
     },
+    "roave/security-advisories": {
+        "version": "dev-master"
+    },
     "sebastian/comparator": {
         "version": "2.1.3"
     },

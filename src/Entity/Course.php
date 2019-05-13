@@ -6,9 +6,10 @@ use App\Model\CourseInterface;
 use App\Model\TimeLimitedAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use App\Model\VisibilityAwareTrait;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 
-class Course implements CourseInterface
+class Course implements CourseInterface, Serializable
 {
     use TimestampableAwareTrait, VisibilityAwareTrait, TimeLimitedAwareTrait;
 
@@ -76,6 +77,16 @@ class Course implements CourseInterface
     public function getCoverImageFile(): ?File
     {
         return $this->coverImageFile;
+    }
+
+    public function serialize(): void
+    {
+        $this->coverImageFile = null;
+    }
+
+    public function unserialize($serialized): void
+    {
+        $this->coverImageFile = null;
     }
 
     public function __toString()

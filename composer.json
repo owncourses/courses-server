@@ -37,6 +37,7 @@
         "vich/uploader-bundle": "^1.9"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "behat/mink": "1.7.x-dev",
         "behat/mink-goutte-driver": "^1.2",
         "behat/symfony2-extension": "^2.1",
