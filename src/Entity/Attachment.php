@@ -8,6 +8,7 @@ use App\Model\PersistableAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use DateTime;
 use Serializable;
+use function serialize;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Attachment implements AttachmentInterface, Serializable
@@ -75,13 +76,14 @@ class Attachment implements AttachmentInterface, Serializable
         $this->mimeType = $mimeType;
     }
 
-    public function serialize(): void
+    public function serialize(): string
     {
         $this->file = null;
+
+        return serialize($this);
     }
 
     public function unserialize($serialized): void
     {
-        $this->file = null;
     }
 }

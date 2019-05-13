@@ -104,14 +104,15 @@ class Lesson implements LessonInterface, Serializable
         $this->durationInMinutes = $durationInMinutes;
     }
 
-    public function serialize(): void
+    public function serialize(): string
     {
         $this->coverImageFile = null;
+
+        return serialize($this);
     }
 
     public function unserialize($serialized): void
     {
-        $this->coverImageFile = null;
     }
 
     public function __toString()
