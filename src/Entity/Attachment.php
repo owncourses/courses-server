@@ -6,7 +6,7 @@ use App\Model\AttachmentInterface;
 use App\Model\LessonInterface;
 use App\Model\PersistableAwareTrait;
 use App\Model\TimestampableAwareTrait;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Attachment implements AttachmentInterface
@@ -61,7 +61,7 @@ class Attachment implements AttachmentInterface
     public function setFile(File $file): void
     {
         $this->file = $file;
-        $this->updated = new DateTime();
+        $this->updated = new DateTimeImmutable();
     }
 
     public function getMimeType(): ?string

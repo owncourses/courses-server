@@ -20,6 +20,17 @@ App\Entity\Attachment:
         mimeType:
             type: string
             length: 100
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
     manyToOne:
         lesson:
             targetEntity: App\Entity\Lesson

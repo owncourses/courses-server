@@ -13,5 +13,5 @@ vich_uploader:
         attachments:
             uri_prefix: "https://s3.%env(AWS_S3_REGION)%.amazonaws.com/%env(AWS_S3_BUCKET)%/%env(AWS_S3_PREFIX)%/attachments"
             upload_destination: app.filesystem.attachments
-            namer: vich_uploader.namer_base64
+            namer: vich_uploader.namer_origname
 
