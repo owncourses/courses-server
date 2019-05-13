@@ -126,7 +126,7 @@ class User implements UserInterface
     public function addCourse(CourseInterface $course): void
     {
         if (!$this->courses->contains($course)) {
-            $this->courses[] = $course;
+            $this->courses->add($course);
         }
     }
 

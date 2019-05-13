@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use App\Model\AttachmentInterface;
 use App\Model\LessonInterface;
 use App\Model\PersistableAwareTrait;
 use App\Model\SortableAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Lesson implements LessonInterface
@@ -25,12 +28,19 @@ class Lesson implements LessonInterface
 
     private $durationInMinutes = 0;
 
+    private $attachments;
+
     /**
      * Hack for PropertyInfo issues with File.
      *
      * @var null
      */
     private $coverImageFile;
+
+    public function __construct()
+    {
+        $this->attachments = new ArrayCollection();
+    }
 
     public function getTitle(): ?string
     {
@@ -101,6 +111,25 @@ class Lesson implements LessonInterface
     public function setDurationInMinutes(int $durationInMinutes): void
     {
         $this->durationInMinutes = $durationInMinutes;
+    }
+
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
+    }
+
+    public function addAttachment(AttachmentInterface $attachment): void
+    {
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments->add($attachment);
+        }
+    }
+
+    public function removeAttachment(AttachmentInterface $attachment): void
+    {
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
+        }
     }
 
     public function __toString()

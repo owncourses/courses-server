@@ -7,7 +7,7 @@ vich_uploader:
             - {path: '%kernel.project_dir%/config/vich_uploader', namespace_prefix: 'App\Entity'}
     mappings:
         covers:
-            uri_prefix: "https://s3.%env(AWS_S3_REGION)%.amazonaws.com/%env(AWS_S3_BUCKET)%/%env(AWS_S3_PREFIX)%"
+            uri_prefix: "https://s3.%env(AWS_S3_REGION)%.amazonaws.com/%env(AWS_S3_BUCKET)%/%env(AWS_S3_PREFIX)%/covers"
             upload_destination: app.filesystem.covers
             namer: vich_uploader.namer_base64
         attachments:

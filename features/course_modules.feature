@@ -33,7 +33,7 @@ Feature:
     And the JSON node "[1].lessons[0].title" should be equal to "Test lesson"
     And the JSON node "[1].lessons[0].embed_code" should not exist
     And the JSON node "[1].lessons[0].completed" should be null
-    And the JSON node "[1].lessons[0].href.coverImageUrl" should be equal to the string "http://localhost/assets/images/course/test-lesson.png"
+    And the JSON node "[1].lessons[0].href.coverImageUrl" should be equal to the string "http://localhost/assets/images/course/covers/test-lesson.png"
     And the JSON node "[0].title" should be equal to "Test Module 2"
     And the JSON node "[0].description" should be equal to "Second module module description"
     And the JSON node "[0].position" should be equal to "0"

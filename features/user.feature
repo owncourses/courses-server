@@ -39,7 +39,7 @@ Feature:
     And the JSON node "courses[0].title" should be equal to the string "Test course"
     And the JSON node "courses[0].description" should be equal to the string "Test course description"
     And the JSON node "courses[0].cover_image_name" should be equal to the string "test-course.png"
-    And the JSON node "courses[0].href.coverImageUrl" should be equal to the string "http://localhost/assets/images/course/test-course.png"
+    And the JSON node "courses[0].href.coverImageUrl" should be equal to the string "http://localhost/assets/images/course/covers/test-course.png"
 
   Scenario: It should register new user
     And I add 'content-type' header equal to 'application/json'

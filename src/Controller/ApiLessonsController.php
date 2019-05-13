@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\UserLesson;
 use App\Form\LessonProgressType;
 use App\Model\LessonInterface;
+use App\Model\UserInterface;
 use App\Repository\LessonRepositoryInterface;
 use App\Repository\UserLessonRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,8 +52,10 @@ final class ApiLessonsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userLesson = $userLessonRepository->getOneByUserAndLesson($security->getUser(), $lesson);
             if (!$userLesson) {
+                /** @var UserInterface $user */
+                $user = $security->getUser();
                 $userLesson = new UserLesson();
-                $userLesson->setUser($security->getUser());
+                $userLesson->setUser($user);
                 $userLesson->setLesson($lesson);
                 $entityManager->persist($userLesson);
             }

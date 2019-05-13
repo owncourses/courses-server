@@ -76,11 +76,12 @@ final class LessonContext extends AbstractObjectContext implements Context
      */
     public function theFollowingLessons(TableNode $table)
     {
+        $metadata = $this->entityManager->getClassMetaData(Lesson::class);
+        $metadata->setIdGenerator(new AssignedGenerator());
+
         foreach ($table as $row => $columns) {
             $lesson = new Lesson();
             if (array_key_exists('id', $columns)) {
-                $metadata = $this->entityManager->getClassMetaData(Lesson::class);
-                $metadata->setIdGenerator(new AssignedGenerator());
                 $lesson->setId($columns['id']);
                 unset($columns['id']);
             }

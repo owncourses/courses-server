@@ -14,7 +14,7 @@ oneup_flysystem:
             awss3v3:
                 client: app.s3_client
                 bucket: '%env(AWS_S3_BUCKET)%'
-                prefix: '%env(AWS_S3_PREFIX)%'
+                prefix: '%env(AWS_S3_PREFIX)%/covers'
                 options:
                     ACL: 'public-read'
         app.flysystem_adapter.attachments:

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Model;
 
 use App\Entity\Module;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 
 interface LessonInterface extends TimestampableInterface, SortableInterface, PersistableInterface
@@ -36,4 +37,10 @@ interface LessonInterface extends TimestampableInterface, SortableInterface, Per
     public function getDurationInMinutes(): int;
 
     public function setDurationInMinutes(int $durationInMinutes): void;
+
+    public function getAttachments(): Collection;
+
+    public function addAttachment(AttachmentInterface $attachment): void;
+
+    public function removeAttachment(AttachmentInterface $attachment): void;
 }
