@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Lesson;
 use App\Model\LessonInterface;
+use App\Model\ModuleInterface;
 
 /**
  * @method Lesson|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,4 +17,6 @@ use App\Model\LessonInterface;
 interface LessonRepositoryInterface
 {
     public function getOneById(string $id): ?LessonInterface;
+
+    public function getByModule(ModuleInterface $module): array;
 }

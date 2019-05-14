@@ -44,7 +44,7 @@ class UserCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $email = (string) $input->getArgument('email');
+        $email = $input->getArgument('email');
 
         if (!is_string($email)) {
             throw new InvalidArgumentException('Provided email must be string!');
