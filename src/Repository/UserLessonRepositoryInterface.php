@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Entity\UserLesson;
 use App\Model\LessonInterface;
+use App\Model\ModuleInterface;
 use App\Model\UserLessonInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,4 +19,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 interface UserLessonRepositoryInterface
 {
     public function getOneByUserAndLesson(?UserInterface $user, LessonInterface $lesson): ?UserLessonInterface;
+
+    public function getCompletedByUserAndModule(UserInterface $user, ModuleInterface $module): array;
 }

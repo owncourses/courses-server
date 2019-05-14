@@ -44,9 +44,8 @@ final class ApiUsersController extends AbstractController
         $user = new User();
         $form = $formFactory->create(RegisterUserType::class, $user);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $existingUser = $userRepository->getOneByEmail($user->getEmail());
+        if ($form->isSubmitted() && $form->isValid() && $userEmail = $user->getEmail()) {
+            $existingUser = $userRepository->getOneByEmail($userEmail);
             if (null !== $existingUser) {
                 return new JsonResponse(['message' => 'User with provided email already exists'], Response::HTTP_CONFLICT);
             }

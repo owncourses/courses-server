@@ -44,7 +44,7 @@ class UserCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $email = $input->getArgument('email');
+        $email = (string) $input->getArgument('email');
 
         if (!is_string($email)) {
             throw new InvalidArgumentException('Provided email must be string!');
@@ -58,10 +58,10 @@ class UserCreateCommand extends Command
         $user = new User();
         $user->setEmail($email);
         $user->setRoles(['ROLE_USER']);
-        $generatedPassword = $this->passwordEncoder->encodePassword($user, $input->getArgument('password'));
+        $generatedPassword = $this->passwordEncoder->encodePassword($user, (string) $input->getArgument('password'));
         $user->setPassword($generatedPassword);
-        $user->setFirstName($input->getArgument('firstName'));
-        $user->setLastName($input->getArgument('lastName'));
+        $user->setFirstName((string) $input->getArgument('firstName'));
+        $user->setLastName((string) $input->getArgument('lastName'));
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
