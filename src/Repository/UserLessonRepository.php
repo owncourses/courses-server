@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\UserLesson;
 use App\Model\LessonInterface;
+use App\Model\ModuleInterface;
 use App\Model\UserLessonInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -34,6 +35,19 @@ class UserLessonRepository extends ServiceEntityRepository implements UserLesson
             ->setParameters(['user' => $user, 'lesson' => $lesson])
             ->getQuery()
             ->getOneOrNullResult()
+            ;
+    }
+
+    public function getCompletedByUserAndModule(UserInterface $user, ModuleInterface $module): array
+    {
+        return $this->createQueryBuilder('ul')
+            ->leftJoin('ul.lesson', 'l')
+            ->andWhere('ul.user = :user')
+            ->andWhere('l.module = :module')
+            ->andWhere('ul.completed = true')
+            ->setParameters(['user' => $user, 'module' => $module])
+            ->getQuery()
+            ->getResult()
             ;
     }
 }

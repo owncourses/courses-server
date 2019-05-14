@@ -18,7 +18,7 @@ class RequestBodySubscriber implements EventSubscriberInterface
             return;
         }
 
-        $data = json_decode($request->getContent(), true);
+        $data = json_decode((string) $request->getContent(), true);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new BadRequestHttpException('invalid json body: '.json_last_error_msg());
         }

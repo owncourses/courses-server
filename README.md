@@ -33,7 +33,7 @@ All of that can be installed on Your own server for free.
 - [ ] Lesson homework tasks (mark as completed, left comments, interact with course author)
 - [ ] Module/Course progress based on completed lessons and duration
 - [ ] Course authors
- - [ ] Image, name, bio, email
+  - [ ] Image, name, bio, email
 - [ ] Users
   - [ ] Users progress in course (finished lessons, time spend in platform)
   - [ ] Users questions about homework's

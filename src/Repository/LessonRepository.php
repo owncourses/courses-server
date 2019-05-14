@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Lesson;
 use App\Model\LessonInterface;
+use App\Model\ModuleInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -30,6 +31,19 @@ class LessonRepository extends ServiceEntityRepository implements LessonReposito
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
+            ;
+    }
+
+    public function getByModule(ModuleInterface $module): array
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.module = :module')
+            ->leftJoin('l.module', 'm')
+            ->leftJoin('m.course', 'c')
+            ->andWhere('c.visible != false')
+            ->setParameter('module', $module)
+            ->getQuery()
+            ->getResult()
             ;
     }
 }
