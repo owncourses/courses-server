@@ -21,7 +21,7 @@ final class LessonCompletedProcessor
         $this->security = $security;
     }
 
-    public function process($object, array $data): array
+    public function process(object $object, array $data): array
     {
         if ($object instanceof LessonInterface) {
             $userLesson = $this->userLessonRepository->getOneByUserAndLesson($this->security->getUser(), $object);

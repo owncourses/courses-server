@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Lesson;
+use App\Model\CourseInterface;
 use App\Model\LessonInterface;
 use App\Model\ModuleInterface;
 
@@ -19,4 +20,6 @@ interface LessonRepositoryInterface
     public function getOneById(string $id): ?LessonInterface;
 
     public function getByModule(ModuleInterface $module): array;
+
+    public function getByCourse(CourseInterface $course): array;
 }
