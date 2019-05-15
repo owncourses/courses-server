@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use function random_int;
-use App\Model\UserInterface;
+use App\Generator\StringGeneratorInterface;
 use App\Form\RegisterUserType;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +19,19 @@ use App\Entity\User;
 
 final class ApiUsersController extends AbstractController
 {
-    public function me(SerializerInterface $serializer): Response
+    protected $stringGenerator;
+
+    protected $serializer;
+
+    public function __construct(StringGeneratorInterface $stringGenerator, SerializerInterface $serializer)
     {
-        return new Response($serializer->serialize($this->getUser(), 'json', [
+        $this->stringGenerator = $stringGenerator;
+        $this->serializer = $serializer;
+    }
+
+    public function getCurrentUser(): Response
+    {
+        return new Response($this->serializer->serialize($this->getUser(), 'json', [
             'groups' => [
                 'user_details',
                 'course_details',
@@ -33,13 +40,11 @@ final class ApiUsersController extends AbstractController
     }
 
     public function registerUser(
-        SerializerInterface $serializer,
         Request $request,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        UserRepositoryInterface $userRepository,
-        EventDispatcherInterface $eventDispatcher
+        UserRepositoryInterface $userRepository
     ): Response {
         $user = new User();
         $form = $formFactory->create(RegisterUserType::class, $user);
@@ -50,30 +55,16 @@ final class ApiUsersController extends AbstractController
                 return new JsonResponse(['message' => 'User with provided email already exists'], Response::HTTP_CONFLICT);
             }
 
-            $generatedPassword = $passwordEncoder->encodePassword($user, $this->randomStr(7));
+            $generatedPassword = $passwordEncoder->encodePassword($user, $this->stringGenerator::random(7));
             $user->setPassword($generatedPassword);
             $user->setPasswordNeedToBeChanged(true);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $eventDispatcher->dispatch(UserInterface::EVENT_USER_CREATED, new GenericEvent($user));
-
-            return new Response($serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
+            return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }
 
-        return new Response($serializer->serialize($form, 'json'), Response::HTTP_BAD_REQUEST);
-    }
-
-    private function randomStr(int $length): string
-    {
-        $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $str = '';
-        $max = mb_strlen($keyspace, '8bit') - 1;
-        for ($i = 0; $i < $length; ++$i) {
-            $str .= $keyspace[random_int(0, $max)];
-        }
-
-        return $str;
+        return new Response($this->serializer->serialize($form, 'json'), Response::HTTP_BAD_REQUEST);
     }
 }

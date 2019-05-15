@@ -1,7 +1,7 @@
 api_users_me:
     path: /api/users/me
     methods: GET
-    controller: App\Controller\ApiUsersController::me
+    controller: App\Controller\ApiUsersController::getCurrentUser
 
 api_users_register:
     path: /api/users/register
