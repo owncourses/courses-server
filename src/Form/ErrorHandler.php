@@ -2,10 +2,9 @@
 
 namespace App\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 
-class ErrorHandler extends AbstractType
+class ErrorHandler
 {
     public static function getErrorsFromForm(FormInterface $form): array
     {
