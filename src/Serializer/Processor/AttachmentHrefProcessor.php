@@ -22,7 +22,7 @@ final class AttachmentHrefProcessor
         $this->requestStack = $requestStack;
     }
 
-    public function process($object, array $data): array
+    public function process(object $object, array $data): array
     {
         if (is_array($data) && array_key_exists('file_name', $data)) {
             $filePath = $this->uploaderHelper->asset($object, 'file');

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\UserLesson;
+use App\Model\CourseInterface;
 use App\Model\LessonInterface;
 use App\Model\ModuleInterface;
 use App\Model\UserLessonInterface;
@@ -38,7 +39,7 @@ class UserLessonRepository extends ServiceEntityRepository implements UserLesson
             ;
     }
 
-    public function getCompletedByUserAndModule(UserInterface $user, ModuleInterface $module): array
+    public function getCompletedByUserInModule(UserInterface $user, ModuleInterface $module): array
     {
         return $this->createQueryBuilder('ul')
             ->leftJoin('ul.lesson', 'l')
@@ -46,6 +47,20 @@ class UserLessonRepository extends ServiceEntityRepository implements UserLesson
             ->andWhere('l.module = :module')
             ->andWhere('ul.completed = true')
             ->setParameters(['user' => $user, 'module' => $module])
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getCompletedByUserInCourse(UserInterface $user, CourseInterface $course): array
+    {
+        return $this->createQueryBuilder('ul')
+            ->leftJoin('ul.lesson', 'l')
+            ->leftJoin('l.module', 'm')
+            ->andWhere('ul.user = :user')
+            ->andWhere('m.course = :course')
+            ->andWhere('ul.completed = true')
+            ->setParameters(['user' => $user, 'course' => $course])
             ->getQuery()
             ->getResult()
             ;

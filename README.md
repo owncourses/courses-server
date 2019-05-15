@@ -25,13 +25,12 @@ All of that can be installed on Your own server for free.
 - [x] Users
   - [x] Login
   - [x] User courses
-
-- [x] Lesson duration 
+- [x] Lesson duration
+- [x] Module/Course progress based on completed lessons and duration 
 
 ## Next tasks
 
 - [ ] Lesson homework tasks (mark as completed, left comments, interact with course author)
-- [ ] Module/Course progress based on completed lessons and duration
 - [ ] Course authors
   - [ ] Image, name, bio, email
 - [ ] Users

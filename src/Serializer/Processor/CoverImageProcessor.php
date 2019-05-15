@@ -22,7 +22,7 @@ final class CoverImageProcessor
         $this->requestStack = $requestStack;
     }
 
-    public function process($object, array $data): array
+    public function process(object $object, array $data): array
     {
         if (is_array($data) && array_key_exists('cover_image_name', $data)) {
             $imagePath = $this->uploaderHelper->asset($object, 'coverImageFile');

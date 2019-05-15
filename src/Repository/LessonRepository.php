@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Lesson;
+use App\Model\CourseInterface;
 use App\Model\LessonInterface;
 use App\Model\ModuleInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -30,8 +31,7 @@ class LessonRepository extends ServiceEntityRepository implements LessonReposito
             ->andWhere('c.visible != false')
             ->setParameter('id', $id)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
     public function getByModule(ModuleInterface $module): array
@@ -43,7 +43,18 @@ class LessonRepository extends ServiceEntityRepository implements LessonReposito
             ->andWhere('c.visible != false')
             ->setParameter('module', $module)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+
+    public function getByCourse(CourseInterface $course): array
+    {
+        return $this->createQueryBuilder('l')
+            ->where('c.id = :courseId')
+            ->leftJoin('l.module', 'm')
+            ->leftJoin('m.course', 'c')
+            ->andWhere('c.visible != false')
+            ->setParameter('courseId', $course->getId())
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\UserLesson;
+use App\Model\CourseInterface;
 use App\Model\LessonInterface;
 use App\Model\ModuleInterface;
 use App\Model\UserLessonInterface;
@@ -20,5 +21,7 @@ interface UserLessonRepositoryInterface
 {
     public function getOneByUserAndLesson(?UserInterface $user, LessonInterface $lesson): ?UserLessonInterface;
 
-    public function getCompletedByUserAndModule(UserInterface $user, ModuleInterface $module): array;
+    public function getCompletedByUserInModule(UserInterface $user, ModuleInterface $module): array;
+
+    public function getCompletedByUserInCourse(UserInterface $user, CourseInterface $course): array;
 }
