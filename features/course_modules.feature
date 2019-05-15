@@ -107,7 +107,7 @@ Feature:
     Then the response should be in JSON
     Then the response status code should be 200
     And the JSON node "[1].progress.completed_lessons" should be equal to "2"
-    And the JSON node "[1].progress.completed_percentage" should be equal to 66
+    And the JSON node "[1].progress.completed_percentage" should be equal to 67
     And the JSON node "[1].progress.completed_time" should be equal to "50"
     And the JSON node "[1].progress.total_duration" should be equal to "70"
 
@@ -147,6 +147,6 @@ Feature:
     Then the response should be in JSON
     Then the response status code should be 200
     And the JSON node "[1].progress.completed_lessons" should be equal to "2"
-    And the JSON node "[1].progress.completed_percentage" should be equal to 66
+    And the JSON node "[1].progress.completed_percentage" should be equal to 67
     And the JSON node "[1].progress.completed_time" should be equal to "50"
     And the JSON node "[1].progress.total_duration" should be equal to "70"
