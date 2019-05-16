@@ -42,7 +42,7 @@ Feature:
     Given that "test@example.com" user have "Test course" course
     When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
-    When I send a "PATCH" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
+    When I send a "PUT" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
     """
     {
       "completed": true
@@ -60,7 +60,7 @@ Feature:
 
     When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
-    When I send a "PATCH" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
+    When I send a "PUT" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
     """
     {
       "completed": false

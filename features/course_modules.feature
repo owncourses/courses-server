@@ -70,7 +70,7 @@ Feature:
 
     When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
-    When I send a "PATCH" request to "/api/lessons/56e3f44c-e16f-4a7a-8519-1d1e87cb32d5/progress" with body:
+    When I send a "PUT" request to "/api/lessons/56e3f44c-e16f-4a7a-8519-1d1e87cb32d5/progress" with body:
     """
     {
       "completed": true
@@ -93,7 +93,7 @@ Feature:
 
     When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
-    When I send a "PATCH" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
+    When I send a "PUT" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/progress" with body:
     """
     {
       "completed": true
@@ -113,7 +113,7 @@ Feature:
 
     When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
-    When I send a "PATCH" request to "/api/lessons/d56b3c1c-1dbb-4aa2-bac6-7cf67527bbb6/progress" with body:
+    When I send a "PUT" request to "/api/lessons/d56b3c1c-1dbb-4aa2-bac6-7cf67527bbb6/progress" with body:
     """
     {
       "completed": true
@@ -133,7 +133,7 @@ Feature:
 
     When I am authenticated as "test@example.com"
     And I add 'content-type' header equal to 'application/json'
-    When I send a "PATCH" request to "/api/lessons/d56b3c1c-1dbb-4aa2-bac6-7cf67527bbb6/progress" with body:
+    When I send a "PUT" request to "/api/lessons/d56b3c1c-1dbb-4aa2-bac6-7cf67527bbb6/progress" with body:
     """
     {
       "completed": false
