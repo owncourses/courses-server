@@ -51,12 +51,14 @@ final class CourseAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title');
+        $datagridMapper->add('authors');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('title');
         $listMapper->add('description');
+        $listMapper->add('authors');
         $listMapper->add('coverImageName');
         $listMapper->add('visible');
         $listMapper->add('startDate');

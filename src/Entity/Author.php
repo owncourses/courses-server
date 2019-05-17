@@ -94,4 +94,9 @@ class Author implements AuthorInterface
             $this->courses->remove($course);
         }
     }
+
+    public function __toString()
+    {
+        return $this->getName() ?? 'New Author';
+    }
 }
