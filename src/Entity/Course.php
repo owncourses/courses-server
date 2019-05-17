@@ -6,6 +6,8 @@ use App\Model\CourseInterface;
 use App\Model\TimeLimitedAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use App\Model\VisibilityAwareTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Course implements CourseInterface
@@ -22,9 +24,12 @@ class Course implements CourseInterface
 
     private $coverImageFile;
 
+    private $authors;
+
     public function __construct()
     {
         $this->visible = true;
+        $this->authors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,6 +76,11 @@ class Course implements CourseInterface
     public function getCoverImageFile(): ?File
     {
         return $this->coverImageFile;
+    }
+
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
     }
 
     public function __toString()

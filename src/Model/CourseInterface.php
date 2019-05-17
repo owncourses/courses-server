@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 
 interface CourseInterface extends TimestampableInterface, VisibilityInterface, TimeLimitedInterface
@@ -25,4 +26,6 @@ interface CourseInterface extends TimestampableInterface, VisibilityInterface, T
     public function setCoverImageFile(?File $imageFile = null): void;
 
     public function getCoverImageFile(): ?File;
+
+    public function getAuthors(): Collection;
 }

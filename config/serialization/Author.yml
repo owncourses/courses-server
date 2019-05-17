@@ -1,0 +1,8 @@
+App\Entity\Author:
+    attributes:
+        name:
+            groups: ['list_courses', 'course_details']
+        bio:
+            groups: ['list_courses', 'course_details']
+        picture:
+            groups: ['list_courses', 'course_details']

@@ -34,11 +34,13 @@ App\Entity\Course:
         visible:
             type: boolean
             nullable: true
-
         startDate:
             type: datetime
             nullable: true
-
         endDate:
             type: datetime
             nullable: true
+    manyToMany:
+        authors:
+            targetEntity: App\Entity\Author
+            mappedBy: courses

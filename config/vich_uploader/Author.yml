@@ -1,0 +1,4 @@
+App\Entity\Author:
+    pictureFile:
+        mapping: pictures
+        filename_property: picture

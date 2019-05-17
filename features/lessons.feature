@@ -25,7 +25,7 @@ Feature:
     And the JSON node "embed_code" should be equal to "<iframe width='500px' height='294px' src='https://player.vimeo.com/video/225434434?'></iframe>"
     And the JSON node "module.title" should be equal to "Test Module"
     And the JSON node "module.course.title" should be equal to "Test course"
-    And the JSON node "href.coverImageUrl" should be equal to the string "http://localhost/assets/images/course/covers/test-lesson.png"
+    And the JSON node "href.cover_image_url" should be equal to the string "http://localhost/assets/images/course/covers/test-lesson.png"
 
   Scenario: I want to mark lesson as completed
     Given the following Courses:
