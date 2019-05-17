@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 interface UserAwareInterface
 {
-    public function getUser(): UserInterface;
+    public function getUser(): SymfonyUserInterface;
 
-    public function setUser(UserInterface $user): void;
+    public function setUser(SymfonyUserInterface $user): void;
 }

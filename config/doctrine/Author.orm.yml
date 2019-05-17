@@ -1,0 +1,48 @@
+App\Entity\Author:
+    type: entity
+    repositoryClass: App\Repository\AuthorRepository
+    table: npd_author
+    id:
+        id:
+            column: uuid
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        name:
+            type: string
+            length: 255
+        bio:
+            type: text
+            nullable: true
+        picture:
+            type: string
+            length: 255
+            nullable: true
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
+    manyToMany:
+        courses:
+            targetEntity: App\Entity\Course
+            fetch: EAGER
+            joinTable:
+                name: npd_author_course
+                joinColumns:
+                    author_id:
+                        referencedColumnName: uuid
+                inverseJoinColumns:
+                    course_id:
+                        referencedColumnName: id
+            cascade:
+                - persist

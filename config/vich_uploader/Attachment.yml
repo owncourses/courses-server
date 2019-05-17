@@ -1,5 +1,5 @@
 App\Entity\Attachment:
     file:
         mapping: attachments
-        filename_property: filename
+        filename_property: fileName
         mime_type: mimeType

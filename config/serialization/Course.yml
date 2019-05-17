@@ -20,3 +20,5 @@ App\Entity\Course:
             groups: ['list_courses', 'course_details']
         active:
             groups: ['list_courses', 'course_details']
+        authors:
+            groups: ['list_courses', 'course_details']

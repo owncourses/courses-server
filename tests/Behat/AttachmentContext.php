@@ -30,7 +30,7 @@ final class AttachmentContext extends AbstractObjectContext implements Context
     /**
      * @Given the following Attachments:
      */
-    public function theFollowinAttachments(TableNode $table)
+    public function theFollowingAttachments(TableNode $table)
     {
         $metadata = $this->entityManager->getClassMetaData(Attachment::class);
         $metadata->setIdGenerator(new AssignedGenerator());

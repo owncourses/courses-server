@@ -27,6 +27,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Courses }
 
+    admin.author:
+        class: App\Admin\AuthorAdmin
+        arguments: [~, App\Entity\Author, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: courses, label: Authors }
+
     admin.module:
         class: App\Admin\ModuleAdmin
         arguments: [~, App\Entity\Module,'PixSortableBehaviorBundle:SortableAdmin']

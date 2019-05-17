@@ -5,27 +5,27 @@ declare(strict_types=1);
 namespace App\Serializer;
 
 use App\Entity\Attachment;
-use App\Serializer\Processor\AttachmentHrefProcessor;
+use App\Serializer\Processor\FileHrefProcessor;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class AttachmentNormalizer implements NormalizerInterface
 {
     private $normalizer;
-    private $attachmentHrefProcessor;
+    private $fileHrefProcessor;
 
     public function __construct(
         ObjectNormalizer $normalizer,
-        AttachmentHrefProcessor $attachmentHrefProcessor
+        FileHrefProcessor $fileHrefProcessor
     ) {
         $this->normalizer = $normalizer;
-        $this->attachmentHrefProcessor = $attachmentHrefProcessor;
+        $this->fileHrefProcessor = $fileHrefProcessor;
     }
 
     public function normalize($object, $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
-        $data = $this->attachmentHrefProcessor->process($object, $data);
+        $data = $this->fileHrefProcessor->process($object, $data);
 
         return $data;
     }
