@@ -5,5 +5,5 @@ api_lessons_get_single:
 
 api_lessons_set_completed:
     path: /api/lessons/{lessonId}/progress
-    methods: PATCH
+    methods: PUT
     controller: App\Controller\ApiLessonsController::setProgress

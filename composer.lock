@@ -10742,7 +10742,7 @@
         "roave/security-advisories": 20,
         "behat/mink": 20
     },
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.2.9",

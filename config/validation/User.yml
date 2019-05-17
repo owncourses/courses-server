@@ -1,0 +1,8 @@
+App\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email]
+            message: 'User with provided email already exists'
+    properties:
+        email:
+            - Email: ~
