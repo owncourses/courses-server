@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Serializer\Processor;
 
 use function array_key_exists;
-use function is_array;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
@@ -39,16 +38,14 @@ final class FileHrefProcessor
 
     public function process(object $object, array $data): array
     {
-        if (is_array($data)) {
-            foreach ($data as $key => $value) {
-                if (array_key_exists($key, self::SUPPORTED_KEYS)) {
-                    $filePath = $this->uploaderHelper->asset($object, self::SUPPORTED_KEYS[$key]['file']);
-                    $currentRequest = $this->requestStack->getCurrentRequest();
-                    if (null !== $filePath && null !== $currentRequest && false === strpos($filePath, '://')) {
-                        $filePath = $currentRequest->getSchemeAndHttpHost().$filePath;
-                    }
-                    $data['href'][self::SUPPORTED_KEYS[$key]['property']] = $filePath;
+        foreach ($data as $key => $value) {
+            if (array_key_exists($key, self::SUPPORTED_KEYS)) {
+                $filePath = $this->uploaderHelper->asset($object, self::SUPPORTED_KEYS[$key]['file']);
+                $currentRequest = $this->requestStack->getCurrentRequest();
+                if (null !== $filePath && null !== $currentRequest && false === strpos($filePath, '://')) {
+                    $filePath = $currentRequest->getSchemeAndHttpHost().$filePath;
                 }
+                $data['href'][self::SUPPORTED_KEYS[$key]['property']] = $filePath;
             }
         }
 
