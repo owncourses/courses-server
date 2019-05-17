@@ -21,24 +21,24 @@ All of that can be installed on Your own server for free.
   - [x] Lesson completion API
   - [x] Lesson covers
   - [x] Lesson attachments
+  - [x] Lesson duration
 - [x] Basic admin panel
 - [x] Users
   - [x] Login
   - [x] User courses
-- [x] Lesson duration
 - [x] Module/Course progress based on completed lessons and duration 
+- [x] Course authors
+  - [x] Image, name, bio, courses
 
 ## Next tasks
 
 - [ ] Lesson homework tasks (mark as completed, left comments, interact with course author)
-- [ ] Course authors
-  - [ ] Image, name, bio, email
 - [ ] Users
   - [ ] Users progress in course (finished lessons, time spend in platform)
   - [ ] Users questions about homework's
 
 
-### Development instalation (with docker)
+### Development installation (with docker)
 
 **Add owncourses.test to you `/etc/hosts`**
 ```bash
