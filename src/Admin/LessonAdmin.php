@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -21,7 +22,10 @@ final class LessonAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('title', TextType::class);
-        $formMapper->add('description', TextType::class);
+        $formMapper->add('description', SimpleFormatterType::class, [
+            'format' => 'richhtml',
+            'attr' => ['class' => 'ckeditor'],
+        ]);
         $formMapper->add('durationInMinutes');
         $formMapper->add('embedCode');
         $formMapper->add('module');
