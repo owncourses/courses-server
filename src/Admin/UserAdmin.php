@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use App\Model\UserInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -21,12 +22,24 @@ final class UserAdmin extends AbstractAdmin
     {
         parent::preUpdate($object);
 
-        if (null === ($plainPassword = $object->getPlainPassword())) {
+        $this->handleUserPassword($object);
+    }
+
+    public function prePersist($object)
+    {
+        parent::prePersist($object);
+
+        $this->handleUserPassword($object);
+    }
+
+    private function handleUserPassword(UserInterface $user)
+    {
+        if (null === ($plainPassword = $user->getPlainPassword())) {
             return;
         }
 
-        $encoded = $this->encoder->encodePassword($object, $plainPassword);
-        $object->setPassword($encoded);
+        $encoded = $this->encoder->encodePassword($user, $plainPassword);
+        $user->setPassword($encoded);
     }
 
     public function setEncoder(UserPasswordEncoderInterface $encoder)
