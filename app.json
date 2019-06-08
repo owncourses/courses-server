@@ -20,35 +20,44 @@
       "generator": "secret"
     },
     "MAILER_URL": {
-      "description": "Url for mailer connection."
+      "description": "Url for mailer connection.",
+      "value": "null://localhost"
     },
     "JWT_PASSPHRASE": {
-      "description": "Pasphrase used for signing JWT tokens."
+      "description": "Pasphrase used for signing JWT tokens.",
+      "value": "123abc"
     },
     "JWT_SECRET_KEY": {
-      "description": "Raw secret key, required for creating tokens."
+      "description": "Raw secret key, required for creating tokens.",
+      "value": "-----BEGIN RSA PRIVATE KEY-----\nProc-Type: 4,ENCRYPTED\nDEK-Info: AES-256-CBC,3449B7331B524C329F2D88B4A1B8AD67\n\n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\n-----END RSA PRIVATE KEY-----\n"
     },
     "JWT_PUBLIC_KEY": {
-      "description": "Raw public key, required for verifying tokens."
+      "description": "Raw public key, required for verifying tokens.",
+      "value": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2G2D0Vl0a+RezfiOEp/t\nWlRyKcHlShN6VqilJctSnRrWNcd4IhISr0eurpJpbq7PLS9ZbDogHmMXoduGWqR0\n4/sttyQTvv0o49Wgf0iZF1or0d4lPpQSDSt/2Bua02ZE8r6MEEPCeCUN0qFwBLE2\nJ3E3FTQcmVBxJYn931ZF3lBXlz6R4BurfnNolZuM8jMRUIinsQfziKvF0BPiY9/S\nYLGhkoPoXSp1kRUDVWvrZ+VRwTUnSn3QlwQPqxlVDTn99UJ4XND+omkkE2wC3OQ6\nRBa+dRhiwYjDTyw1cy3DkKm4sQl9ujs2vtiud61exv+tu4Ch5Lh7dz0IgfIFAXf/\nbttvul3abkDm/m0kC+ORneloMONu+ir7cuxG6CbIwpK0J3oc51KFZt/39vkWcbNf\naKP4alV169zeZaB6cMZrZEyrdiSBKRaICVTfoAl2eTO73Q7mie0j0Qrm4/VyI1tt\nRlGS/iMDOeQzIerBxN2/z970dN3EhB4ec7crKfh41sRX/GGNhHXH55b+4YrO95+C\n+/wrQVdH/FbsKebuTkZsdzqLoJg2u9JPv45KSd1oRf2A8Sms2Ehu7dwtKyO/EZkT\nN4LWXB/UV/gqElRTl7U67FZKa7WqEXFkEQHRM5rYQW4TnmxNsL3Oh+QBgr6sht4f\n6DQKfZ8WpSS/mvfQoce/KQ0CAwEAAQ==\n-----END PUBLIC KEY-----"
     },
     "SECURITY_SECRET": {
-      "description": "A secret key used for signing request coming from 3d party apps."
+      "description": "A secret key used for signing request coming from 3d party apps.",
+      "value": "superS3cret"
     },
     "AWS_S3_KEY": {
-      "description": "AWS S3 key used for assets storage."
+      "description": "AWS S3 key used for assets storage.",
+      "value": "withThisKeyUploadWillNotWork"
     },
     "AWS_S3_SECRET": {
-      "description": "AWS S3 secret used for assets storage."
+      "description": "AWS S3 secret used for assets storage.",
+      "value": "withThisSecretUploadWillNotWork"
     },
     "AWS_S3_BUCKET": {
-      "description": "AWS S3 bucket name used for assets storage."
+      "description": "AWS S3 bucket name used for assets storage.",
+      "value": "owncourses.com"
     },
     "AWS_S3_REGION": {
-      "description": "AWS S3 region code used for assets storage."
+      "description": "AWS S3 region code used for assets storage.",
+      "value": "eu-west-1"
     },
     "CORS_ALLOW_ORIGIN": {
       "description": "Hosts allowed to use API.",
-      "value": "*"
+      "value": "^https?://localhost(:[0-9]+)?$"
     }
   },
   "scripts": {
