@@ -5,4 +5,4 @@ parameters:
 	excludes_analyse:
 		- %currentWorkingDirectory%/src/Migrations/*
 	symfony:
-		container_xml_path: '%rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml'
+		container_xml_path: '%rootDir%/../../../var/cache/test/srcApp_KernelTestDebugContainer.xml'
