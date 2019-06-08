@@ -70,3 +70,13 @@ docker-compose exec app bin/console app:user:promote test@example.com ROLE_ADMIN
 ```
 
 Open `http://owncourses.test/admin` in Your browser
+
+
+### JWT tokens
+
+#### Generate keys needed for token creation and verification
+
+```bash
+openssl genrsa -out config/jwt/private.pem -aes256 4096 # set this value as JWT_SECRET_KEY env variable
+openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem # set this value as JWT_PUBLIC_KEY env variable
+```

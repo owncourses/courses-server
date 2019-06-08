@@ -25,6 +25,12 @@
     "JWT_PASSPHRASE": {
       "description": "Pasphrase used for signing JWT tokens."
     },
+    "JWT_SECRET_KEY": {
+      "description": "Raw secret key, required for creating tokens."
+    },
+    "JWT_PUBLIC_KEY": {
+      "description": "Raw public key, required for verifying tokens."
+    },
     "SECURITY_SECRET": {
       "description": "A secret key used for signing request coming from 3d party apps."
     },
@@ -38,7 +44,11 @@
       "description": "AWS S3 bucket name used for assets storage."
     },
     "AWS_S3_REGION": {
-      "description": "WS S3 region code used for assets storage."
+      "description": "AWS S3 region code used for assets storage."
+    },
+    "CORS_ALLOW_ORIGIN": {
+      "description": "Hosts allowed to use API.",
+      "value": "*"
     }
   },
   "scripts": {
