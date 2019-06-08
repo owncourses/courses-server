@@ -12,6 +12,7 @@
       }
     }
   ],
+  "success_url": "/admin",
   "image": "heroku/php",
   "env": {
     "APP_SECRET": {
@@ -41,7 +42,6 @@
     }
   },
   "scripts": {
-    "postdeploy": "bundle exec rake bootstrap",
-    "pr-predestroy": "bundle exec rake cleanup",
+    "postdeploy": "php bin/console app:user:create test@example.com testPassword Test User && php bin/console app:user:promote test@example.com ROLE_ADMIN && openssl genrsa -passout env:JWT_PASSPHRASE -out config/jwt/private.pem -aes256 4096 && openssl rsa -pubout -passin env:JWT_PASSPHRASE -in config/jwt/private.pem -out config/jwt/public.pem"
   }
 }
