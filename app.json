@@ -1,0 +1,47 @@
+{
+  "name": "OwnCourses server",
+  "description": "API (and admin) server for OwnCourses platform",
+  "repository": "https://github.com/owncourses/courses-server",
+  "logo": "https://i.ibb.co/YQ52bDY/logo.png",
+  "keywords": ["online courses", "e-learning", "open source platform"],
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "10"
+      }
+    }
+  ],
+  "image": "heroku/php",
+  "env": {
+    "APP_SECRET": {
+      "description": "A secret key for verifying the integrity of data.",
+      "generator": "secret"
+    },
+    "MAILER_URL": {
+      "description": "Url for mailer connection."
+    },
+    "JWT_PASSPHRASE": {
+      "description": "Pasphrase used for signing JWT tokens."
+    },
+    "SECURITY_SECRET": {
+      "description": "A secret key used for signing request coming from 3d party apps."
+    },
+    "AWS_S3_KEY": {
+      "description": "AWS S3 key used for assets storage."
+    },
+    "AWS_S3_SECRET": {
+      "description": "AWS S3 secret used for assets storage."
+    },
+    "AWS_S3_BUCKET": {
+      "description": "AWS S3 bucket name used for assets storage."
+    },
+    "AWS_S3_REGION": {
+      "description": "WS S3 region code used for assets storage."
+    }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake bootstrap",
+    "pr-predestroy": "bundle exec rake cleanup",
+  }
+}
