@@ -2,6 +2,7 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/owncourses/courses-server/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/owncourses/courses-server/?branch=master)
 [![CircleCI](https://circleci.com/gh/owncourses/courses-server/tree/master.svg?style=svg)](https://circleci.com/gh/owncourses/courses-server/tree/master) 
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ### OwnCourses platform provides solution for independent online course makers.
 
