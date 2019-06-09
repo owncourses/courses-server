@@ -19,10 +19,6 @@
       "description": "A secret key for verifying the integrity of data.",
       "generator": "secret"
     },
-    "MAILER_URL": {
-      "description": "Url for mailer connection.",
-      "value": "null://localhost"
-    },
     "JWT_PASSPHRASE": {
       "description": "Pasphrase used for signing JWT tokens.",
       "value": "123abc"
@@ -34,10 +30,6 @@
     "JWT_PUBLIC_KEY": {
       "description": "Raw public key, required for verifying tokens.",
       "value": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2G2D0Vl0a+RezfiOEp/t\nWlRyKcHlShN6VqilJctSnRrWNcd4IhISr0eurpJpbq7PLS9ZbDogHmMXoduGWqR0\n4/sttyQTvv0o49Wgf0iZF1or0d4lPpQSDSt/2Bua02ZE8r6MEEPCeCUN0qFwBLE2\nJ3E3FTQcmVBxJYn931ZF3lBXlz6R4BurfnNolZuM8jMRUIinsQfziKvF0BPiY9/S\nYLGhkoPoXSp1kRUDVWvrZ+VRwTUnSn3QlwQPqxlVDTn99UJ4XND+omkkE2wC3OQ6\nRBa+dRhiwYjDTyw1cy3DkKm4sQl9ujs2vtiud61exv+tu4Ch5Lh7dz0IgfIFAXf/\nbttvul3abkDm/m0kC+ORneloMONu+ir7cuxG6CbIwpK0J3oc51KFZt/39vkWcbNf\naKP4alV169zeZaB6cMZrZEyrdiSBKRaICVTfoAl2eTO73Q7mie0j0Qrm4/VyI1tt\nRlGS/iMDOeQzIerBxN2/z970dN3EhB4ec7crKfh41sRX/GGNhHXH55b+4YrO95+C\n+/wrQVdH/FbsKebuTkZsdzqLoJg2u9JPv45KSd1oRf2A8Sms2Ehu7dwtKyO/EZkT\nN4LWXB/UV/gqElRTl7U67FZKa7WqEXFkEQHRM5rYQW4TnmxNsL3Oh+QBgr6sht4f\n6DQKfZ8WpSS/mvfQoce/KQ0CAwEAAQ==\n-----END PUBLIC KEY-----"
-    },
-    "SECURITY_SECRET": {
-      "description": "A secret key used for signing request coming from 3d party apps.",
-      "value": "superS3cret"
     },
     "AWS_S3_KEY": {
       "description": "AWS S3 key used for assets storage.",
