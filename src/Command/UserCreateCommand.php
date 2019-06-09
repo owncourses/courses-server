@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\User;
+use App\Repository\CourseRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -10,6 +11,7 @@ use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -18,13 +20,19 @@ class UserCreateCommand extends Command
 {
     protected static $defaultName = 'app:user:create';
 
+    private $courseRepository;
     private $userRepository;
     private $entityManager;
     private $passwordEncoder;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        CourseRepositoryInterface $courseRepository,
+        UserRepositoryInterface $userRepository,
+        UserPasswordEncoderInterface $passwordEncoder,
+        EntityManagerInterface $entityManager
+    ) {
         parent::__construct();
+        $this->courseRepository = $courseRepository;
         $this->userRepository = $userRepository;
         $this->passwordEncoder = $passwordEncoder;
         $this->entityManager = $entityManager;
@@ -38,7 +46,7 @@ class UserCreateCommand extends Command
             ->addArgument('password', InputArgument::REQUIRED, 'User password')
             ->addArgument('firstName', InputArgument::REQUIRED, 'User first name')
             ->addArgument('lastName', InputArgument::REQUIRED, 'User last name')
-        ;
+            ->addOption('courses', null, InputOption::VALUE_REQUIRED, 'Courses assigned to user("," sperated by title)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -62,6 +70,16 @@ class UserCreateCommand extends Command
         $user->setPassword($generatedPassword);
         $user->setFirstName((string) $input->getArgument('firstName'));
         $user->setLastName((string) $input->getArgument('lastName'));
+
+        if ($input->hasOption('courses')) {
+            $coursesTitles = explode(',', $input->getOption('courses'));
+            foreach ($coursesTitles as $coursesTitle) {
+                $course = $this->courseRepository->findOneBy(['title' => $coursesTitle]);
+                if (null !== $course) {
+                    $user->addCourse($course);
+                }
+            }
+        }
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
