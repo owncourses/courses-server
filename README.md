@@ -1,17 +1,38 @@
-# OwnCourses back office server and API
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="https://i.ibb.co/YQ52bDY/logo.png" alt="OwnCourses logo"></a>
+</p>
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/owncourses/courses-server/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/owncourses/courses-server/?branch=master)
-[![CircleCI](https://circleci.com/gh/owncourses/courses-server/tree/master.svg?style=svg)](https://circleci.com/gh/owncourses/courses-server/tree/master) 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+<h3 align="center">OwnCourses server</h3>
+
+<div align="center">
+
+  [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
+  [![GitHub Issues](https://img.shields.io/github/issues/owncourses/courses-server.svg)](https://github.com/owncourses/courses-server/issues)
+  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/owncourses/courses-server.svg)](https://github.com/owncourses/courses-server/pulls)
+  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/owncourses/courses-server/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/owncourses/courses-server/?branch=master)
+  [![CircleCI](https://circleci.com/gh/owncourses/courses-server/tree/master.svg?style=svg)](https://circleci.com/gh/owncourses/courses-server/tree/master) 
+  [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+</div>
 
 ### OwnCourses platform provides solution for independent online course makers.
 
-OwnCourses allows You to create unlimited courses, define your course modules, and lessons and give access to them for Your students.
+---
+
+OwnCourses allows You to create unlimited courses, define your course modules, and lessons and give access to them for Your students. 
 This server application provides API used by student portal application (build in react).
 
 All of that can be installed on Your own server for free.
 
-## MPV components
+## 📝 Table of Contents
+- [What's done?](#mvp)
+- [Next tasks](#next)
+- [Development installation (with docker)](#docker)
+- [JWT tokens configuration](#jwt)
+
+## What's done? <a name = "mvp"></a>
 
 - [x] Courses
   - [x] Course covers
@@ -31,7 +52,7 @@ All of that can be installed on Your own server for free.
 - [x] Course authors
   - [x] Image, name, bio, courses
 
-## Next tasks
+## Next tasks <a name = "next"></a>
 
 - [ ] Lesson homework tasks (mark as completed, left comments, interact with course author)
 - [ ] Users
@@ -39,7 +60,7 @@ All of that can be installed on Your own server for free.
   - [ ] Users questions about homework's
 
 
-### Development installation (with docker)
+## Development installation (with docker) <a name = "docker"></a>
 
 **Add owncourses.test to you `/etc/hosts`**
 ```bash
@@ -73,7 +94,7 @@ docker-compose exec app bin/console app:user:promote test@example.com ROLE_ADMIN
 Open `http://owncourses.test/admin` in Your browser
 
 
-### JWT tokens
+## JWT tokens configuration <a name = "jwt"></a>
 
 #### Generate keys needed for token creation and verification
 
