@@ -7,8 +7,11 @@ namespace App\Controller;
 use App\Factory\UserFactoryInterface;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
+use App\Model\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +42,8 @@ final class ApiUsersController extends AbstractController
     public function registerUser(
         Request $request,
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        EventDispatcher $dispatcher
     ): Response {
         $user = $this->userFactory->create();
         $form = $formFactory->create(RegisterUserType::class, $user);
@@ -47,6 +51,14 @@ final class ApiUsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $dispatcher->dispatch(new GenericEvent($user), UserInterface::EVENT_USER_CREATED);
+
+            //TODO:
+            // Catch eventand send email with link to password reset to new user
+            // Add controller for handling user password change
+            // Implement user password change in app
+            // Add env variable for student app url (user will be sned there from email)
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }

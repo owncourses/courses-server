@@ -15,6 +15,7 @@ class RegisterUserType extends AbstractType
             ->add('email')
             ->add('firstName')
             ->add('lastName')
+            // TODO add courses to form (find them by name)
         ;
     }
 

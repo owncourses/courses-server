@@ -1,0 +1,4 @@
+api_lessons_get_single:
+    path: /api/authorization
+    methods: POST
+    controller: App\Controller\ApiAuthorizationController::authorization

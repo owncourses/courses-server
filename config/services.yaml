@@ -17,6 +17,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\EventListener\UserRegisteredListener:
+        tags:
+            - { name: kernel.event_listener, event: app.user.created }
+
     app.uploader.storage:
         alias: vich_uploader.storage
         public: true

@@ -30,6 +30,7 @@ final class RestJwtContext extends RestContext
     public function iAmAuthenticatedAs(string $username)
     {
         $token = $this->jwtEncoder->encode(['username' => $username]);
+
         $this->request->setHttpHeader('Authorization', 'Bearer '.$token);
     }
 

@@ -19,9 +19,9 @@
       "description": "A secret key for verifying the integrity of data.",
       "generator": "secret"
     },
-    "MAILER_URL": {
-      "description": "Url for mailer connection.",
-      "value": "null://localhost"
+    "MAILER_DSN": {
+      "description": "Data for mailer connection.",
+      "value": "smtp://localhost"
     },
     "JWT_PASSPHRASE": {
       "description": "Pasphrase used for signing JWT tokens.",
