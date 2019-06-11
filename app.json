@@ -49,7 +49,7 @@
     },
     "CORS_ALLOW_ORIGIN": {
       "description": "Hosts allowed to use API.",
-      "value": "^https?://localhost(:[0-9]+)?$"
+      "value": "^.*$"
     }
   },
   "scripts": {
