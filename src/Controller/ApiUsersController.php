@@ -8,6 +8,7 @@ use App\Factory\UserFactoryInterface;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
 use App\Repository\CourseRepositoryInterface;
+use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -38,27 +39,31 @@ final class ApiUsersController extends AbstractController
         ]));
     }
 
-    public function registerUser(
+    public function registerOrUpdateUser(
         Request $request,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         CourseRepositoryInterface $courseRepository,
+        UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage
     ): Response {
-        $user = $this->userFactory->create();
+        $user = $userRepository->getOneByEmail($request->request->get('email'));
+        if (null === $user) {
+            $user = $this->userFactory->create();
+            $entityManager->persist($user);
+        }
+
         $form = $formFactory->create(RegisterUserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (null !== $courseName = $form->get('course')->getData()) {
-                $course = $courseRepository->findOneBy(['title' => $courseName]);
+                $course = $courseRepository->getOneByTitle($courseName);
                 if (null !== $course) {
                     $user->addCourse($course);
                 }
             }
 
-            $entityManager->persist($user);
             $entityManager->flush();
-
             $tokenStorage->getToken()->setUser($user);
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);

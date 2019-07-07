@@ -77,9 +77,10 @@ Feature:
     """
     {
       "email": "test@example.com",
-      "firstName": "New",
+      "firstName": "Updated",
       "lastName": "User"
     }
     """
     Then the response should be in JSON
-    And the response status code should be 400
+    And the response status code should be 201
+    And the JSON node "first_name" should be equal to "Updated"
