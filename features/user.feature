@@ -46,26 +46,22 @@ Feature:
     And I send a "POST" request to "/api/users/register" with signed body:
     """
     {
-      "register_user": {
-        "email": "newuser@example.com",
-        "firstName": "New",
-        "lastName": "User"
-      }
+      "email": "newuser@example.com",
+      "firstName": "New",
+      "lastName": "User"
     }
     """
     Then the response should be in JSON
     And the response status code should be 201
 
-  Scenario: It should register new user
+  Scenario: It should fail on not signed request
     And I add 'content-type' header equal to 'application/json'
     And I send a "POST" request to "/api/users/register" with body:
     """
     {
-      "register_user": {
-        "email": "newuser@example.com",
-        "firstName": "New",
-        "lastName": "User"
-      }
+      "email": "newuser@example.com",
+      "firstName": "New",
+      "lastName": "User"
     }
     """
     Then the response should be in JSON
@@ -80,11 +76,9 @@ Feature:
     And I send a "POST" request to "/api/users/register" with signed body:
     """
     {
-      "register_user": {
-        "email": "test@example.com",
-        "firstName": "New",
-        "lastName": "User"
-      }
+      "email": "test@example.com",
+      "firstName": "New",
+      "lastName": "User"
     }
     """
     Then the response should be in JSON

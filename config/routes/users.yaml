@@ -7,3 +7,8 @@ api_users_register:
     path: /api/users/register
     methods: POST
     controller: App\Controller\ApiUsersController::registerUser
+
+api_integration_register:
+    path: /api/integration/users/register
+    methods: POST
+    controller: App\Controller\ApiUsersController::registerUser
