@@ -10,7 +10,7 @@ use App\Form\RegisterUserType;
 use App\Model\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +43,7 @@ final class ApiUsersController extends AbstractController
         Request $request,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
-        EventDispatcher $dispatcher
+        EventDispatcherInterface $dispatcher
     ): Response {
         $user = $this->userFactory->create();
         $form = $formFactory->create(RegisterUserType::class, $user);
