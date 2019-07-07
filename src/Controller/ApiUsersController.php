@@ -7,11 +7,13 @@ namespace App\Controller;
 use App\Factory\UserFactoryInterface;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
+use App\Repository\CourseRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class ApiUsersController extends AbstractController
@@ -39,20 +41,25 @@ final class ApiUsersController extends AbstractController
     public function registerUser(
         Request $request,
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        CourseRepositoryInterface $courseRepository,
+        TokenStorageInterface $tokenStorage
     ): Response {
         $user = $this->userFactory->create();
         $form = $formFactory->create(RegisterUserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (null !== $courseName = $form->get('course')->getData()) {
+                $course = $courseRepository->findOneBy(['title' => $courseName]);
+                if (null !== $course) {
+                    $user->addCourse($course);
+                }
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
-            //TODO:
-            // Catch eventand send email with link to password reset to new user
-            // Add controller for handling user password change
-            // Implement user password change in app
-            // Add env variable for student app url (user will be send there from email)
+            $tokenStorage->getToken()->setUser($user);
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }

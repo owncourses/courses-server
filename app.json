@@ -54,6 +54,10 @@
     "CORS_ALLOW_ORIGIN": {
       "description": "Hosts allowed to use API.",
       "value": "^.*$"
+    },
+    "INTEGRATION_API_KEY": {
+      "description": "Api key used by integration services (like Zapier)",
+      "value": "test-integration-api-key"
     }
   },
   "scripts": {

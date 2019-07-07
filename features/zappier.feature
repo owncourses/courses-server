@@ -29,3 +29,22 @@ Feature:
     """
     Then the response should be in JSON
     And the response status code should be 201
+
+  Scenario: It should register new user and assign course to him
+    Given the following Courses:
+      | title       | description             | coverImage       |
+      | Test course | Test course description | course_cover.png |
+    And I add 'content-type' header equal to 'application/json'
+    And I add 'x-api-key' header equal to 'test-api-key'
+    And I send a "POST" request to "/api/integration/users/register" with body:
+    """
+    {
+      "email": "newuser@example.com",
+      "firstName": "New",
+      "lastName": "User",
+      "course": "Test course"
+    }
+    """
+    Then the response should be in JSON
+    And the response status code should be 201
+    And the JSON node "courses[0].title" should be equal to "Test course"

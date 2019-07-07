@@ -1,11 +1,11 @@
 App\Entity\Course:
     attributes:
         id:
-            groups: ['list_courses', 'course_details', 'course_modules', 'lesson_details']
+            groups: ['list_courses', 'course_details', 'course_modules', 'lesson_details', 'user_details']
         title:
-            groups: ['list_courses', 'course_details', 'course_modules', 'lesson_details']
+            groups: ['list_courses', 'course_details', 'course_modules', 'lesson_details', 'user_details']
         description:
-            groups: ['course_details', 'course_details', 'course_modules', 'lesson_details']
+            groups: ['list_courses', 'course_details', 'course_modules', 'lesson_details']
         coverImageName:
             groups: ['course_details']
         created:
