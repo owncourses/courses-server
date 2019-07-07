@@ -1,6 +1,7 @@
 parameters:
     locale: 'en'
     security_secret: '%env(SECURITY_SECRET)%'
+    integration_api_key: '%env(INTEGRATION_API_KEY)%'
 
 services:
     _defaults:
@@ -8,6 +9,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $securitySecret: '%security_secret%'
+            $integrationApiKey: '%integration_api_key%'
 
     App\:
         resource: '../src/*'

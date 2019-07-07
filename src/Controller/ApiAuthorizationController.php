@@ -11,8 +11,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiAuthorizationController extends AbstractController
 {
+    private $integrationApiKey;
+
+    public function __construct(string $integrationApiKey)
+    {
+        $this->integrationApiKey = $integrationApiKey;
+    }
+
     public function authorization(Request $request): Response
     {
-        return new JsonResponse(['api_key' => $request->request->get('api_key')]);
+        if ($this->integrationApiKey !== $request->request->get('api_key', $request->headers->get('X-API-KEY'))) {
+            return new JsonResponse(['success' => false], Response::HTTP_FORBIDDEN);
+        }
+
+        return new JsonResponse(['success' => true]);
     }
 }

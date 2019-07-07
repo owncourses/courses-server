@@ -58,7 +58,7 @@ final class ApiUsersController extends AbstractController
             // Catch eventand send email with link to password reset to new user
             // Add controller for handling user password change
             // Implement user password change in app
-            // Add env variable for student app url (user will be sned there from email)
+            // Add env variable for student app url (user will be send there from email)
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }
