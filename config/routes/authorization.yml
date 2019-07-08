@@ -1,0 +1,4 @@
+api_integration_authorization:
+    path: /api/integration/authorization
+    methods: POST
+    controller: App\Controller\ApiAuthorizationController::authorization

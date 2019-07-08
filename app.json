@@ -19,6 +19,10 @@
       "description": "A secret key for verifying the integrity of data.",
       "generator": "secret"
     },
+    "MAILER_DSN": {
+      "description": "Data for mailer connection.",
+      "value": "smtp://localhost"
+    },
     "JWT_PASSPHRASE": {
       "description": "Pasphrase used for signing JWT tokens.",
       "value": "123abc"
@@ -50,6 +54,10 @@
     "CORS_ALLOW_ORIGIN": {
       "description": "Hosts allowed to use API.",
       "value": "^.*$"
+    },
+    "INTEGRATION_API_KEY": {
+      "description": "Api key used by integration services (like Zapier)",
+      "value": "test-integration-api-key"
     }
   },
   "scripts": {

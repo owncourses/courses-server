@@ -15,14 +15,23 @@ class RegisterUserType extends AbstractType
             ->add('email')
             ->add('firstName')
             ->add('lastName')
+            ->add('course', null, [
+                'mapped' => false,
+                'required' => false,
+            ])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
             'csrf_protection' => false,
         ]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return '';
     }
 }

@@ -1,0 +1,4 @@
+App\Entity\Settings:
+    type: entity
+    repositoryClass: App\Repository\ModuleRepository
+    table: npd_settings

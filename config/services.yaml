@@ -1,6 +1,8 @@
 parameters:
     locale: 'en'
     security_secret: '%env(SECURITY_SECRET)%'
+    integration_api_key: '%env(INTEGRATION_API_KEY)%'
+    swp.resources: []
 
 services:
     _defaults:
@@ -8,6 +10,8 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $securitySecret: '%security_secret%'
+            $integrationApiKey: '%integration_api_key%'
+            $cacheDir: '%kernel.cache_dir%'
 
     App\:
         resource: '../src/*'
@@ -59,3 +63,5 @@ services:
         calls:
             - ["setEncoder", ['@security.password_encoder']]
         public: true
+
+    SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface: "@swp_settings.manager.settings"

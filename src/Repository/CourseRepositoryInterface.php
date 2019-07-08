@@ -17,4 +17,6 @@ interface CourseRepositoryInterface
     public function getAll(): array;
 
     public function getOneById(int $courseId): ?Course;
+
+    public function getOneByTitle(string $title): ?Course;
 }

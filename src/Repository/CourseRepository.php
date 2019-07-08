@@ -40,4 +40,15 @@ class CourseRepository extends ServiceEntityRepository implements CourseReposito
             ->getOneOrNullResult()
             ;
     }
+
+    public function getOneByTitle(string $title): ?Course
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.title = :title')
+            ->andWhere('c.visible = true')
+            ->setParameter('title', $title)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

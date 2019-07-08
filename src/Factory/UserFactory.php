@@ -22,7 +22,9 @@ class UserFactory implements UserFactoryInterface
     public function create(): UserInterface
     {
         $user = new User();
-        $generatedPassword = $this->passwordEncoder->encodePassword($user, $this->stringGenerator::random(7));
+        $plainPassword = $this->stringGenerator::random(7);
+        $generatedPassword = $this->passwordEncoder->encodePassword($user, $plainPassword);
+        $user->setPlainPassword($plainPassword);
         $user->setPassword($generatedPassword);
         $user->setPasswordNeedToBeChanged(true);
 

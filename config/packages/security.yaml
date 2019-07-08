@@ -28,6 +28,14 @@ security:
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
 
+        api_integration:
+            pattern:   ^/api/integration/*/
+            stateless: true
+            guard:
+                provider: chain_provider
+                authenticators:
+                    - App\Security\IntegrationApiKeyAuthenticator
+
         api_doc:
             pattern:   ^/api/doc(.*)
             security: false

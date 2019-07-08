@@ -3,7 +3,7 @@ jobs:
     build:
         working_directory: ~/owncourses
         docker:
-            - image: circleci/php:7.2-browsers
+            - image: circleci/php:7.3-browsers
         steps:
             - checkout
 
@@ -35,7 +35,7 @@ jobs:
 
     deploy:
         docker:
-            -   image: circleci/php:7.2-browsers
+            -   image: circleci/php:7.3-browsers
         working_directory: ~/owncourses
         environment:
             setup: lowest
