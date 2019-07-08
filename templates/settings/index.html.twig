@@ -9,6 +9,23 @@
     <div class="row">
         <div class="col-md-12">
             {{ form_start(form) }}
+            {% spaceless %}
+                {% if not form.vars.valid %}
+                    <div class="alert alert-error">
+                        {{ form_errors(form) }}
+
+                        {% for children in form.children %}
+                            {% if not children.vars.valid %}
+                                <ul>
+                                    {% for error in children.vars.errors %}
+                                        <li><b>{{ children.vars.label }}</b>: {{ error.message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endspaceless %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="box box-primary">
@@ -19,13 +36,14 @@
                         </div>
                         <div class="box-body">
 
-                            <div class="my-custom-class-for-errors">
-                                {{ form_errors(form) }}
-                            </div>
-
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    {{ form_row(form.new_user_email_template) }}
+                                    <div class="form-group">
+                                        {{ form_label(form.new_user_email_template) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.new_user_email_template) }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div style="background-color: #f8f8f8; padding: 15px;">
