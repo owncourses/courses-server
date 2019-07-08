@@ -9,3 +9,8 @@ admin_login:
     path: /admin/login
     methods: GET
     controller: App\Controller\AdminSecurityController::login
+
+admin_settings:
+    path: /admin/settings
+    methods: GET|POST
+    controller: App\Controller\AdminSettingsController::index

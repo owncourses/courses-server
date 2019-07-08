@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
-class Settings
+use SWP\Bundle\SettingsBundle\Model\Settings as SWPSettings;
+
+class Settings extends SWPSettings
 {
 }

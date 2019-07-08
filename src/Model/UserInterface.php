@@ -20,7 +20,7 @@ interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterf
 
     public function getPlainPassword(): ?string;
 
-    public function setPlainPassword(string $plainPassword): void;
+    public function setPlainPassword(?string $plainPassword): void;
 
     public function getFirstName(): ?string;
 

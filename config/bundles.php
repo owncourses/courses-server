@@ -30,4 +30,7 @@ return [
     Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
     Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
+    SWP\Bundle\StorageBundle\SWPStorageBundle::class => ['all' => true],
+    Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
+    SWP\Bundle\SettingsBundle\SWPSettingsBundle::class => ['all' => true],
 ];

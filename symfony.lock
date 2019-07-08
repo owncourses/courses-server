@@ -218,6 +218,19 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
+    "nelmio/api-doc-bundle": {
+        "version": "2.13",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.13",
+            "ref": "d13bb99357ebcd2ffb6fe808a64961f5bc1c7546"
+        },
+        "files": [
+            "config/packages/nelmio_api_doc.yaml",
+            "config/routes/nelmio_api_doc.yaml"
+        ]
+    },
     "nelmio/cors-bundle": {
         "version": "1.5",
         "recipe": {
@@ -409,6 +422,18 @@
         "files": [
             "config/packages/stof_doctrine_extensions.yaml"
         ]
+    },
+    "swp/common": {
+        "version": "2.0-dev"
+    },
+    "swp/settings-bundle": {
+        "version": "2.0-dev"
+    },
+    "swp/storage": {
+        "version": "2.0-dev"
+    },
+    "swp/storage-bundle": {
+        "version": "2.0-dev"
     },
     "symfony/amazon-mailer": {
         "version": "4.3",
@@ -627,15 +652,6 @@
         }
     },
     "symfony/security-core": {
-        "version": "v4.2.3"
-    },
-    "symfony/security-csrf": {
-        "version": "v4.2.3"
-    },
-    "symfony/security-guard": {
-        "version": "v4.2.3"
-    },
-    "symfony/security-http": {
         "version": "v4.2.3"
     },
     "symfony/serializer": {

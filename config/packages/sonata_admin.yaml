@@ -1,8 +1,13 @@
 sonata_admin:
+    title_logo: assets/logo.png
     title: 'OwnCourses'
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
+
+    templates:
+        layout: 'admin/standard_layout.html.twig'
+
     assets:
         extra_javascripts:
             - bundles/fosckeditor/ckeditor.js

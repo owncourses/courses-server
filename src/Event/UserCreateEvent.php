@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Event;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Model\UserInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class UserCreateEvent extends Event

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a10bede9e50049b80d78b3067dcc23b2",
+    "content-hash": "c0cbb7ad29e553267c69e3ccf2ddb5a4",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2799,6 +2799,91 @@
             "time": "2016-12-05T07:27:31+00:00"
         },
         {
+            "name": "nelmio/api-doc-bundle",
+            "version": "2.13.4",
+            "target-dir": "Nelmio/ApiDocBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
+                "reference": "28802f2c44dbbf29aa7f5dc80a10f44d3558f580"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/28802f2c44dbbf29aa7f5dc80a10f44d3558f580",
+                "reference": "28802f2c44dbbf29aa7f5dc80a10f44d3558f580",
+                "shasum": ""
+            },
+            "require": {
+                "michelf/php-markdown": "~1.4",
+                "php": ">=5.4",
+                "symfony/console": "~2.3|~3.0|~4.0",
+                "symfony/framework-bundle": "~2.3|~3.0|~4.0",
+                "symfony/twig-bundle": "~2.3|~3.0|~4.0"
+            },
+            "conflict": {
+                "jms/serializer": "<0.12",
+                "jms/serializer-bundle": "<0.11",
+                "symfony/symfony": "~2.7.8",
+                "twig/twig": "<1.12"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.5",
+                "doctrine/orm": "~2.3",
+                "dunglas/api-bundle": "~1.0",
+                "friendsofsymfony/rest-bundle": "~1.0|~2.0",
+                "jms/serializer-bundle": ">=0.11",
+                "sensio/framework-extra-bundle": "~3.0",
+                "symfony/browser-kit": "~2.3|~3.0|~4.0",
+                "symfony/css-selector": "~2.3|~3.0|~4.0",
+                "symfony/finder": "~2.3|~3.0|~4.0",
+                "symfony/form": "~2.3|~3.0|~4.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0|~4.0",
+                "symfony/serializer": "~2.7|~3.0|~4.0",
+                "symfony/validator": "~2.3|~3.0|~4.0",
+                "symfony/yaml": "~2.3|~3.0|~4.0"
+            },
+            "suggest": {
+                "dunglas/api-bundle": "For making use of resources definitions of DunglasApiBundle.",
+                "friendsofsymfony/rest-bundle": "For making use of REST information in the doc.",
+                "jms/serializer": "For making use of serializer information in the doc.",
+                "symfony/form": "For using form definitions as input.",
+                "symfony/validator": "For making use of validator information in the doc."
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Nelmio\\ApiDocBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/nelmio/NelmioApiDocBundle/contributors"
+                }
+            ],
+            "description": "Generates documentation for your REST API from annotations",
+            "keywords": [
+                "api",
+                "doc",
+                "documentation",
+                "rest"
+            ],
+            "time": "2019-06-01T13:34:59+00:00"
+        },
+        {
             "name": "nelmio/cors-bundle",
             "version": "1.5.6",
             "source": {
@@ -4552,6 +4637,263 @@
                 "tree"
             ],
             "time": "2017-12-24T16:06:50+00:00"
+        },
+        {
+            "name": "swp/common",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SuperdeskWebPublisher/common.git",
+                "reference": "c219cf662f162d241a06beffdadc0d8086deb26b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SuperdeskWebPublisher/common/zipball/c219cf662f162d241a06beffdadc0d8086deb26b",
+                "reference": "c219cf662f162d241a06beffdadc0d8086deb26b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "exclude-from-classmap": [
+                    "spec/"
+                ],
+                "psr-4": {
+                    "SWP\\Component\\Common\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Rafał Muszyński",
+                    "email": "rafal.muszynski@sourcefabric.org"
+                }
+            ],
+            "description": "Common library - common interfaces, models etc. used in PHP apps.",
+            "keywords": [
+                "Superdesk",
+                "common",
+                "library",
+                "publisher"
+            ],
+            "time": "2019-04-11T10:28:10+00:00"
+        },
+        {
+            "name": "swp/settings-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SuperdeskWebPublisher/SWPSettingsBundle.git",
+                "reference": "84ac3e016b330655ed504dccf70ec499b0f1c530"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SuperdeskWebPublisher/SWPSettingsBundle/zipball/84ac3e016b330655ed504dccf70ec499b0f1c530",
+                "reference": "84ac3e016b330655ed504dccf70ec499b0f1c530",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^1.10",
+                "doctrine/orm": "^2.6",
+                "nelmio/api-doc-bundle": "2.13.*",
+                "php": "^7.3",
+                "sensio/framework-extra-bundle": "^5.0",
+                "swp/common": "^2.0",
+                "swp/storage-bundle": "^2.0",
+                "symfony/form": "^4.2",
+                "symfony/security": "^4.2",
+                "symfony/translation": "^4.2",
+                "symfony/twig-bundle": "^4.2",
+                "symfony/validator": "^4.2"
+            },
+            "require-dev": {
+                "doctrine/doctrine-cache-bundle": "1.3.*",
+                "liip/functional-test-bundle": "^2.0",
+                "phpdocumentor/reflection-docblock": "^4.0",
+                "phpunit/phpunit": "^5.6",
+                "symfony/asset": "^4.2",
+                "symfony/framework-bundle": "^4.2",
+                "symfony/http-foundation": "^4.2",
+                "symfony/monolog-bridge": "^4.2",
+                "symfony/monolog-bundle": "^3.4",
+                "symfony/property-access": "^4.2",
+                "symfony/security-bundle": "^4.2",
+                "symfony/serializer": "^4.2",
+                "symfony/templating": "^4.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SWP\\Bundle\\SettingsBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Mikołajczuk",
+                    "email": "pawel.mikolajczuk@sourcefabric.org"
+                }
+            ],
+            "description": "Scope and owner aware settings system. Define settings in configuration, keep customized values in storage.",
+            "keywords": [
+                "Settings",
+                "Superdesk",
+                "bundle",
+                "publisher",
+                "settings bundle"
+            ],
+            "time": "2019-04-18T07:10:48+00:00"
+        },
+        {
+            "name": "swp/storage",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SuperdeskWebPublisher/storage.git",
+                "reference": "9e1a0076b03de8d901e3b31c862fda8c236f0eb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SuperdeskWebPublisher/storage/zipball/9e1a0076b03de8d901e3b31c862fda8c236f0eb2",
+                "reference": "9e1a0076b03de8d901e3b31c862fda8c236f0eb2",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.6",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.4",
+                "symfony/dependency-injection": "^3.1"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "To make use of dependency injection classes."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "exclude-from-classmap": [
+                    "spec/"
+                ],
+                "psr-4": {
+                    "SWP\\Component\\Storage\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Rafał Muszyński",
+                    "email": "rafal.muszynski@sourcefabric.org"
+                }
+            ],
+            "description": "Build persistence-agnostic storage layer.",
+            "keywords": [
+                "Superdesk",
+                "agnostic",
+                "doctrine",
+                "driver",
+                "library",
+                "publisher",
+                "storage"
+            ],
+            "time": "2019-04-05T13:53:55+00:00"
+        },
+        {
+            "name": "swp/storage-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SuperdeskWebPublisher/SWPStorageBundle.git",
+                "reference": "1b8fd2294184525bef2815b2e3bd22bf9deef2a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SuperdeskWebPublisher/SWPStorageBundle/zipball/1b8fd2294184525bef2815b2e3bd22bf9deef2a0",
+                "reference": "1b8fd2294184525bef2815b2e3bd22bf9deef2a0",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^1.10",
+                "doctrine/orm": "^2.6",
+                "php": "^7.3",
+                "swp/storage": "^2.0",
+                "symfony/doctrine-bridge": "^4.2",
+                "symfony/framework-bundle": "^4.2",
+                "symfony/property-info": "^4.2"
+            },
+            "require-dev": {
+                "doctrine/phpcr-odm": "1.4.*",
+                "jackalope/jackalope-doctrine-dbal": ">=1.2.2 <1.3",
+                "jackalope/jackalope-jackrabbit": ">=1.2.2 <1.3",
+                "phpdocumentor/reflection-docblock": "^4.0",
+                "phpspec/phpspec": "^5.1"
+            },
+            "suggest": {
+                "doctrine/phpcr-bundle": "To make use of PHP Content Repository implementations."
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "exclude-from-classmap": [
+                    "spec/"
+                ],
+                "psr-4": {
+                    "SWP\\Bundle\\StorageBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Rafał Muszyński",
+                    "email": "rafal.muszynski@sourcefabric.org"
+                }
+            ],
+            "description": "This bundle provides tools to build persistence-agnostic storage layer.",
+            "keywords": [
+                "Superdesk",
+                "agnostic",
+                "doctrine",
+                "persistence",
+                "phpcr",
+                "storage",
+                "webpublisher"
+            ],
+            "time": "2019-04-17T11:43:33+00:00"
         },
         {
             "name": "symfony/amazon-mailer",
@@ -6972,6 +7314,88 @@
             "time": "2019-06-26T13:54:39+00:00"
         },
         {
+            "name": "symfony/security",
+            "version": "v4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security.git",
+                "reference": "6bf4904e4e52bd6499084cb6a67a66e918c3666d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/security/zipball/6bf4904e4e52bd6499084cb6a67a66e918c3666d",
+                "reference": "6bf4904e4e52bd6499084cb6a67a66e918c3666d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/event-dispatcher-contracts": "^1.1",
+                "symfony/http-foundation": "~3.4|~4.0",
+                "symfony/http-kernel": "^4.3",
+                "symfony/property-access": "~3.4|~4.0",
+                "symfony/service-contracts": "^1.1"
+            },
+            "replace": {
+                "symfony/security-core": "self.version",
+                "symfony/security-csrf": "self.version",
+                "symfony/security-guard": "self.version",
+                "symfony/security-http": "self.version"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "psr/log": "~1.0",
+                "symfony/expression-language": "~3.4|~4.0",
+                "symfony/finder": "~3.4|~4.0",
+                "symfony/ldap": "~3.4|~4.0",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-intl-icu": "~1.0",
+                "symfony/routing": "~3.4|~4.0",
+                "symfony/validator": "~3.4|~4.0"
+            },
+            "suggest": {
+                "psr/container-implementation": "To instantiate the Security class",
+                "symfony/expression-language": "For using the expression voter",
+                "symfony/form": "",
+                "symfony/ldap": "For using the LDAP user and authentication providers",
+                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
+                "symfony/validator": "For using the user password constraint"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Core/Tests/",
+                    "/Csrf/Tests/",
+                    "/Guard/Tests/",
+                    "/Http/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-06-26T06:50:02+00:00"
+        },
+        {
             "name": "symfony/security-acl",
             "version": "v3.0.2",
             "source": {
@@ -7115,256 +7539,6 @@
             "description": "Symfony SecurityBundle",
             "homepage": "https://symfony.com",
             "time": "2019-06-20T10:11:09+00:00"
-        },
-        {
-            "name": "symfony/security-core",
-            "version": "v4.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/security-core.git",
-                "reference": "489f3a13362bf692df974f84367fba954b1d78a8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-core/zipball/489f3a13362bf692df974f84367fba954b1d78a8",
-                "reference": "489f3a13362bf692df974f84367fba954b1d78a8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3",
-                "symfony/event-dispatcher-contracts": "^1.1",
-                "symfony/service-contracts": "^1.1"
-            },
-            "conflict": {
-                "symfony/event-dispatcher": "<4.3",
-                "symfony/security-guard": "<4.3"
-            },
-            "require-dev": {
-                "psr/container": "^1.0",
-                "psr/log": "~1.0",
-                "symfony/event-dispatcher": "^4.3",
-                "symfony/expression-language": "~3.4|~4.0",
-                "symfony/http-foundation": "~3.4|~4.0",
-                "symfony/ldap": "~3.4|~4.0",
-                "symfony/validator": "~3.4|~4.0"
-            },
-            "suggest": {
-                "psr/container-implementation": "To instantiate the Security class",
-                "symfony/event-dispatcher": "",
-                "symfony/expression-language": "For using the expression voter",
-                "symfony/http-foundation": "",
-                "symfony/ldap": "For using LDAP integration",
-                "symfony/validator": "For using the user password constraint"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Security\\Core\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Security Component - Core Library",
-            "homepage": "https://symfony.com",
-            "time": "2019-06-26T06:50:02+00:00"
-        },
-        {
-            "name": "symfony/security-csrf",
-            "version": "v4.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/security-csrf.git",
-                "reference": "e7e3509ef7de66ea4970c75f9a0a72bf132d452e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-csrf/zipball/e7e3509ef7de66ea4970c75f9a0a72bf132d452e",
-                "reference": "e7e3509ef7de66ea4970c75f9a0a72bf132d452e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3",
-                "symfony/security-core": "~3.4|~4.0"
-            },
-            "conflict": {
-                "symfony/http-foundation": "<3.4"
-            },
-            "require-dev": {
-                "symfony/http-foundation": "~3.4|~4.0"
-            },
-            "suggest": {
-                "symfony/http-foundation": "For using the class SessionTokenStorage."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Security\\Csrf\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Security Component - CSRF Library",
-            "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
-        },
-        {
-            "name": "symfony/security-guard",
-            "version": "v4.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/security-guard.git",
-                "reference": "2177390e39f49e5ae0ac5765982fa32a4aeb536f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-guard/zipball/2177390e39f49e5ae0ac5765982fa32a4aeb536f",
-                "reference": "2177390e39f49e5ae0ac5765982fa32a4aeb536f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3",
-                "symfony/security-core": "~3.4.22|^4.2.3",
-                "symfony/security-http": "^4.3"
-            },
-            "require-dev": {
-                "psr/log": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Security\\Guard\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Security Component - Guard",
-            "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
-        },
-        {
-            "name": "symfony/security-http",
-            "version": "v4.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/security-http.git",
-                "reference": "8a93196dec0a136f817063c99eee20cd44e3615a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/8a93196dec0a136f817063c99eee20cd44e3615a",
-                "reference": "8a93196dec0a136f817063c99eee20cd44e3615a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3",
-                "symfony/http-foundation": "~3.4|~4.0",
-                "symfony/http-kernel": "^4.3",
-                "symfony/property-access": "~3.4|~4.0",
-                "symfony/security-core": "^4.3"
-            },
-            "conflict": {
-                "symfony/security-csrf": "<3.4.11|~4.0,<4.0.11"
-            },
-            "require-dev": {
-                "psr/log": "~1.0",
-                "symfony/routing": "~3.4|~4.0",
-                "symfony/security-csrf": "^3.4.11|^4.0.11"
-            },
-            "suggest": {
-                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
-                "symfony/security-csrf": "For using tokens to protect authentication/logout attempts"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Security\\Http\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Security Component - HTTP Integration",
-            "homepage": "https://symfony.com",
-            "time": "2019-06-13T11:01:17+00:00"
         },
         {
             "name": "symfony/serializer",
@@ -11530,7 +11704,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "behat/mink": 20,
         "roave/security-advisories": 20

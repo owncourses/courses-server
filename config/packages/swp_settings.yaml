@@ -1,0 +1,21 @@
+swp_settings:
+    persistence:
+        orm:
+            enabled: true
+            classes:
+                settings:
+                    model: App\Entity\Settings
+
+    settings:
+        new_user_email_template:
+            type: string
+            scope: global
+        new_user_email_title:
+            type: string
+            scope: global
+        email_from_address:
+            type: string
+            scope: global
+        email_from_name:
+            type: string
+            scope: global

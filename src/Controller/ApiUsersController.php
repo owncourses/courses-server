@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Event\UserCreateEvent;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
 use App\Manager\UserManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +42,8 @@ final class ApiUsersController extends AbstractController
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         UserManagerInterface $userManager,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        EventDispatcherInterface $eventDispatcher
     ): Response {
         if (!$request->request->has('email')) {
             return new JsonResponse(['message' => 'User email is not provided'], Response::HTTP_BAD_REQUEST);
@@ -54,14 +57,18 @@ final class ApiUsersController extends AbstractController
                 $userManager->addCourseByTitle($user, $courseName);
             }
 
+            $newUser = false;
             if (!$entityManager->contains($user)) {
                 $entityManager->persist($user);
+                $newUser = true;
             }
 
             $entityManager->flush();
             $tokenStorage->getToken()->setUser($user);
 
-            //TODO: Dispatch event and send email
+            if ($newUser) {
+                $eventDispatcher->dispatch(new UserCreateEvent($user));
+            }
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }
