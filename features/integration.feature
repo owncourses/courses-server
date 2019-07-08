@@ -1,9 +1,9 @@
 Feature:
   In order to provide integration layer with multiple services
   As a developer
-  I want to use zapier to integrate OwnCourses with other services
+  I want to use external system to integrate OwnCourses with other services
 
-  Scenario: I want to authorize zapier integration
+  Scenario: I want to authorize integration
     When I add 'content-type' header equal to 'application/json'
     And I add 'x-api-key' header equal to 'wrong-api-key'
     When I send a "POST" request to "/api/integration/authorization"

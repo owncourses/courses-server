@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Factory\UserFactoryInterface;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
-use App\Repository\CourseRepositoryInterface;
-use App\Repository\UserRepositoryInterface;
+use App\Manager\UserManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -21,12 +20,9 @@ final class ApiUsersController extends AbstractController
 {
     protected $serializer;
 
-    private $userFactory;
-
-    public function __construct(SerializerInterface $serializer, UserFactoryInterface $userFactory)
+    public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
-        $this->userFactory = $userFactory;
     }
 
     public function getCurrentUser(): Response
@@ -43,28 +39,29 @@ final class ApiUsersController extends AbstractController
         Request $request,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
-        CourseRepositoryInterface $courseRepository,
-        UserRepositoryInterface $userRepository,
+        UserManagerInterface $userManager,
         TokenStorageInterface $tokenStorage
     ): Response {
-        $user = $userRepository->getOneByEmail($request->request->get('email'));
-        if (null === $user) {
-            $user = $this->userFactory->create();
-            $entityManager->persist($user);
+        if (!$request->request->has('email')) {
+            return new JsonResponse(['message' => 'User email is not provided'], Response::HTTP_BAD_REQUEST);
         }
 
+        $user = $userManager->getOrCreateUser($request->request->get('email'));
         $form = $formFactory->create(RegisterUserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (null !== $courseName = $form->get('course')->getData()) {
-                $course = $courseRepository->getOneByTitle($courseName);
-                if (null !== $course) {
-                    $user->addCourse($course);
-                }
+                $userManager->addCourseByTitle($user, $courseName);
+            }
+
+            if (!$entityManager->contains($user)) {
+                $entityManager->persist($user);
             }
 
             $entityManager->flush();
             $tokenStorage->getToken()->setUser($user);
+
+            //TODO: Dispatch event and send email
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
         }
