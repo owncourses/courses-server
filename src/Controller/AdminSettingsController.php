@@ -28,9 +28,9 @@ class AdminSettingsController extends AbstractController
                 $settingsManager->set('new_user_email_title', $data['new_user_email_title']);
                 $settingsManager->set('email_from_address', $data['email_from_address']);
                 $settingsManager->set('email_from_name', $data['email_from_name']);
-            }
 
-            return new RedirectResponse($this->generateUrl('admin_settings'));
+                return new RedirectResponse($this->generateUrl('admin_settings'));
+            }
         }
 
         return $this->render('settings/index.html.twig', [
