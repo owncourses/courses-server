@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Event\UserCreateEvent;
+use App\Event\UserPasswordChangeRequestEvent;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
+use App\Form\UserPasswordResetRequestType;
+use App\Form\UserPasswordResetType;
 use App\Manager\UserManagerInterface;
+use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use SWP\Component\Common\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -71,6 +76,59 @@ final class ApiUsersController extends AbstractController
             }
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_CREATED);
+        }
+
+        return new Response($this->serializer->serialize(ErrorHandler::getErrorsFromForm($form), 'json'), Response::HTTP_BAD_REQUEST);
+    }
+
+    public function requestPasswordReset(
+        Request $request,
+        FormFactoryInterface $formFactory,
+        EntityManagerInterface $entityManager,
+        UserManagerInterface $userManager,
+        UserRepositoryInterface $userRepository,
+        EventDispatcherInterface $eventDispatcher
+    ): Response {
+        $form = $formFactory->create(UserPasswordResetRequestType::class, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->getOneByEmail($form->getData()['email']);
+            if (null === $user) {
+                throw new NotFoundHttpException('User was not found');
+            }
+            $userManager->setGeneratedPasswordResetToken($user);
+            $entityManager->flush();
+
+            $eventDispatcher->dispatch(new UserPasswordChangeRequestEvent($user));
+        }
+
+        return new JsonResponse(['success' => true]);
+    }
+
+    public function requestPassword(
+        Request $request,
+        FormFactoryInterface $formFactory,
+        EntityManagerInterface $entityManager,
+        UserManagerInterface $userManager,
+        UserRepositoryInterface $userRepository
+    ): Response {
+        $form = $formFactory->create(UserPasswordResetType::class, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->getOneByPasswordResetToken($request->query->get('token'));
+            if (null === $user) {
+                throw new NotFoundHttpException('User was not found');
+            }
+
+            $data = $form->getData();
+            if ($data['password'] !== $data['repeatedPassword']) {
+                throw new \InvalidArgumentException('Passwords are not equal');
+            }
+
+            $userManager->resetPassword($user, $data['password']);
+            $entityManager->flush();
+
+            return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_OK);
         }
 
         return new Response($this->serializer->serialize(ErrorHandler::getErrorsFromForm($form), 'json'), Response::HTTP_BAD_REQUEST);

@@ -32,4 +32,5 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
     SWP\Bundle\StorageBundle\SWPStorageBundle::class => ['all' => true],
     SWP\Bundle\SettingsBundle\SWPSettingsBundle::class => ['all' => true],
+    Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
 ];

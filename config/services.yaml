@@ -2,6 +2,7 @@ parameters:
     locale: 'en'
     security_secret: '%env(SECURITY_SECRET)%'
     integration_api_key: '%env(INTEGRATION_API_KEY)%'
+    students_app_url: '%env(STUDENTS_APP_URL)%'
     swp.resources: []
 
 services:
@@ -12,6 +13,7 @@ services:
             $securitySecret: '%security_secret%'
             $integrationApiKey: '%integration_api_key%'
             $cacheDir: '%kernel.cache_dir%'
+            $studentsAppUrl: '%students_app_url%'
 
     App\:
         resource: '../src/*'

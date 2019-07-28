@@ -33,6 +33,8 @@ class User implements UserInterface
 
     private $passwordNeedToBeChanged;
 
+    private $passwordResetToken;
+
     private $courses;
 
     public function __construct()
@@ -145,5 +147,15 @@ class User implements UserInterface
     public function setPasswordNeedToBeChanged($passwordNeedToBeChanged): void
     {
         $this->passwordNeedToBeChanged = $passwordNeedToBeChanged;
+    }
+
+    public function getPasswordResetToken(): ?string
+    {
+        return $this->passwordResetToken;
+    }
+
+    public function setPasswordResetToken(?string $passwordResetToken): void
+    {
+        $this->passwordResetToken = $passwordResetToken;
     }
 }

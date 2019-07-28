@@ -39,4 +39,8 @@ interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterf
     public function getPasswordNeedToBeChanged(): ?bool;
 
     public function setPasswordNeedToBeChanged($passwordNeedToBeChanged): void;
+
+    public function getPasswordResetToken(): ?string;
+
+    public function setPasswordResetToken(?string $passwordResetToken): void;
 }

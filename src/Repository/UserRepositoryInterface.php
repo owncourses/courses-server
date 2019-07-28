@@ -16,4 +16,6 @@ use App\Model\UserInterface;
 interface UserRepositoryInterface
 {
     public function getOneByEmail(string $email): ?UserInterface;
+
+    public function getOneByPasswordResetToken(string $token): ?UserInterface;
 }

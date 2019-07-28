@@ -51,6 +51,7 @@ security:
         api:
             pattern:   ^/api
             stateless: true
+            anonymous: true
             guard:
                 provider: chain_provider
                 authenticators:
@@ -76,7 +77,9 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     access_control:
-        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/*,       roles: [ROLE_ADMIN] }
-        - { path: ^/api/login,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,         roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin/login,                      roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/*,                          roles: ROLE_ADMIN }
+        - { path: ^/api/login,                        roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users/password/reset_request, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users/password/reset,         roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,                              roles: IS_AUTHENTICATED_FULLY }
