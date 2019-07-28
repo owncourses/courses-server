@@ -29,4 +29,14 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
             ->getOneOrNullResult()
         ;
     }
+
+    public function getOneByPasswordResetToken(string $token): ?UserInterface
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.passwordResetToken = :token')
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

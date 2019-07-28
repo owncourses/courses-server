@@ -29,6 +29,20 @@ class AdminSettingsType extends AbstractType
                     new NotNull(), new Length(['min' => 3]),
                 ],
             ])
+            ->add('password_reset_email_template', SimpleFormatterType::class, [
+                'format' => 'richhtml',
+                'label' => 'Password reset email template',
+                'constraints' => [
+                    new NotNull(),
+                ],
+            ])
+            ->add('password_reset_email_title', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label' => 'Password reset email title',
+                'constraints' => [
+                    new NotNull(), new Length(['min' => 3]),
+                ],
+            ])
             ->add('email_from_address', TextType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Email address for sent emails',

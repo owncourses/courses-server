@@ -16,6 +16,8 @@ class AdminSettingsController extends AbstractController
         $form = $this->createForm(AdminSettingsType::class, [
             'new_user_email_template' => $settingsManager->get('new_user_email_template'),
             'new_user_email_title' => $settingsManager->get('new_user_email_title'),
+            'password_reset_email_template' => $settingsManager->get('password_reset_email_template'),
+            'password_reset_email_title' => $settingsManager->get('password_reset_email_title'),
             'email_from_address' => $settingsManager->get('email_from_address'),
             'email_from_name' => $settingsManager->get('email_from_name'),
         ]);
@@ -26,6 +28,8 @@ class AdminSettingsController extends AbstractController
                 $data = $form->getData();
                 $settingsManager->set('new_user_email_template', $data['new_user_email_template']);
                 $settingsManager->set('new_user_email_title', $data['new_user_email_title']);
+                $settingsManager->set('password_reset_email_template', $data['password_reset_email_template']);
+                $settingsManager->set('password_reset_email_title', $data['password_reset_email_title']);
                 $settingsManager->set('email_from_address', $data['email_from_address']);
                 $settingsManager->set('email_from_name', $data['email_from_name']);
 

@@ -12,6 +12,10 @@ Feature:
       | name       | picture    | bio                       | courses                         |
       | Jesica Doe | jesica.png | Well known courses author | Test course, Second test course |
 
+    Given the following Authors:
+      | name       | bio                       | courses                         |
+      | John Doe   | Well known courses author | Test course, Second test course |
+
     Given the following Users:
       | firstName | lastName | email            | password     |
       | Test      | User     | test@example.com | testPassword |
@@ -27,3 +31,6 @@ Feature:
     And the JSON node "[0].authors" should exist
     And the JSON node "[0].authors[0].name" should be equal to "Jesica Doe"
     And the JSON node "[0].authors[0].href.picture" should be equal to "http://localhost/assets/images/course/pictures/jesica-doe.png"
+
+    And the JSON node "[0].authors[1].name" should be equal to "John Doe"
+    And the JSON node "[0].authors[1].href.picture" should be null

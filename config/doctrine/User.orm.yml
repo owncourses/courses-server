@@ -26,6 +26,9 @@ App\Entity\User:
         passwordNeedToBeChanged:
             type: boolean
             nullable: true
+        passwordResetToken:
+            type: string
+            nullable: true
         created:
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL

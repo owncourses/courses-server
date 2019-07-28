@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Event\UserCreateEvent;
+use App\Event\UserPasswordChangeRequestEvent;
 use SWP\Bundle\SettingsBundle\Context\ScopeContext;
 use SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -20,23 +21,25 @@ class UserSubscriber implements EventSubscriberInterface
 
     private $cacheDir;
 
-    public function __construct(MailerInterface $mailer, SettingsManagerInterface $settingsManager, string $cacheDir)
-    {
+    private $studentsAppUrl;
+
+    public function __construct(
+        MailerInterface $mailer,
+        SettingsManagerInterface $settingsManager,
+        string $cacheDir,
+        string $studentsAppUrl
+    ) {
         $this->mailer = $mailer;
         $this->settingsManager = $settingsManager;
         $this->cacheDir = $cacheDir;
+        $this->studentsAppUrl = $studentsAppUrl;
     }
 
     public function onUserCreated(UserCreateEvent $event): void
     {
         $user = $event->getUser();
-        $email = new TemplatedEmail();
+        $email = $this->createEmail($user);
         $email
-            ->from(new NamedAddress(
-                $this->getSetting('email_from_address', 'contact@owncourses.org'),
-                $this->getSetting('email_from_name', 'OwnCourses Team')
-            ))
-            ->to($user->getEmail())
             ->subject($this->getSetting('new_user_email_title', 'Welcome in OwnCourses'))
             ->html(
                 $this->renderTemplateFromString($this->getSetting('new_user_email_template', 'CHANGE THIS EMAIL CONTENT IN OwnCourses SETTINGS! '), [
@@ -51,11 +54,44 @@ class UserSubscriber implements EventSubscriberInterface
         $this->mailer->send($email);
     }
 
+    public function onUserPasswordRequestReset(UserPasswordChangeRequestEvent $event): void
+    {
+        $user = $event->getUser();
+        $email = $this->createEmail($user);
+        $email
+            ->subject($this->getSetting('password_reset_email_title', 'Password reset in OwnCourses'))
+            ->html(
+                $this->renderTemplateFromString($this->getSetting('password_reset_email_template', 'CHANGE THIS EMAIL CONTENT IN OwnCourses SETTINGS! '), [
+                    'firstName' => $user->getFirstName(),
+                    'lastName' => $user->getLastName(),
+                    'email' => $user->getEmail(),
+                    'resetUrl' => $this->studentsAppUrl.'/reset?token='.$user->getPasswordResetToken(),
+                ])
+            )
+        ;
+
+        $this->mailer->send($email);
+    }
+
     public static function getSubscribedEvents()
     {
         return [
-           UserCreateEvent::class => 'onUserCreated',
+            UserCreateEvent::class => 'onUserCreated',
+            UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
         ];
+    }
+
+    private function createEmail($user): TemplatedEmail
+    {
+        $email = new TemplatedEmail();
+        $email
+            ->from(new NamedAddress(
+                $this->getSetting('email_from_address', 'contact@owncourses.org'),
+                $this->getSetting('email_from_name', 'OwnCourses Team')
+            ))
+            ->to($user->getEmail());
+
+        return $email;
     }
 
     private function getSetting(string $name, string $default)
