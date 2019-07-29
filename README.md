@@ -38,6 +38,7 @@ All of that can be installed on Your own server for free.
   - [x] Course covers
   - [x] Course status (visible/hidden)
   - [x] Course start/end
+  - [x] All course attachments
 - [x] Module
 - [x] Lessons
   - [x] Lesson completion API
