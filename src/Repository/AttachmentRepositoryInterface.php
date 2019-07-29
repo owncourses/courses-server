@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Attachment;
+use App\Model\CourseInterface;
 
 /**
  * @method Attachment|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,4 +15,5 @@ use App\Entity\Attachment;
  */
 interface AttachmentRepositoryInterface
 {
+    public function getAllForCourse(CourseInterface $course): array;
 }

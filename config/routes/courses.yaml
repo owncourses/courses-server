@@ -2,3 +2,8 @@ api_courses:
     path: /api/courses
     methods: GET
     controller: App\Controller\ApiCoursesController::getAll
+
+api_course_attachments:
+    path: /api/courses/{courseId}/attachments
+    methods: GET
+    controller: App\Controller\ApiCoursesController::getCourseAttachments
