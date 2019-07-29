@@ -47,10 +47,13 @@ All of that can be installed on Your own server for free.
 - [x] Basic admin panel
 - [x] Users
   - [x] Login
+  - [x] Password reset
   - [x] User courses
 - [x] Module/Course progress based on completed lessons and duration 
 - [x] Course authors
   - [x] Image, name, bio, courses
+- [x] Settings 
+  - [x] Emails settings
 
 ## Next tasks <a name = "next"></a>
 
