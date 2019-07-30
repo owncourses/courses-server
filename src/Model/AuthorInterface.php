@@ -32,4 +32,8 @@ interface AuthorInterface extends TimestampableInterface, PersistableInterface
     public function addCourse(CourseInterface $course): void;
 
     public function removeCourse(CourseInterface $course): void;
+
+    public function getGender(): string;
+
+    public function setGender(string $gender): void;
 }

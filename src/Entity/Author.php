@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class Author implements AuthorInterface
 {
+    public const AUTHOR_GENDER_MALE = 'male';
+    public const AUTHOR_GENDER_FEMALE = 'female';
+    public const AUTHOR_GENDER_OTHER = 'other';
+
     use PersistableAwareTrait, TimestampableAwareTrait;
 
     private $name;
@@ -24,6 +28,8 @@ class Author implements AuthorInterface
     private $pictureFile;
 
     private $courses;
+
+    private $gender = self::AUTHOR_GENDER_MALE;
 
     public function __construct()
     {
@@ -55,7 +61,7 @@ class Author implements AuthorInterface
         return $this->picture;
     }
 
-    public function setPicture(string $picture): void
+    public function setPicture(?string $picture): void
     {
         $this->picture = $picture;
     }
@@ -98,5 +104,15 @@ class Author implements AuthorInterface
     public function __toString()
     {
         return $this->getName() ?? 'New Author';
+    }
+
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
     }
 }

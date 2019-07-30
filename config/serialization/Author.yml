@@ -4,5 +4,7 @@ App\Entity\Author:
             groups: ['list_courses', 'course_details']
         bio:
             groups: ['list_courses', 'course_details']
+        gender:
+            groups: ['list_courses', 'course_details']
         picture:
             groups: ['list_courses', 'course_details']
