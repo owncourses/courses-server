@@ -2,10 +2,12 @@
 
 namespace App\Admin;
 
+use App\Entity\Author;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -16,6 +18,15 @@ final class AuthorAdmin extends AbstractAdmin
         $container = $this->getConfigurationPool()->getContainer();
         $formMapper->add('name', TextType::class);
         $formMapper->add('bio', TextType::class);
+        $formMapper->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Male' => Author::AUTHOR_GENDER_MALE,
+                    'Female' => Author::AUTHOR_GENDER_FEMALE,
+                    'Other' => Author::AUTHOR_GENDER_OTHER,
+                ],
+                'required' => true,
+            ]
+        );
         $formMapper->add('courses');
         $fileFieldOptions = ['required' => false];
         if (null !== $this->getSubject()->getPicture()) {

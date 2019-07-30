@@ -21,6 +21,11 @@ App\Entity\Author:
             type: string
             length: 255
             nullable: true
+        gender:
+            type: string
+            length: 10
+            options:
+                default: "male"
         created:
             type: datetime
             gedmo:

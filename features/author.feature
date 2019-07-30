@@ -9,8 +9,8 @@ Feature:
       | Test course        | Test course description | course_cover.png |
       | Second test course | Test course description | course_cover.png |
     Given the following Authors:
-      | name       | picture    | bio                       | courses                         |
-      | Jesica Doe | jesica.png | Well known courses author | Test course, Second test course |
+      | name       | picture    | bio                       | courses                         | gender |
+      | Jesica Doe | jesica.png | Well known courses author | Test course, Second test course | female |
 
     Given the following Authors:
       | name       | bio                       | courses                         |
@@ -30,6 +30,7 @@ Feature:
     And the JSON node "[0].title" should be equal to "Test course"
     And the JSON node "[0].authors" should exist
     And the JSON node "[0].authors[0].name" should be equal to "Jesica Doe"
+    And the JSON node "[0].authors[0].gender" should be equal to "female"
     And the JSON node "[0].authors[0].href.picture" should be equal to "http://localhost/assets/images/course/pictures/jesica-doe.png"
 
     And the JSON node "[0].authors[1].name" should be equal to "John Doe"

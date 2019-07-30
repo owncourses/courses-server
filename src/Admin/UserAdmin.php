@@ -87,10 +87,10 @@ final class UserAdmin extends AbstractAdmin
             ->add('lastName')
             ->add('courses')
             ->add('plainPassword', PasswordType::class, ['label' => 'Password', 'required' => false])
-            ->add('roles', ChoiceType::class, array(
+            ->add('roles', ChoiceType::class, [
                     'choices' => self::flattenRoles($roles),
                     'multiple' => true,
-                )
+                ]
             )
             ;
     }
