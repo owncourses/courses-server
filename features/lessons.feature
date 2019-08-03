@@ -22,6 +22,7 @@ Feature:
     Then the response status code should be 200
     And the JSON node "title" should be equal to "Test lesson"
     And the JSON node "description" should be equal to "Test lesson description"
+    And the JSON node "embed_type" should be equal to "code"
     And the JSON node "embed_code" should be equal to "<iframe width='500px' height='294px' src='https://player.vimeo.com/video/225434434?'></iframe>"
     And the JSON node "module.title" should be equal to "Test Module"
     And the JSON node "module.course.title" should be equal to "Test course"
@@ -132,5 +133,24 @@ Feature:
     Then the response should be in JSON
     Then the response status code should be 200
     And the JSON node "duration_in_minutes" should be equal to 35
+
+  Scenario: I want to work with vimeo videos in lessons
+    Given the following Courses:
+      | title           | description                 | coverImage       | visible | startDate | endDate  |
+      | Test course     | Test course description     | course_cover.png | true    | null      | null     |
+    Given Course "Test course" and module "Test Module" and id "07a2f327-103a-11e9-8025-00ff5d11aabc"
+    Given the following Lessons:
+      | id                                   | title       | embedType | module      | description                 | coverImage       | durationInMinutes | embedCode |
+      | e7f48f24-a5b7-4b8b-b491-258ad546f8bc | Test lesson | vimeo     | Test Module | Test course description     | lesson_cover.png | 35                | vimeoID   |
+    Given the following Users:
+      | firstName | lastName | email            | password     |
+      | Test      | User     | test@example.com | testPassword |
+    Given that "test@example.com" user have "Test course" course
+    When I am authenticated as "test@example.com"
+    When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc"
+    Then the response should be in JSON
+    Then the response status code should be 200
+    And the JSON node "embed_type" should be equal to vimeo
+    And the JSON node "embed_code" should be equal to vimeoID
 
 

@@ -16,6 +16,11 @@ App\Entity\Lesson:
             length: 255
         description:
             type: text
+        embedType:
+            type: string
+            length: 20
+            options:
+                default: "code"
         embedCode:
             type: text
         created:

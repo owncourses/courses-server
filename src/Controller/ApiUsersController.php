@@ -100,9 +100,11 @@ final class ApiUsersController extends AbstractController
             $entityManager->flush();
 
             $eventDispatcher->dispatch(new UserPasswordChangeRequestEvent($user));
+
+            return new JsonResponse(['success' => true]);
         }
 
-        return new JsonResponse(['success' => true]);
+        return new Response($this->serializer->serialize(ErrorHandler::getErrorsFromForm($form), 'json'), Response::HTTP_BAD_REQUEST);
     }
 
     public function requestPassword(

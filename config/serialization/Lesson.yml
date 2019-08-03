@@ -6,6 +6,8 @@ App\Entity\Lesson:
             groups: ['list', 'lesson_details', 'course_modules']
         description:
             groups: ['lesson_details']
+        embedType:
+            groups: ['lesson_details']
         embedCode:
             groups: ['lesson_details']
         module:
