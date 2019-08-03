@@ -12,10 +12,11 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         if ('application/json' === $request->headers->get('Content-Type')) {
-            return new JsonResponse([
+            $event->allowCustomResponseCode();
+            $event->setResponse(new JsonResponse([
                 'success' => false,
                 'message' => $event->getException()->getMessage(),
-            ]);
+            ], $event->getException()->getStatusCode()));
         }
     }
 

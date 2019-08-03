@@ -17,6 +17,18 @@ Feature:
     Then the response should be in JSON
     And the response status code should be 200
 
+  Scenario: It handles reset password for not existing user
+    When I add 'content-type' header equal to 'application/json'
+    And I send a "POST" request to "/api/users/password/reset_request" with body:
+    """
+    {
+      "email": "false@example.com"
+    }
+    """
+    Then the response should be in JSON
+    And the response status code should be 404
+    And the JSON node message should be equal to "User was not found"
+
 
   Scenario: It resets user password
     Given the following Users:
