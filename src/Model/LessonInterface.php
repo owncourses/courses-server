@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\File\File;
 
 interface LessonInterface extends TimestampableInterface, SortableInterface, PersistableInterface
 {
+    public const EMBED_TYPE_CODE = 'code';
+
+    public const EMBED_TYPE_VIMEO = 'vimeo';
+
     public function getTitle(): ?string;
 
     public function setTitle(string $title): void;
@@ -17,6 +21,10 @@ interface LessonInterface extends TimestampableInterface, SortableInterface, Per
     public function getDescription(): ?string;
 
     public function setDescription(string $description): void;
+
+    public function setEmbedType(string $embedType): void;
+
+    public function getEmbedType(): string;
 
     public function getEmbedCode(): ?string;
 

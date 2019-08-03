@@ -20,6 +20,8 @@ class Lesson implements LessonInterface
 
     private $description;
 
+    private $embedType = LessonInterface::EMBED_TYPE_CODE;
+
     private $embedCode;
 
     private $module;
@@ -55,6 +57,16 @@ class Lesson implements LessonInterface
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function setEmbedType(string $embedType): void
+    {
+        $this->embedType = $embedType;
+    }
+
+    public function getEmbedType(): string
+    {
+        return $this->embedType;
     }
 
     public function getEmbedCode(): ?string

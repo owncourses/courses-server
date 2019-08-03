@@ -2,11 +2,13 @@
 
 namespace App\Admin;
 
+use App\Model\LessonInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -27,6 +29,14 @@ final class LessonAdmin extends AbstractAdmin
             'attr' => ['class' => 'ckeditor'],
         ]);
         $formMapper->add('durationInMinutes');
+        $formMapper->add('embedType', ChoiceType::class, [
+                'choices' => [
+                    'code' => LessonInterface::EMBED_TYPE_CODE,
+                    'Vimeo' => LessonInterface::EMBED_TYPE_VIMEO,
+                ],
+                'required' => true,
+            ]
+        );
         $formMapper->add('embedCode');
         $formMapper->add('module');
 
