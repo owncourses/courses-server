@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Model\AttachmentInterface;
-use App\Model\LessonInterface;
+use App\Model\LessonAwareTrait;
 use App\Model\PersistableAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use DateTimeImmutable;
@@ -11,11 +11,11 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class Attachment implements AttachmentInterface
 {
-    use PersistableAwareTrait, TimestampableAwareTrait;
+    use PersistableAwareTrait;
+    use TimestampableAwareTrait;
+    use LessonAwareTrait;
 
     private $name;
-
-    private $lesson;
 
     private $fileName;
 
@@ -31,16 +31,6 @@ class Attachment implements AttachmentInterface
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    public function getLesson(): ?LessonInterface
-    {
-        return $this->lesson;
-    }
-
-    public function setLesson(LessonInterface $lesson): void
-    {
-        $this->lesson = $lesson;
     }
 
     public function getFileName(): ?string

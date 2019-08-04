@@ -1,0 +1,14 @@
+api_bookmarks_get_for_lesson:
+    path: /api/lessons/{lessonId}/bookmarks
+    methods: GET
+    controller: App\Controller\ApiBookmarksController::getAllForLesson
+
+api_bookmarks_create:
+    path: /api/lessons/{lessonId}/bookmarks
+    methods: POST
+    controller: App\Controller\ApiBookmarksController::create
+
+api_bookmarks_delete:
+    path: /api/bookmarks/{bookmarkId}
+    methods: DELETE
+    controller: App\Controller\ApiBookmarksController::delete

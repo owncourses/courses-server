@@ -1,0 +1,12 @@
+App\Entity\Bookmark:
+    attributes:
+        id:
+            groups: ['bookmarks_list', 'bookmark_details']
+        title:
+            groups: ['bookmarks_list', 'bookmark_details']
+        timeInSeconds:
+            groups: ['bookmarks_list', 'bookmark_details']
+        user:
+            groups: ['bookmarks_list', 'bookmark_details']
+        created:
+            groups: ['bookmark_details']

@@ -7,6 +7,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpException as SymfonyHttpException;
 
 class ApiExceptionSubscriber implements EventSubscriberInterface
 {
@@ -18,6 +19,10 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
             $code = Response::HTTP_INTERNAL_SERVER_ERROR;
             if ($exception instanceof HttpException) {
                 $code = $exception->getStatusCode();
+            }
+
+            if ($exception instanceof SymfonyHttpException) {
+                $code = $exception->getPrevious()->getCode();
             }
 
             $event->setResponse(new JsonResponse([

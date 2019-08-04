@@ -1,7 +1,7 @@
 App\Entity\User:
     attributes:
         id:
-            groups: ['user_details']
+            groups: ['user_details', 'bookmarks_list', 'bookmark_details']
         email:
             groups: ['user_details']
         roles:
