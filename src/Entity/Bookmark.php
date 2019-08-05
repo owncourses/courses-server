@@ -8,7 +8,7 @@ use App\Model\OptionalUserAwareTrait;
 use App\Model\PersistableAwareTrait;
 use App\Model\TimestampableAwareTrait;
 
-final class Bookmark implements BookmarkInterface
+class Bookmark implements BookmarkInterface
 {
     use PersistableAwareTrait;
     use TimestampableAwareTrait;
