@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -66,5 +67,16 @@ final class BookmarkAdmin extends AbstractAdmin
             ->add('created')
             ->add('updated')
             ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query->expr()->isnull($query->getRootAliases()[0].'.user')
+        );
+
+        return $query;
     }
 }

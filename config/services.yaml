@@ -74,3 +74,4 @@ services:
         public: true
 
     SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface: "@swp_settings.manager.settings"
+ 
