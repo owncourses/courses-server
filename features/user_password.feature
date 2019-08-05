@@ -3,7 +3,7 @@ Feature:
   As a user
   I want to use users passwords reset API
 
-  Scenario: It sends reset password confirmation link
+  Scenario: It sends reset password link
     Given the following Users:
       | firstName | lastName | email            | password     |
       | Test      | User     | test@example.com | testPassword |
