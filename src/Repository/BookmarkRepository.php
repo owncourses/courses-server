@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Bookmark;
+use App\Model\BookmarkInterface;
 use App\Model\LessonInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -28,5 +29,15 @@ class BookmarkRepository extends ServiceEntityRepository implements BookmarkRepo
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    public function getOneById(string $id): ?BookmarkInterface
+    {
+        return $this->createQueryBuilder('b')
+        ->where('b.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
     }
 }

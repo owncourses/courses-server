@@ -28,4 +28,6 @@ interface CourseInterface extends TimestampableInterface, VisibilityInterface, T
     public function getCoverImageFile(): ?File;
 
     public function getAuthors(): Collection;
+
+    public function setAuthors(Collection $authors): void;
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Bookmark;
+use App\Model\BookmarkInterface;
 use App\Model\LessonInterface;
 
 /**
@@ -16,4 +17,6 @@ use App\Model\LessonInterface;
 interface BookmarkRepositoryInterface
 {
     public function getAllForLesson(LessonInterface $lesson): array;
+
+    public function getOneById(string $id): ?BookmarkInterface;
 }

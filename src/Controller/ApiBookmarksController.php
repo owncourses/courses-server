@@ -80,7 +80,7 @@ final class ApiBookmarksController extends AbstractController
         EntityManagerInterface $entityManager,
         string $bookmarkId
     ): Response {
-        $bookmark = $this->bookmarkRepository->findOneBy(['id' => $bookmarkId]);
+        $bookmark = $this->bookmarkRepository->getOneById($bookmarkId);
         if (null === $bookmark) {
             throw new NotFoundHttpException('Bookmark was not found');
         }
