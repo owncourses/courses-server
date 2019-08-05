@@ -33,7 +33,7 @@ class Author implements AuthorInterface
 
     public function __construct()
     {
-        $this->courses = new ArrayCollection();
+        $this->setCourses(new ArrayCollection());
     }
 
     public function getName(): ?string

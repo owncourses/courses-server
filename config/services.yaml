@@ -66,4 +66,12 @@ services:
             - ["setEncoder", ['@security.password_encoder']]
         public: true
 
+    admin.bookmark:
+        class: App\Admin\BookmarkAdmin
+        arguments: [~, App\Entity\Bookmark, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: courses, label: Bookmarks }
+        public: true
+
     SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface: "@swp_settings.manager.settings"
+ 

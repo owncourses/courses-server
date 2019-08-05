@@ -28,8 +28,8 @@ class Course implements CourseInterface
 
     public function __construct()
     {
-        $this->visible = true;
-        $this->authors = new ArrayCollection();
+        $this->setVisible(true);
+        $this->setAuthors(new ArrayCollection());
     }
 
     public function getId(): ?int
@@ -81,6 +81,11 @@ class Course implements CourseInterface
     public function getAuthors(): Collection
     {
         return $this->authors;
+    }
+
+    public function setAuthors(Collection $authors): void
+    {
+        $this->authors = $authors;
     }
 
     public function __toString()
