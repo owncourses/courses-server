@@ -77,6 +77,6 @@ final class BookmarkAdmin extends AbstractAdmin
             $query->expr()->isnull($query->getRootAliases()[0].'.user')
         );
 
-        return $query;
+        return new $query();
     }
 }
