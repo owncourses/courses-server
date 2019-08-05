@@ -6,6 +6,7 @@ default:
                 - App\Tests\Behat\CourseContext
                 - App\Tests\Behat\LessonContext
                 - App\Tests\Behat\AttachmentContext
+                - App\Tests\Behat\BookmarkContext
                 - App\Tests\Behat\AuthorContext
                 - App\Tests\Behat\UserContext
                 - App\Tests\Behat\CommandContext
