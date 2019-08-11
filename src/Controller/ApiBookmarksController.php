@@ -43,7 +43,7 @@ final class ApiBookmarksController extends AbstractController
             throw new NotFoundHttpException('Lesson was not found');
         }
 
-        $bookmarks = $this->bookmarkRepository->getAllForLesson($lesson);
+        $bookmarks = $this->bookmarkRepository->getAllForLessonAndUser($lesson, $this->getUser());
 
         return new Response($serializer->serialize($bookmarks, 'json', ['groups' => ['bookmarks_list']]));
     }
@@ -90,6 +90,7 @@ final class ApiBookmarksController extends AbstractController
         }
 
         $entityManager->remove($bookmark);
+        $entityManager->flush();
 
         return new Response(null, Response::HTTP_NO_CONTENT);
     }

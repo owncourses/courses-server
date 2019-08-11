@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Entity\Bookmark;
 use App\Model\BookmarkInterface;
 use App\Model\LessonInterface;
+use App\Model\UserInterface;
 
 /**
  * @method Bookmark|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,7 +17,7 @@ use App\Model\LessonInterface;
  */
 interface BookmarkRepositoryInterface
 {
-    public function getAllForLesson(LessonInterface $lesson): array;
+    public function getAllForLessonAndUser(LessonInterface $lesson, UserInterface $user): array;
 
     public function getOneById(string $id): ?BookmarkInterface;
 }
