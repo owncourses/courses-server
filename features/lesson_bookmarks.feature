@@ -24,11 +24,10 @@ Feature:
     When I send a "GET" request to "/api/lessons/e7f48f24-a5b7-4b8b-b491-258ad546f8bc/bookmarks"
     Then the response should be in JSON
     Then the response status code should be 200
-    And the JSON node "[0].title" should be equal to "test system bookmark"
-    And the JSON node "[0].time_in_seconds" should be equal to "15"
-    And the JSON node "[0].user" should be null
-    And the JSON node "[0].id" should exist
-    And the JSON node "[1].user.id" should exist
+    And the JSON node "[1].title" should be equal to "test system bookmark"
+    And the JSON node "[1].time_in_seconds" should be equal to "15"
+    And the JSON node "[1].user" should be null
+    And the JSON node "[1].id" should exist
 
   Scenario: I want to create new user bookmark
     Given the following Courses:

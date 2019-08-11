@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Bookmark;
 use App\Model\BookmarkInterface;
 use App\Model\LessonInterface;
+use App\Model\UserInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -21,11 +22,14 @@ class BookmarkRepository extends ServiceEntityRepository implements BookmarkRepo
         parent::__construct($registry, Bookmark::class);
     }
 
-    public function getAllForLesson(LessonInterface $lesson): array
+    public function getAllForLessonAndUser(LessonInterface $lesson, UserInterface $user): array
     {
         return $this->createQueryBuilder('b')
             ->where('b.lesson = :lesson')
+            ->andWhere('b.user = :user')
+            ->orWhere('b.user IS NULL')
             ->setParameter('lesson', $lesson)
+            ->setParameter('user', $user)
             ->getQuery()
             ->getResult()
             ;
