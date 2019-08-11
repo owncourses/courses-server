@@ -57,4 +57,32 @@ class LessonRepository extends ServiceEntityRepository implements LessonReposito
             ->getQuery()
             ->getResult();
     }
+
+    public function getNextInModule(LessonInterface $lesson): ?LessonInterface
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.module = :module')
+            ->leftJoin('l.module', 'm')
+            ->leftJoin('m.course', 'c')
+            ->andWhere('c.visible != false')
+            ->andWhere('l.position = :position')
+            ->setParameter('module', $lesson->getModule())
+            ->setParameter('position', $lesson->getPosition() + 1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getPreviousInModule(LessonInterface $lesson): ?LessonInterface
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.module = :module')
+            ->leftJoin('l.module', 'm')
+            ->leftJoin('m.course', 'c')
+            ->andWhere('c.visible != false')
+            ->andWhere('l.position = :position')
+            ->setParameter('module', $lesson->getModule())
+            ->setParameter('position', $lesson->getPosition() - 1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

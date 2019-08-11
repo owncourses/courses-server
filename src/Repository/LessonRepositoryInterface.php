@@ -22,4 +22,8 @@ interface LessonRepositoryInterface
     public function getByModule(ModuleInterface $module): array;
 
     public function getByCourse(CourseInterface $course): array;
+
+    public function getNextInModule(LessonInterface $lesson): ?LessonInterface;
+
+    public function getPreviousInModule(LessonInterface $lesson): ?LessonInterface;
 }
