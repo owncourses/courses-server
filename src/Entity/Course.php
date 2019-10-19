@@ -12,13 +12,17 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class Course implements CourseInterface
 {
-    use TimestampableAwareTrait, VisibilityAwareTrait, TimeLimitedAwareTrait;
+    use TimestampableAwareTrait;
+    use VisibilityAwareTrait;
+    use TimeLimitedAwareTrait;
 
     private $id;
 
     private $title;
 
     private $description;
+
+    private $sku;
 
     private $coverImageName;
 
@@ -55,6 +59,16 @@ class Course implements CourseInterface
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getSku(): ?string
+    {
+        return $this->sku;
+    }
+
+    public function setSku(string $sku): void
+    {
+        $this->sku = $sku;
     }
 
     public function getCoverImageName(): ?string

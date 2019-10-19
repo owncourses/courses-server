@@ -18,5 +18,5 @@ interface CourseRepositoryInterface
 
     public function getOneById(int $courseId): ?Course;
 
-    public function getOneByTitle(string $title): ?Course;
+    public function getOneByTitleOrSku(string $titleOrSku): ?Course;
 }

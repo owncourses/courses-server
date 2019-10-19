@@ -15,6 +15,10 @@ App\Entity\Course:
             type: string
             length: 255
             nullable: true
+        sku:
+            type: string
+            length: 255
+            nullable: true
         coverImageName:
             type: string
             length: 255

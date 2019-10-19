@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - [Unreleased]
 
 ### Added
+- Add sku field to course, allow to add course to user by sku in integrations endpoint
 - Lesson bookmarks feature. Users cane see admin defined bookmarks and create/delete their own.
 - Embed type field. Can be used as an extra information about embed handling by students app. 
 - New Author property - gender (it will allow fix prononciation in author box in students app)

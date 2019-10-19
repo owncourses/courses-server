@@ -29,9 +29,9 @@ final class UserManager implements UserManagerInterface
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function addCourseByTitle(UserInterface $user, string $courseTitle): void
+    public function addCourseByTitleOrSku(UserInterface $user, string $courseTitleOrSku): void
     {
-        $course = $this->courseRepository->getOneByTitle($courseTitle);
+        $course = $this->courseRepository->getOneByTitleOrSku($courseTitleOrSku);
         if (null !== $course) {
             $user->addCourse($course);
         }
