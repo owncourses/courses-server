@@ -29,6 +29,7 @@ class BookmarkRepository extends ServiceEntityRepository implements BookmarkRepo
             ->andWhere('b.user = :user OR b.user IS NULL')
             ->setParameter('lesson', $lesson)
             ->setParameter('user', $user)
+            ->orderBy('b.timeInSeconds', 'ASC')
             ->getQuery()
             ->getResult()
             ;
