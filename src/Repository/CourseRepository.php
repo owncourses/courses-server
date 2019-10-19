@@ -41,12 +41,15 @@ class CourseRepository extends ServiceEntityRepository implements CourseReposito
             ;
     }
 
-    public function getOneByTitle(string $title): ?Course
+    public function getOneByTitleOrSku(string $titleOrSku): ?Course
     {
-        return $this->createQueryBuilder('c')
-            ->where('c.title = :title')
+        $qb = $this->createQueryBuilder('c');
+
+        return $qb->where(
+                $qb->expr()->orX('c.title = :titleOrSku', 'c.sku = :titleOrSku')
+            )
             ->andWhere('c.visible = true')
-            ->setParameter('title', $title)
+            ->setParameter('titleOrSku', $titleOrSku)
             ->getQuery()
             ->getOneOrNullResult()
             ;

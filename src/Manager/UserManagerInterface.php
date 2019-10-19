@@ -8,7 +8,7 @@ use App\Model\UserInterface;
 
 interface UserManagerInterface
 {
-    public function addCourseByTitle(UserInterface $user, string $courseTitle): void;
+    public function addCourseByTitleOrSku(UserInterface $user, string $courseTitleOrSku): void;
 
     public function getOrCreateUser(string $email): UserInterface;
 

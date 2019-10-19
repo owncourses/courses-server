@@ -58,8 +58,8 @@ final class ApiUsersController extends AbstractController
         $form = $formFactory->create(RegisterUserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if (null !== $courseName = $form->get('course')->getData()) {
-                $userManager->addCourseByTitle($user, $courseName);
+            if (null !== $courseTitleOrSku = $form->get('course')->getData()) {
+                $userManager->addCourseByTitleOrSku($user, $courseTitleOrSku);
             }
 
             $newUser = false;

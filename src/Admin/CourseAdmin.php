@@ -17,6 +17,7 @@ final class CourseAdmin extends AbstractAdmin
         $container = $this->getConfigurationPool()->getContainer();
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextType::class, ['required' => false]);
+        $formMapper->add('sku', TextType::class, ['required' => false]);
         $formMapper->add('visible', null, ['required' => false]);
         $formMapper->add('startDate', DateTimeType::class, [
             'widget' => 'single_text',
@@ -51,6 +52,7 @@ final class CourseAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title');
+        $datagridMapper->add('sku');
         $datagridMapper->add('authors');
     }
 
@@ -58,6 +60,7 @@ final class CourseAdmin extends AbstractAdmin
     {
         $listMapper->addIdentifier('title');
         $listMapper->add('description');
+        $listMapper->add('sku');
         $listMapper->add('authors');
         $listMapper->add('coverImageName');
         $listMapper->add('visible');

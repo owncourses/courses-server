@@ -19,6 +19,10 @@ interface CourseInterface extends TimestampableInterface, VisibilityInterface, T
 
     public function setDescription(string $description): void;
 
+    public function getSku(): ?string;
+
+    public function setSku(string $sku): void;
+
     public function getCoverImageName(): ?string;
 
     public function setCoverImageName(string $coverImageName): void;
