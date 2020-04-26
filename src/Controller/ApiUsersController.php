@@ -8,6 +8,7 @@ use App\Event\UserCreateEvent;
 use App\Event\UserPasswordChangeRequestEvent;
 use App\Form\ErrorHandler;
 use App\Form\RegisterUserType;
+use App\Form\UserEmailType;
 use App\Form\UserPasswordResetRequestType;
 use App\Form\UserPasswordResetType;
 use App\Manager\UserManagerInterface;
@@ -131,6 +132,26 @@ final class ApiUsersController extends AbstractController
             $entityManager->flush();
 
             return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_OK);
+        }
+
+        return new Response($this->serializer->serialize(ErrorHandler::getErrorsFromForm($form), 'json'), Response::HTTP_BAD_REQUEST);
+    }
+
+    public function checkEmail(
+        Request $request,
+        FormFactoryInterface $formFactory,
+        UserRepositoryInterface $userRepository
+    ): Response {
+        $form = $formFactory->create(UserEmailType::class, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $userRepository->getOneByEmail($form->getData()['email']);
+
+            if (null !== $user) {
+                return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_OK);
+            }
+
+            return new Response(null, Response::HTTP_NOT_FOUND);
         }
 
         return new Response($this->serializer->serialize(ErrorHandler::getErrorsFromForm($form), 'json'), Response::HTTP_BAD_REQUEST);

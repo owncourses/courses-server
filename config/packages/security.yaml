@@ -79,6 +79,7 @@ security:
     access_control:
         - { path: ^/admin/login,                      roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/*,                          roles: ROLE_ADMIN }
+        - { path: ^/api/users/check-email,            roles: ROLE_ADMIN }
         - { path: ^/api/login,                        roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users/password/reset_request, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users/password/reset,         roles: IS_AUTHENTICATED_ANONYMOUSLY }

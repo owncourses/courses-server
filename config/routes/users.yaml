@@ -22,3 +22,8 @@ api_users_pasword_reset:
     path: /api/users/password/reset
     methods: POST
     controller: App\Controller\ApiUsersController::requestPassword
+
+api_users_check_email:
+    path: /api/users/check-email
+    methods: POST
+    controller: App\Controller\ApiUsersController::checkEmail
