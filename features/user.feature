@@ -84,3 +84,70 @@ Feature:
     Then the response should be in JSON
     And the response status code should be 201
     And the JSON node "first_name" should be equal to "Updated"
+
+  Scenario: It should check if user with provided email have account in system
+    Given the following Users:
+      | firstName | lastName | email             | password     |
+      | Test      | User     | admin@example.com | testPassword |
+    When I run the "app:user:promote" command with options:
+      | user | admin@example.com |
+      | role | ROLE_ADMIN       |
+
+    Given the following Courses:
+      | title       | description             | coverImage       | sku |
+      | Test course | Test course description | course_cover.png | 001 |
+    And I add 'content-type' header equal to 'application/json'
+    And I add 'x-api-key' header equal to 'test-api-key'
+    And I send a "POST" request to "/api/integration/users/register" with body:
+    """
+    {
+      "email": "newuser@example.com",
+      "firstName": "New",
+      "lastName": "User",
+      "course": "001"
+    }
+    """
+    Then the response should be in JSON
+    And the response status code should be 201
+
+    When I am authenticated as "admin@example.com"
+    And I add 'content-type' header equal to 'application/json'
+    And I send a "POST" request to "/api/users/check-email" with body:
+    """
+    {
+      "email": "newuser@example.com"
+    }
+    """
+    Then the response should be in JSON
+    Then the response status code should be 200
+    Then the JSON node "" should have 8 elements
+    And the JSON node "email" should be equal to "newuser@example.com"
+    And the JSON node "courses[0].title" should be equal to "Test course"
+
+    When I am authenticated as "admin@example.com"
+    And I add 'content-type' header equal to 'application/json'
+    And I send a "POST" request to "/api/users/check-email" with body:
+    """
+    {
+      "email": "notexisting@example.com"
+    }
+    """
+    Then the response status code should be 404
+
+    When I am authenticated as "admin@example.com"
+    And I add 'content-type' header equal to 'application/json'
+    And I send a "POST" request to "/api/users/check-email" with body:
+    """
+    {
+      "wrongType": "notexisting@example.com"
+    }
+    """
+    Then the response status code should be 400
+
+    And I send a "POST" request to "/api/users/check-email" with body:
+    """
+    {
+      "email": "notexisting@example.com"
+    }
+    """
+    Then the response status code should be 401

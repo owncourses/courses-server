@@ -11,7 +11,8 @@ use Doctrine\Common\Collections\Collection;
 
 class User implements UserInterface
 {
-    use TimestampableAwareTrait, PersistableAwareTrait;
+    use TimestampableAwareTrait;
+    use PersistableAwareTrait;
 
     private $email;
 
