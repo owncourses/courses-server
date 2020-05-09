@@ -1,16 +1,12 @@
 {
-    "nelmio/api-doc-bundle": {
-        "version": "2.13",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.13",
-            "ref": "d13bb99357ebcd2ffb6fe808a64961f5bc1c7546"
-        },
-        "files": [
-            "config/packages/nelmio_api_doc.yaml",
-            "config/routes/nelmio_api_doc.yaml"
-        ]
+    "brick/math": {
+        "version": "0.8.15"
+    },
+    "friends-of-behat/mink-extension": {
+        "version": "2.3.1"
+    },
+    "ramsey/collection": {
+        "version": "1.0.1"
     },
     "swp/common": {
         "version": "2.0-dev"
@@ -29,5 +25,20 @@
     },
     "symfony/http-client-contracts": {
         "version": "v1.1.5"
+    },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.16.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.16.0"
+    },
+    "symfony/string": {
+        "version": "v5.0.8"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.3"
+    },
+    "twig/string-extra": {
+        "version": "v3.0.3"
     }
 }
