@@ -5,6 +5,12 @@
     "friends-of-behat/mink-extension": {
         "version": "2.3.1"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
+    "php": {
+        "version": "7.4"
+    },
     "ramsey/collection": {
         "version": "1.0.1"
     },
@@ -19,6 +25,9 @@
     },
     "swp/storage-bundle": {
         "version": "2.0-dev"
+    },
+    "symfony/error-handler": {
+        "version": "v4.4.8"
     },
     "symfony/http-client": {
         "version": "v4.3.3"
@@ -40,5 +49,8 @@
     },
     "twig/string-extra": {
         "version": "v3.0.3"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     }
 }
