@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 final class LessonAdmin extends AbstractAdmin
 {
@@ -20,6 +21,14 @@ final class LessonAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
+
+    private UploaderHelper $uploaderHelper;
+
+    public function __construct(UploaderHelper $uploaderHelper, $code, $class, $baseControllerName = null)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->uploaderHelper = $uploaderHelper;
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -47,7 +56,7 @@ final class LessonAdmin extends AbstractAdmin
             null !== $this->getSubject() &&
             null !== $this->getSubject()->getCoverImageName()
         ) {
-            $imagePath = $container->get('vich_uploader.templating.helper.uploader_helper')->asset($this->getSubject(), 'coverImageFile');
+            $imagePath = $this->uploaderHelper->asset($this->getSubject(), 'coverImageFile');
 
             $fileFieldOptions['help'] = '<img src="'.$imagePath.'" class="admin-preview" />';
         }

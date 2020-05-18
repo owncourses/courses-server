@@ -7,16 +7,25 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 final class AttachmentAdmin extends AbstractAdmin
 {
+    private UploaderHelper $uploaderHelper;
+
+    public function __construct(UploaderHelper $uploaderHelper, $code, $class, $baseControllerName = null)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->uploaderHelper = $uploaderHelper;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $container = $this->getConfigurationPool()->getContainer();
         $formMapper->add('name');
         $fileFieldOptions = ['required' => false];
         if (null !== $this->getSubject()->getFileName()) {
-            $filePath = $container->get('vich_uploader.templating.helper.uploader_helper')->asset($this->getSubject(), 'file');
+            $filePath = $this->uploaderHelper->asset($this->getSubject(), 'file');
 
             $fileFieldOptions['help'] = 'Current file: '.$filePath;
         }

@@ -29,13 +29,13 @@ services:
 
     admin.course:
         class: App\Admin\CourseAdmin
-        arguments: [~, App\Entity\Course, ~]
+        arguments: [@Vich\UploaderBundle\Templating\Helper\UploaderHelper, ~, App\Entity\Course, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Courses }
 
     admin.author:
         class: App\Admin\AuthorAdmin
-        arguments: [~, App\Entity\Author, ~]
+        arguments: [@Vich\UploaderBundle\Templating\Helper\UploaderHelper, ~, App\Entity\Author, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Authors }
 
@@ -47,13 +47,13 @@ services:
 
     admin.lesson:
         class: App\Admin\LessonAdmin
-        arguments: [~, App\Entity\Lesson,'PixSortableBehaviorBundle:SortableAdmin']
+        arguments: [@Vich\UploaderBundle\Templating\Helper\UploaderHelper, ~, App\Entity\Lesson,'PixSortableBehaviorBundle:SortableAdmin']
         tags:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Lessons }
 
     admin.attachment:
         class: App\Admin\AttachmentAdmin
-        arguments: [~, App\Entity\Attachment, ~]
+        arguments: [@Vich\UploaderBundle\Templating\Helper\UploaderHelper, ~, App\Entity\Attachment, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Attachments }
 
@@ -74,4 +74,4 @@ services:
         public: true
 
     SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface: "@swp_settings.manager.settings"
- 
+
