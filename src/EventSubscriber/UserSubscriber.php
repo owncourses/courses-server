@@ -9,7 +9,7 @@ use SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\NamedAddress;
+use Symfony\Component\Mime\Address;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
@@ -85,7 +85,7 @@ class UserSubscriber implements EventSubscriberInterface
     {
         $email = new TemplatedEmail();
         $email
-            ->from(new NamedAddress(
+            ->from(new Address(
                 $this->getSetting('email_from_address', 'contact@owncourses.org'),
                 $this->getSetting('email_from_name', 'OwnCourses Team')
             ))
