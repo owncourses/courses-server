@@ -14,6 +14,7 @@
         "pixassociates/sortable-behavior-bundle": "^1.5",
         "ramsey/uuid-doctrine": "^1.6",
         "sensio/framework-extra-bundle": "^5.5",
+        "sentry/sentry-symfony": "^3.5",
         "sonata-project/admin-bundle": "^3.66",
         "sonata-project/doctrine-orm-admin-bundle": "^3.13",
         "sonata-project/formatter-bundle": "^4.1",

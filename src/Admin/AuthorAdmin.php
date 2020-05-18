@@ -16,9 +16,8 @@ final class AuthorAdmin extends AbstractAdmin
 {
     private UploaderHelper $uploaderHelper;
 
-    public function __construct(UploaderHelper $uploaderHelper, $code, $class, $baseControllerName = null)
+    public function setUploaderHelper(UploaderHelper $uploaderHelper)
     {
-        parent::__construct($code, $class, $baseControllerName);
         $this->uploaderHelper = $uploaderHelper;
     }
 
