@@ -2,10 +2,10 @@
 
 namespace App\Command;
 
-use function in_array;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use function in_array;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,9 +54,11 @@ class UserPromoteCommand extends Command
 
             $io->success(sprintf('Role %s was successfully added to user %s', $role, $userEmail));
 
-            return null;
+            return 0;
         }
 
         $io->success(sprintf('User %s already have role %s', $userEmail, $role));
+
+        return 1;
     }
 }
