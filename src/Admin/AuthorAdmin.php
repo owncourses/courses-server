@@ -4,15 +4,23 @@ namespace App\Admin;
 
 use App\Entity\Author;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 final class AuthorAdmin extends AbstractAdmin
 {
+    private UploaderHelper $uploaderHelper;
+
+    public function setUploaderHelper(UploaderHelper $uploaderHelper)
+    {
+        $this->uploaderHelper = $uploaderHelper;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $container = $this->getConfigurationPool()->getContainer();
@@ -30,7 +38,7 @@ final class AuthorAdmin extends AbstractAdmin
         $formMapper->add('courses');
         $fileFieldOptions = ['required' => false];
         if (null !== $this->getSubject()->getPicture()) {
-            $imagePath = $container->get('vich_uploader.templating.helper.uploader_helper')->asset($this->getSubject(), 'pictureFile');
+            $imagePath = $this->uploaderHelper->asset($this->getSubject(), 'pictureFile');
 
             $fileFieldOptions['help'] = '<img src="'.$imagePath.'" class="admin-preview" />';
         }

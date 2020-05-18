@@ -3,7 +3,7 @@ jobs:
     build:
         working_directory: ~/owncourses
         docker:
-            - image: circleci/php:7.3-browsers
+            - image: circleci/php:7.4-browsers
         steps:
             - checkout
 
