@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\Course;
 use App\Entity\Module;
+use App\Model\CourseInterface;
 
 /**
  * @method Module|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,5 +15,5 @@ use App\Entity\Module;
  */
 interface ModuleRepositoryInterface
 {
-    public function getAllForCourse(Course $course): array;
+    public function getAllForCourse(CourseInterface $course): array;
 }

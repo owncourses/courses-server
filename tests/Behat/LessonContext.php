@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat;
 
+use App\Entity\DemoLesson;
 use App\Entity\Lesson;
+use App\Repository\LessonRepositoryInterface;
 use App\Repository\ModuleRepositoryInterface;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
@@ -16,20 +18,20 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class LessonContext extends AbstractObjectContext implements Context
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /**
-     * @var ModuleRepositoryInterface
-     */
-    private $moduleRepository;
+    private ModuleRepositoryInterface $moduleRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, ModuleRepositoryInterface $moduleRepository)
-    {
+    private LessonRepositoryInterface $lessonRepository;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ModuleRepositoryInterface $moduleRepository,
+        LessonRepositoryInterface $lessonRepository
+    ) {
         $this->moduleRepository = $moduleRepository;
         $this->entityManager = $entityManager;
+        $this->lessonRepository = $lessonRepository;
     }
 
     /**
@@ -68,6 +70,36 @@ final class LessonContext extends AbstractObjectContext implements Context
         }
 
         $this->entityManager->persist($lesson);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given the following Demo Lessons:
+     */
+    public function theFollowingDemoLessons(TableNode $table)
+    {
+        $metadata = $this->entityManager->getClassMetaData(DemoLesson::class);
+        $metadata->setIdGenerator(new AssignedGenerator());
+
+        foreach ($table as $row => $columns) {
+            $demoLesson = new DemoLesson();
+            if (array_key_exists('id', $columns)) {
+                $demoLesson->setId($columns['id']);
+                unset($columns['id']);
+            }
+
+            if (array_key_exists('lesson', $columns)) {
+                $lesson = $this->lessonRepository->findOneBy(['id' => $columns['lesson']]);
+                if (null === $lesson) {
+                    throw new Exception('Lesson was not found');
+                }
+                $columns['lesson'] = $lesson;
+            }
+
+            $this->fillObject($demoLesson, $columns);
+            $this->entityManager->persist($demoLesson);
+        }
+
         $this->entityManager->flush();
     }
 

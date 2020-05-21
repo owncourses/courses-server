@@ -22,3 +22,9 @@ App\Entity\Course:
             groups: ['list_courses', 'course_details']
         authors:
             groups: ['list_courses', 'course_details']
+        type:
+            groups: ['list_courses', 'course_details', 'course_modules',]
+        purchaseUrl:
+            groups: ['list_courses', 'course_details', 'course_modules',]
+        parent:
+            groups: ['list_courses', 'course_details']
