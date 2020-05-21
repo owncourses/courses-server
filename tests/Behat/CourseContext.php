@@ -59,7 +59,7 @@ final class CourseContext extends AbstractObjectContext implements Context
             }
 
             if (array_key_exists('startDate', $columns)) {
-                if ('null' === $columns['startDate']) {
+                if (null === $columns['startDate']) {
                     unset($columns['startDate']);
                 } else {
                     $date = new DateTime();
@@ -69,7 +69,7 @@ final class CourseContext extends AbstractObjectContext implements Context
             }
 
             if (array_key_exists('endDate', $columns)) {
-                if ('null' === $columns['endDate']) {
+                if (null === $columns['endDate']) {
                     unset($columns['endDate']);
                 } else {
                     $date = new DateTime();
