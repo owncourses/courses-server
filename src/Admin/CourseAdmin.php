@@ -65,6 +65,7 @@ final class CourseAdmin extends AbstractAdmin
             $fileFieldOptions['help'] = '<img src="'.$imagePath.'" class="admin-preview" />';
         }
         $formMapper->add('coverImageFile', FileType::class, $fileFieldOptions);
+        $formMapper->add('parent');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
