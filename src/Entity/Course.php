@@ -17,17 +17,17 @@ class Course implements CourseInterface
     use VisibilityAwareTrait;
     use TimeLimitedAwareTrait;
 
-    private ?int $id;
+    private ?int $id = null;
 
-    private ?string $title;
+    private ?string $title = null;
 
-    private ?string $description;
+    private ?string $description = null;
 
-    private ?string $sku;
+    private ?string $sku = null;
 
-    private ?string $coverImageName;
+    private ?string $coverImageName = null;
 
-    private ?File $coverImageFile;
+    private ?File $coverImageFile = null;
 
     private Collection $authors;
 
@@ -35,7 +35,7 @@ class Course implements CourseInterface
 
     private ?string $purchaseUrl = null;
 
-    private ?CourseInterface $parent;
+    private ?CourseInterface $parent = null;
 
     public function __construct()
     {

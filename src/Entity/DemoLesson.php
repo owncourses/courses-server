@@ -12,7 +12,7 @@ class DemoLesson implements DemoLessonInterface
     use TimestampableAwareTrait;
     use PersistableAwareTrait;
 
-    private ?LessonInterface $lesson;
+    private ?LessonInterface $lesson = null;
 
     public function getLesson(): ?LessonInterface
     {

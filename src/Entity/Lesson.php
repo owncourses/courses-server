@@ -18,23 +18,23 @@ class Lesson implements LessonInterface
     use SortableAwareTrait;
     use PersistableAwareTrait;
 
-    private ?string $title;
+    private ?string $title = null;
 
-    private ?string $description;
+    private ?string $description = null;
 
     private string $embedType = LessonInterface::EMBED_TYPE_CODE;
 
-    private ?string $embedCode;
+    private ?string $embedCode = null;
 
-    private ?Module $module;
+    private ?Module $module = null;
 
-    private ?string $coverImageName;
+    private ?string $coverImageName = null;
 
     private int $durationInMinutes = 0;
 
     private Collection $attachments;
 
-    private ?File $coverImageFile;
+    private ?File $coverImageFile = null;
 
     private bool $blocked = false;
 
