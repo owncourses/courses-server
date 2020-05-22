@@ -1,6 +1,6 @@
 build:
     nodes:
-        my-tests:
+        analysis:
             environment:
                 php:
                     version: 7.4
