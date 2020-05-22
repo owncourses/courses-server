@@ -1,0 +1,33 @@
+App\Entity\Notification:
+    type: entity
+    repositoryClass: App\Repository\NotificationRepository
+    table: npd_notification
+    id:
+        id:
+            column: uuid
+            type: uuid
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        title:
+            type: string
+        text:
+            type: text
+        url:
+            type: string
+        label:
+            type: string
+        created:
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            nullable: true
+            gedmo:
+                timestampable:
+                    on: update

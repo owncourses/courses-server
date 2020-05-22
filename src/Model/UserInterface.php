@@ -36,6 +36,10 @@ interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterf
 
     public function removeCourse(CourseInterface $course): void;
 
+    public function getNotifications(): Collection;
+
+    public function addNotification(NotificationInterface $notification): void;
+
     public function getPasswordNeedToBeChanged(): ?bool;
 
     public function setPasswordNeedToBeChanged($passwordNeedToBeChanged): void;

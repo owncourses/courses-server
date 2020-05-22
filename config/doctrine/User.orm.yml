@@ -54,3 +54,16 @@ App\Entity\User:
                         referencedColumnName: id
             cascade:
                 - all
+
+        notifications:
+            targetEntity: App\Entity\Notification
+            joinTable:
+                name: npd_user_read_notifications
+                joinColumns:
+                    user_id:
+                        referencedColumnName: uuid
+                inverseJoinColumns:
+                    notification_id:
+                        referencedColumnName: uuid
+            cascade:
+                - all
