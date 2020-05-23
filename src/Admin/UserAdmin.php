@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserAdmin extends AbstractAdmin
 {
-    private $encoder;
+    private ?UserPasswordEncoderInterface $encoder = null;
 
     public function preUpdate($object)
     {
@@ -67,6 +67,7 @@ final class UserAdmin extends AbstractAdmin
             ->add('courses')
             ->add('created')
             ->add('updated')
+            ->add('lastLoginDate')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
