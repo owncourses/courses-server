@@ -49,9 +49,7 @@ final class LessonAdmin extends AbstractAdmin
         $formMapper->add('module');
 
         $fileFieldOptions = ['required' => false];
-        $container = $this->getConfigurationPool()->getContainer();
         if (
-            null !== $container &&
             null !== $this->getSubject() &&
             null !== $this->getSubject()->getCoverImageName()
         ) {

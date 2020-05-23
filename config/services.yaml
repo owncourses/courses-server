@@ -87,5 +87,11 @@ services:
             - { name: sonata.admin, manager_type: orm, group: courses, label: Bookmarks }
         public: true
 
-    SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface: "@swp_settings.manager.settings"
+    admin.notification:
+        class: App\Admin\NotificationAdmin
+        arguments: [~, App\Entity\Notification, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: notifications, label: Notification }
+        public: true
 
+    SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface: "@swp_settings.manager.settings"

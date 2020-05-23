@@ -36,6 +36,10 @@ interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterf
 
     public function removeCourse(CourseInterface $course): void;
 
+    public function getNotifications(): Collection;
+
+    public function addNotification(NotificationInterface $notification): void;
+
     public function getPasswordNeedToBeChanged(): ?bool;
 
     public function setPasswordNeedToBeChanged($passwordNeedToBeChanged): void;
@@ -43,4 +47,8 @@ interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterf
     public function getPasswordResetToken(): ?string;
 
     public function setPasswordResetToken(?string $passwordResetToken): void;
+
+    public function getLastLoginDate(): ?\DateTime;
+
+    public function setLastLoginDate(?\DateTime $lastLoginDate): void;
 }

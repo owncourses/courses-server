@@ -41,6 +41,9 @@ App\Entity\User:
             gedmo:
                 timestampable:
                     on: update
+        lastLoginDate:
+            type: datetime
+            nullable: true
     manyToMany:
         courses:
             targetEntity: App\Entity\Course
@@ -52,5 +55,18 @@ App\Entity\User:
                 inverseJoinColumns:
                     course_id:
                         referencedColumnName: id
+            cascade:
+                - all
+
+        notifications:
+            targetEntity: App\Entity\Notification
+            joinTable:
+                name: npd_user_read_notifications
+                joinColumns:
+                    user_id:
+                        referencedColumnName: uuid
+                inverseJoinColumns:
+                    notification_id:
+                        referencedColumnName: uuid
             cascade:
                 - all

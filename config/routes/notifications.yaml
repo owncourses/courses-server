@@ -1,0 +1,9 @@
+api_notifications:
+    path: /api/notifications
+    methods: GET
+    controller: App\Controller\ApiNotificationsController::list
+
+api_notifications_mark_as_read:
+    path: /api/notifications/{uuid}
+    methods: POST
+    controller: App\Controller\ApiNotificationsController::markAsRead

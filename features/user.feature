@@ -25,15 +25,19 @@ Feature:
     Given the following Users:
       | firstName | lastName | email            | password     |
       | Test      | User     | test@example.com | testPassword |
+
     Given that "test@example.com" user have "Test course" course
     When I am authenticated as "test@example.com"
     And I send a "GET" request to "/api/users/me"
+
     Then the response should be in JSON
     And the JSON node "email" should be equal to the string "test@example.com"
     And the JSON node "first_name" should be equal to the string "Test"
     And the JSON node "last_name" should be equal to the string "User"
     And the JSON node "password" should not exist
     And the JSON node "plain_password" should not exist
+    And the JSON node "last_login_date" should exist
+    And the JSON node "last_login_date" should not be null
     And the JSON node "roles[0]" should be equal to the string "ROLE_USER"
     And the JSON node "courses" should have 1 element
     And the JSON node "courses[0].title" should be equal to the string "Test course"
@@ -120,7 +124,7 @@ Feature:
     """
     Then the response should be in JSON
     Then the response status code should be 200
-    Then the JSON node "" should have 8 elements
+    Then the JSON node "" should have 9 elements
     And the JSON node "email" should be equal to "newuser@example.com"
     And the JSON node "courses[0].title" should be equal to "Test course"
 
