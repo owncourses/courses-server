@@ -4,35 +4,51 @@ namespace App\EventSubscriber;
 
 use App\Event\UserCreateEvent;
 use App\Event\UserPasswordChangeRequestEvent;
+use App\Model\UserInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
+use Lexik\Bundle\JWTAuthenticationBundle\Events;
+use Sentry\ClientInterface as SentryClient;
 use SWP\Bundle\SettingsBundle\Context\ScopeContext;
 use SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
 class UserSubscriber implements EventSubscriberInterface
 {
-    private $mailer;
+    private MailerInterface $mailer;
 
-    private $settingsManager;
+    private SettingsManagerInterface $settingsManager;
 
-    private $cacheDir;
+    private string $cacheDir;
 
-    private $studentsAppUrl;
+    private string $studentsAppUrl;
+
+    private SentryClient $sentryClient;
+
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         MailerInterface $mailer,
         SettingsManagerInterface $settingsManager,
         string $cacheDir,
-        string $studentsAppUrl
+        string $studentsAppUrl,
+        SentryClient $sentryClient,
+        EntityManagerInterface $entityManager
     ) {
         $this->mailer = $mailer;
         $this->settingsManager = $settingsManager;
         $this->cacheDir = $cacheDir;
         $this->studentsAppUrl = $studentsAppUrl;
+        $this->sentryClient = $sentryClient;
+        $this->entityManager = $entityManager;
     }
 
     public function onUserCreated(UserCreateEvent $event): void
@@ -51,7 +67,11 @@ class UserSubscriber implements EventSubscriberInterface
             )
         ;
 
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            $this->sentryClient->captureException($e);
+        }
     }
 
     public function onUserPasswordRequestReset(UserPasswordChangeRequestEvent $event): void
@@ -70,7 +90,20 @@ class UserSubscriber implements EventSubscriberInterface
             )
         ;
 
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            $this->sentryClient->captureException($e);
+        }
+    }
+
+
+    public function onUserSuccessfulLogin(InteractiveLoginEvent $event): void
+    {
+        /** @var UserInterface $user */
+        $user = $event->getAuthenticationToken()->getUser();
+        $user->setLastLoginDate(new \DateTime());
+        $this->entityManager->flush();
     }
 
     public static function getSubscribedEvents()
@@ -78,6 +111,7 @@ class UserSubscriber implements EventSubscriberInterface
         return [
             UserCreateEvent::class => 'onUserCreated',
             UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onUserSuccessfulLogin',
         ];
     }
 
