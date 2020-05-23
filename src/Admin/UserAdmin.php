@@ -61,12 +61,12 @@ final class UserAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
-            ->add('id')
             ->add('email')
             ->add('firstName')
             ->add('lastName')
             ->add('courses')
-            ->add('roles')
+            ->add('created')
+            ->add('updated')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
