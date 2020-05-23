@@ -41,6 +41,9 @@ App\Entity\User:
             gedmo:
                 timestampable:
                     on: update
+        lastLoginDate:
+            type: datetime
+            nullable: true
     manyToMany:
         courses:
             targetEntity: App\Entity\Course

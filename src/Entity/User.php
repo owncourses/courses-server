@@ -15,36 +15,33 @@ class User implements UserInterface
     use TimestampableAwareTrait;
     use PersistableAwareTrait;
 
-    private $email;
+    private ?string $email = null;
 
-    /**
-     * @var string[]
-     */
-    private $roles = [];
+    private array $roles = [];
 
-    private $password;
+    private ?string $password = null;
 
-    private $firstName;
+    private ?string $firstName = null;
 
-    private $lastName;
+    private ?string $lastName = null;
 
-    /**
-     * @var string|null Temporary field used for password hashing
-     */
-    private $plainPassword;
+    private ?string $plainPassword = null;
 
-    private $passwordNeedToBeChanged;
+    private bool $passwordNeedToBeChanged;
 
-    private $passwordResetToken;
+    private ?string $passwordResetToken = null;
 
-    private $courses;
+    private Collection $courses;
 
     private Collection $notifications;
+
+    private ?\DateTime $lastLoginDate = null;
 
     public function __construct()
     {
         $this->courses = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->passwordNeedToBeChanged = false;
     }
 
     public function getEmail(): ?string
@@ -174,5 +171,15 @@ class User implements UserInterface
     public function setPasswordResetToken(?string $passwordResetToken): void
     {
         $this->passwordResetToken = $passwordResetToken;
+    }
+
+    public function getLastLoginDate(): ?\DateTime
+    {
+        return $this->lastLoginDate;
+    }
+
+    public function setLastLoginDate(?\DateTime $lastLoginDate): void
+    {
+        $this->lastLoginDate = $lastLoginDate;
     }
 }

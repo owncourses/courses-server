@@ -13,13 +13,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserManager implements UserManagerInterface
 {
-    private $courseRepository;
+    private CourseRepositoryInterface $courseRepository;
 
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    private $userFactory;
+    private UserFactoryInterface $userFactory;
 
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(CourseRepositoryInterface $courseRepository, UserRepositoryInterface $userRepository, UserFactoryInterface $userFactory, UserPasswordEncoderInterface $passwordEncoder)
     {
