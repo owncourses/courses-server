@@ -1,0 +1,13 @@
+security:
+    providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, app_user_provider]
+        in_memory:
+                memory:
+                    users:
+                        johndoe: { password: test }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email

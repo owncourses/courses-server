@@ -100,10 +100,11 @@ class UserSubscriber implements EventSubscriberInterface
 
     public function onUserSuccessfulLogin(InteractiveLoginEvent $event): void
     {
-        /** @var UserInterface $user */
         $user = $event->getAuthenticationToken()->getUser();
-        $user->setLastLoginDate(new \DateTime());
-        $this->entityManager->flush();
+        if ($user instanceof UserInterface) {
+            $user->setLastLoginDate(new \DateTime());
+            $this->entityManager->flush();
+        }
     }
 
     public static function getSubscribedEvents()
