@@ -8,6 +8,7 @@ Feature:
       | id                                   | title             | text                                     | url                               | label     |
       | 2cbb5590-3bb6-40a4-b388-c60289bfa188 | Test notification | Test notification text. Can be longer... | https://example.com/notifications | new       |
       | 2cbb5590-3bb6-40a4-b388-c60289bfa199 | notification 32d5 | Test notification text                   | https://example.com/              | important |
+      | 2cbb5590-3bb6-40a4-b388-c60289bfa177 | notification 32d5 | Test notification text                   | null                              | important |
 
     Given the following Users:
       | firstName | lastName | email            | password     |
@@ -18,8 +19,8 @@ Feature:
     Then the response status code should be 200
     And the response should be in JSON
     And the JSON node "" should have 2 elements
-    And the JSON node "unread" should be equal to "2"
-    And the JSON node "notifications" should have 2 elements
+    And the JSON node "unread" should be equal to "3"
+    And the JSON node "notifications" should have 3 elements
     And the JSON node "notifications[0].id" should be equal to "2cbb5590-3bb6-40a4-b388-c60289bfa188"
     And the JSON node "notifications[0].title" should be equal to "Test notification"
     And the JSON node "notifications[0].text" should be equal to "Test notification text. Can be longer..."
@@ -33,11 +34,11 @@ Feature:
     Then the response should be in JSON
     Then the response status code should be 201
     And the JSON node "" should have 2 elements
-    And the JSON node "unread" should be equal to "1"
+    And the JSON node "unread" should be equal to "2"
 
     When I am authenticated as "test@example.com"
     And I send a "GET" request to "/api/notifications"
     Then the response status code should be 200
     And the response should be in JSON
     And the JSON node "" should have 2 elements
-    And the JSON node "unread" should be equal to "1"
+    And the JSON node "unread" should be equal to "2"

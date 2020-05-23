@@ -6,4 +6,4 @@ doctrine:
         default_table_options:
             charset: utf8
             collate: utf8_unicode_ci
-        url: 'sqlite:///%kernel.project_dir%/var/data.db'
+        url: 'sqlite:///%kernel.project_dir%/var/cache/data.db'

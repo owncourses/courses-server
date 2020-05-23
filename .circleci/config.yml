@@ -6,18 +6,15 @@ jobs:
             - image: circleci/php:7.4-browsers
         steps:
             - checkout
-
             - run: sudo apt update
             - run: sudo apt install zlib1g-dev libsqlite3-dev
             - run: sudo docker-php-ext-install zip
-
             - restore_cache:
                   keys:
                       - v1-dependencies-{{ checksum "composer.lock" }}
                       - v1-dependencies-
 
             - run: composer install -n --prefer-dist
-
             - save_cache:
                   key: v1-dependencies-{{ checksum "composer.lock" }}
                   paths:
@@ -26,44 +23,12 @@ jobs:
                   name: Setup database
                   command: |
                       php bin/console doctrine:schema:update --force -e test
-
             - run: php ./vendor/bin/behat
-
             - run: php ./vendor/bin/phpspec run
-
             - run: php vendor/bin/phpstan analyse src/ --level=4 -vvv
-
-    deploy:
-        docker:
-            -   image: circleci/php:7.3-browsers
-        working_directory: ~/owncourses
-        environment:
-            setup: lowest
-        steps:
-            - checkout
-            - add_ssh_keys:
-                  fingerprints:
-                      - "ea:b5:56:00:2e:bc:1f:c1:a7:38:eb:50:e1:3f:a6:a4"
-            - run:
-                  name: Install Deployer
-                  command: |
-                      curl -LO https://deployer.org/deployer.phar
-                      sudo mv deployer.phar /usr/local/bin/dep
-                      sudo chmod +x /usr/local/bin/dep
-            - run:
-                  name: Deploy
-                  command: |
-                      echo -e "Host deploy.owncourses.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-                      dep deploy -n
 
 workflows:
     version: 2
     build-and-deploy:
         jobs:
             - build
-            - deploy:
-                  requires:
-                      - build
-                  filters:
-                      branches:
-                          only: master

@@ -24,3 +24,5 @@ App\Entity\Lesson:
             groups: ['list', 'lesson_details', 'course_modules']
         attachments:
             groups: ['lesson_details']
+        blocked:
+            groups: ['list', 'lesson_details', 'course_modules']

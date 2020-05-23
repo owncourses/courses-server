@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\File\File;
 
 interface CourseInterface extends TimestampableInterface, VisibilityInterface, TimeLimitedInterface
 {
+    const COURSE_TYPE_STANDARD = 'standard';
+
+    const COURSE_TYPE_DEMO = 'demo';
+
     public function getId(): ?int;
 
     public function getTitle(): ?string;
@@ -34,4 +38,16 @@ interface CourseInterface extends TimestampableInterface, VisibilityInterface, T
     public function getAuthors(): Collection;
 
     public function setAuthors(Collection $authors): void;
+
+    public function getType(): string;
+
+    public function setType(string $type): void;
+
+    public function getPurchaseUrl(): ?string;
+
+    public function setPurchaseUrl(?string $purchaseUrl): void;
+
+    public function getParent(): ?CourseInterface;
+
+    public function setParent(?CourseInterface $parent): void;
 }

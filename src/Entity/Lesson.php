@@ -14,25 +14,29 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class Lesson implements LessonInterface
 {
-    use TimestampableAwareTrait, SortableAwareTrait, PersistableAwareTrait;
+    use TimestampableAwareTrait;
+    use SortableAwareTrait;
+    use PersistableAwareTrait;
 
-    private $title;
+    private ?string $title = null;
 
-    private $description;
+    private ?string $description = null;
 
-    private $embedType = LessonInterface::EMBED_TYPE_CODE;
+    private string $embedType = LessonInterface::EMBED_TYPE_CODE;
 
-    private $embedCode;
+    private ?string $embedCode = null;
 
-    private $module;
+    private ?Module $module = null;
 
-    private $coverImageName;
+    private ?string $coverImageName = null;
 
-    private $durationInMinutes = 0;
+    private int $durationInMinutes = 0;
 
-    private $attachments;
+    private Collection $attachments;
 
-    private $coverImageFile;
+    private ?File $coverImageFile = null;
+
+    private bool $blocked = false;
 
     public function __construct()
     {
@@ -137,6 +141,16 @@ class Lesson implements LessonInterface
         if ($this->attachments->contains($attachment)) {
             $this->attachments->removeElement($attachment);
         }
+    }
+
+    public function isBlocked(): bool
+    {
+        return $this->blocked;
+    }
+
+    public function setBlocked(bool $blocked): void
+    {
+        $this->blocked = $blocked;
     }
 
     public function __toString()

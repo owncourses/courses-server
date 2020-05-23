@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class ApiCoursesController extends AbstractController
 {
-    private $courseRepository;
+    private CourseRepositoryInterface $courseRepository;
 
     public function __construct(CourseRepositoryInterface $courseRepository)
     {
