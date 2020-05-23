@@ -28,7 +28,7 @@ final class ApiCourseModulesController extends AbstractController
         CourseRepositoryInterface $courseRepository,
         ModuleRepositoryInterface $moduleRepository,
     DemoLessonRepositoryInterface $demoLessonRepository
-    ){
+    ) {
         $this->courseRepository = $courseRepository;
         $this->moduleRepository = $moduleRepository;
         $this->demoLessonRepository = $demoLessonRepository;
