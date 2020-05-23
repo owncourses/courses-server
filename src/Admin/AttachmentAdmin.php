@@ -20,7 +20,6 @@ final class AttachmentAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $container = $this->getConfigurationPool()->getContainer();
         $formMapper->add('name');
         $fileFieldOptions = ['required' => false];
         if (null !== $this->getSubject()->getFileName()) {

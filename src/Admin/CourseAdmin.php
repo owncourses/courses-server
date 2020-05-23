@@ -22,7 +22,6 @@ final class CourseAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $container = $this->getConfigurationPool()->getContainer();
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextType::class, ['required' => false]);
         $formMapper->add('sku', TextType::class, ['required' => false]);
