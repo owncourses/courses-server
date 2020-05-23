@@ -8,6 +8,7 @@ use App\Model\TimestampableAwareTrait;
 use App\Model\VisibilityAwareTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\File\File;
 
 class Course implements CourseInterface
@@ -16,19 +17,25 @@ class Course implements CourseInterface
     use VisibilityAwareTrait;
     use TimeLimitedAwareTrait;
 
-    private $id;
+    private ?int $id = null;
 
-    private $title;
+    private ?string $title = null;
 
-    private $description;
+    private ?string $description = null;
 
-    private $sku;
+    private ?string $sku = null;
 
-    private $coverImageName;
+    private ?string $coverImageName = null;
 
-    private $coverImageFile;
+    private ?File $coverImageFile = null;
 
-    private $authors;
+    private Collection $authors;
+
+    private string $type = CourseInterface::COURSE_TYPE_STANDARD;
+
+    private ?string $purchaseUrl = null;
+
+    private ?CourseInterface $parent = null;
 
     public function __construct()
     {
@@ -100,6 +107,36 @@ class Course implements CourseInterface
     public function setAuthors(Collection $authors): void
     {
         $this->authors = $authors;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getPurchaseUrl(): ?string
+    {
+        return $this->purchaseUrl;
+    }
+
+    public function setPurchaseUrl(?string $purchaseUrl): void
+    {
+        $this->purchaseUrl = $purchaseUrl;
+    }
+
+    public function getParent(): ?CourseInterface
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?CourseInterface $parent): void
+    {
+        $this->parent = $parent;
     }
 
     public function __toString()

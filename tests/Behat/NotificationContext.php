@@ -14,9 +14,8 @@ final class NotificationContext extends AbstractObjectContext implements Context
 {
     private EntityManagerInterface $entityManager;
 
-    public function __construct(
-        EntityManagerInterface $entityManager
-    ) {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
 
@@ -29,8 +28,14 @@ final class NotificationContext extends AbstractObjectContext implements Context
         $metadata->setIdGenerator(new AssignedGenerator());
 
         foreach ($table as $row => $columns) {
+            foreach ($columns as $key => $columnValue) {
+                if ('null' === $columnValue) {
+                    $columns[$key] = null;
+                }
+            }
+
             $notification = new Notification();
-            if (array_key_exists('id', $columns)) {
+            if (array_key_exists('id', $columns) && is_string($columns['id'])) {
                 $notification->setId($columns['id']);
                 unset($columns['id']);
             }

@@ -1,7 +1,7 @@
-App\Entity\Notification:
+App\Entity\DemoLesson:
     type: entity
-    repositoryClass: App\Repository\NotificationRepository
-    table: npd_notification
+    repositoryClass: App\Repository\DemoLessonRepository
+    table: npd_demo_lesson
     id:
         id:
             column: uuid
@@ -11,15 +11,6 @@ App\Entity\Notification:
             customIdGenerator:
                 class: Ramsey\Uuid\Doctrine\UuidGenerator
     fields:
-        title:
-            type: string
-        text:
-            type: text
-        url:
-            type: string
-            nullable: true
-        label:
-            type: string
         created:
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
@@ -32,3 +23,10 @@ App\Entity\Notification:
             gedmo:
                 timestampable:
                     on: update
+    oneToOne:
+        lesson:
+            targetEntity: App\Entity\Lesson
+            joinColumn:
+                name: lesson_uuid
+                referencedColumnName: uuid
+                nullable: false

@@ -51,4 +51,8 @@ interface LessonInterface extends TimestampableInterface, SortableInterface, Per
     public function addAttachment(AttachmentInterface $attachment): void;
 
     public function removeAttachment(AttachmentInterface $attachment): void;
+
+    public function isBlocked(): bool;
+
+    public function setBlocked(bool $blocked): void;
 }

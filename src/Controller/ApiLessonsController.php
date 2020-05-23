@@ -16,9 +16,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class ApiLessonsController extends AbstractController
 {
-    private $lessonProvider;
+    private LessonProviderInterface $lessonProvider;
 
-    private $serializer;
+    private SerializerInterface $serializer;
 
     public function __construct(LessonProviderInterface $lessonProvider, SerializerInterface $serializer)
     {
@@ -26,7 +26,7 @@ final class ApiLessonsController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    public function getSingleModule(string $lessonId): Response
+    public function getSingleLesson(string $lessonId): Response
     {
         return new Response($this->serializer->serialize(
             $this->lessonProvider->getOneById($lessonId),

@@ -44,6 +44,19 @@ App\Entity\Course:
         endDate:
             type: datetime
             nullable: true
+        type:
+            type: string
+            nullable: false
+            options:
+                default: standard
+        purchaseUrl:
+            type: string
+            nullable: true
+    manyToOne:
+        parent:
+            targetEntity: App\Entity\Course
+            joinColumn:
+                nullable: true
     manyToMany:
         authors:
             targetEntity: App\Entity\Author

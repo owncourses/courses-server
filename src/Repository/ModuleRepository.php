@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Course;
 use App\Entity\Module;
+use App\Model\CourseInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -20,7 +20,7 @@ class ModuleRepository extends ServiceEntityRepository implements ModuleReposito
         parent::__construct($registry, Module::class);
     }
 
-    public function getAllForCourse(Course $course): array
+    public function getAllForCourse(CourseInterface $course): array
     {
         return $this->createQueryBuilder('m')
             ->addSelect('l')

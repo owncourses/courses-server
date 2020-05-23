@@ -2,10 +2,13 @@
 
 namespace App\Admin;
 
+use App\Model\CourseInterface;
+use App\Model\LessonInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,6 +28,14 @@ final class CourseAdmin extends AbstractAdmin
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextType::class, ['required' => false]);
         $formMapper->add('sku', TextType::class, ['required' => false]);
+        $formMapper->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Standard' => CourseInterface::COURSE_TYPE_STANDARD,
+                    'Demo' => CourseInterface::COURSE_TYPE_DEMO,
+                ],
+                'required' => true,
+            ]
+        );
         $formMapper->add('visible', null, ['required' => false]);
         $formMapper->add('startDate', DateTimeType::class, [
             'widget' => 'single_text',
@@ -54,6 +65,9 @@ final class CourseAdmin extends AbstractAdmin
             $fileFieldOptions['help'] = '<img src="'.$imagePath.'" class="admin-preview" />';
         }
         $formMapper->add('coverImageFile', FileType::class, $fileFieldOptions);
+
+        $formMapper->add('purchaseUrl');
+        $formMapper->add('parent');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
