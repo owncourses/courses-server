@@ -11,7 +11,7 @@ use App\Entity\Module;
 use App\Model\CourseInterface;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class DemoFixtures extends Fixture
 {

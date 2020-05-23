@@ -6,6 +6,7 @@ namespace App\Tests\Behat;
 
 use App\Entity\Course;
 use App\Entity\User;
+use App\Manager\UserManagerInterface;
 use App\Model\UserInterface;
 use App\Repository\CourseRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
@@ -16,24 +17,28 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserContext extends AbstractObjectContext implements Context
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    private $courseRepository;
+    private CourseRepositoryInterface $courseRepository;
 
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
-    private $encoder;
+    private UserPasswordEncoderInterface $encoder;
+
+    private UserManagerInterface $userManager;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         CourseRepositoryInterface $courseRepository,
         UserRepositoryInterface $userRepository,
+        UserManagerInterface $userManager,
         UserPasswordEncoderInterface $encoder
     ) {
         $this->courseRepository = $courseRepository;
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
         $this->encoder = $encoder;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -61,8 +66,7 @@ final class UserContext extends AbstractObjectContext implements Context
     {
         /** @var UserInterface $user */
         $user = $this->userRepository->findOneBy(['email' => $userEmail]);
-        $course = $this->courseRepository->findOneBy(['title' => $courseTitle]);
-        $user->addCourse($course);
+        $this->userManager->addCourseByTitleOrSku($user, $courseTitle);
         $this->entityManager->flush();
     }
 }

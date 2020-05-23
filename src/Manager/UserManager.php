@@ -6,6 +6,7 @@ namespace App\Manager;
 
 use App\Factory\UserFactoryInterface;
 use App\Generator\StringGenerator;
+use App\Model\CourseInterface;
 use App\Model\UserInterface;
 use App\Repository\CourseRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
@@ -34,6 +35,16 @@ final class UserManager implements UserManagerInterface
         $course = $this->courseRepository->getOneByTitleOrSku($courseTitleOrSku);
         if (null !== $course) {
             $user->addCourse($course);
+        }
+
+        /** @var CourseInterface $userCourse */
+        foreach ($user->getCourses() as $userCourse) {
+            if (
+                null !== $userCourse->getParent() &&
+                $userCourse->getParent()->getId() === $course->getId()
+            ) {
+                $user->removeCourse($userCourse);
+            }
         }
     }
 
