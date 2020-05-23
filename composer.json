@@ -56,8 +56,7 @@
         "roave/security-advisories": "dev-master",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.17",
-        "symfony/profiler-pack": "*",
-        "symfony/web-server-bundle": "4.2.*"
+        "symfony/profiler-pack": "*"
     },
     "config": {
         "preferred-install": {

@@ -23,7 +23,6 @@ final class AuthorAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $container = $this->getConfigurationPool()->getContainer();
         $formMapper->add('name', TextType::class);
         $formMapper->add('bio', TextType::class);
         $formMapper->add('gender', ChoiceType::class, [

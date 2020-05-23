@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Model\CourseInterface;
+use App\Model\NotificationInterface;
 use App\Model\PersistableAwareTrait;
 use App\Model\TimestampableAwareTrait;
 use App\Model\UserInterface;
@@ -38,9 +39,12 @@ class User implements UserInterface
 
     private $courses;
 
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getEmail(): ?string
@@ -137,6 +141,18 @@ class User implements UserInterface
     {
         if ($this->courses->contains($course)) {
             $this->courses->removeElement($course);
+        }
+    }
+
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(NotificationInterface $notification): void
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
         }
     }
 
