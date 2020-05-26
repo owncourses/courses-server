@@ -12,5 +12,7 @@ App\Entity\Notification:
             groups: ['list']
         urlTitle:
             groups: ['list']
+        read:
+            groups: ['list']
         created:
             groups: ['list']

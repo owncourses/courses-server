@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\NotificationInterface;
 use App\Model\UserInterface;
 use App\Repository\NotificationRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,10 +33,10 @@ class ApiNotificationsController extends AbstractController
         $user = $this->getUser();
 
         return new Response($this->serializer->serialize(
-            [
-                'notifications' => $notifications,
-                'unread' => $this->getNumberOfUnreadNotifications($notifications, $user)
-            ], 'json', ['groups' => ['list']]));
+            $this->getProcessedNotifications($notifications, $user),
+            'json',
+            ['groups' => ['list']])
+        );
     }
 
     public function markAsRead(string $uuid, EntityManagerInterface $entityManager): Response
@@ -53,28 +54,39 @@ class ApiNotificationsController extends AbstractController
         $notifications = $this->notificationRepository->findAll();
 
         return new Response($this->serializer->serialize(
-            [
-                'notifications' => $notifications,
-                'unread' => $this->getNumberOfUnreadNotifications($notifications, $user)
-            ], 'json', ['groups' => ['list']]), 201);
+            $this->getProcessedNotifications($notifications, $user),
+            'json',
+            ['groups' => ['list']]
+        ), 201);
     }
 
-    private function getNumberOfUnreadNotifications(array $notifications, UserInterface $user): int
+
+    private function getProcessedNotifications(array $notifications, UserInterface $user): array
     {
         $readByUserNotifications = \array_map(function ($notification) {
             return $notification->getId();
         }, $user->getNotifications()->toArray());
 
-        if (0 === count($readByUserNotifications)) {
-            return count($notifications);
+        $unreadNotification = count($notifications);
+        if (0 === $unreadNotification) {
+            return [
+                'notifications' => $notifications,
+                'unread' => $unreadNotification,
+            ];
         }
 
-        foreach ($notifications as $key => $notification) {
+
+        /** @var NotificationInterface $notification */
+        foreach ($notifications as $notification) {
             if (in_array($notification->getId(), $readByUserNotifications)) {
-                unset($notifications[$key]);
+                $notification->setRead(true);
+                $unreadNotification--;
             }
         }
 
-        return count($notifications);
+        return [
+            'notifications' => $notifications,
+            'unread' => $unreadNotification,
+        ];
     }
 }
