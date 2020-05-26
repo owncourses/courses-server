@@ -34,6 +34,7 @@ final class NotificationAdmin extends AbstractAdmin
             ->add('title')
             ->add('text')
             ->add('url')
+            ->add('urlTitle')
             ->add('label')
             ->add('created')
             ->add('updated')
@@ -52,6 +53,7 @@ final class NotificationAdmin extends AbstractAdmin
             ->add('title')
             ->add('text')
             ->add('url')
+            ->add('urlTitle')
             ->add('label', ChoiceType::class, [
                     'choices' => [
                         'New' => NotificationInterface::LABEL_NEW,
@@ -70,6 +72,7 @@ final class NotificationAdmin extends AbstractAdmin
             ->add('title')
             ->add('text')
             ->add('url')
+            ->add('urlTitle')
             ->add('label')
             ->add('created')
             ->add('updated')

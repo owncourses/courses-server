@@ -18,6 +18,9 @@ App\Entity\Notification:
         url:
             type: string
             nullable: true
+        urlTitle:
+            type: string
+            nullable: true
         label:
             type: string
         created:
