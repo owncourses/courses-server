@@ -55,6 +55,11 @@ All of that can be installed on Your own server for free.
   - [x] Image, name, bio, courses
 - [x] Settings 
   - [x] Emails settings
+- [x] Notifications 
+  - [x] Add new notification
+  - [x] List notifications
+    - [x] Mark already read notifications
+  - [x] Mark notifications as read by user
 
 ## Next tasks <a name = "next"></a>
 
