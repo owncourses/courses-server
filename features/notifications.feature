@@ -43,3 +43,4 @@ Feature:
     And the response should be in JSON
     And the JSON node "" should have 2 elements
     And the JSON node "unread" should be equal to "2"
+    And the JSON node "notifications[0].read" should be true

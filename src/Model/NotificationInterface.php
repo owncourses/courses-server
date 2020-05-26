@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-interface NotificationInterface
+interface NotificationInterface extends PersistableInterface, TimestampableInterface
 {
     public const LABEL_NEW = 'new';
 
@@ -29,4 +29,8 @@ interface NotificationInterface
     public function getUrlTitle(): ?string;
 
     public function setUrlTitle(?string $urlTitle): void;
+
+    public function isRead(): bool;
+
+    public function setRead(bool $read): void;
 }

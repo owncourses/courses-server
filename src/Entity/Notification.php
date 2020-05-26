@@ -21,6 +21,8 @@ class Notification implements NotificationInterface
 
     private ?string $label = null;
 
+    private bool $read = false;
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -71,4 +73,13 @@ class Notification implements NotificationInterface
         $this->urlTitle = $urlTitle;
     }
 
+    public function isRead(): bool
+    {
+        return $this->read;
+    }
+
+    public function setRead(bool $read): void
+    {
+        $this->read = $read;
+    }
 }
