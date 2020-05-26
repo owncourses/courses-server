@@ -25,4 +25,8 @@ interface NotificationInterface
     public function getLabel(): ?string;
 
     public function setLabel(?string $label): void;
+
+    public function getUrlTitle(): ?string;
+
+    public function setUrlTitle(?string $urlTitle): void;
 }

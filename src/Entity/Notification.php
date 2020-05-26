@@ -17,6 +17,8 @@ class Notification implements NotificationInterface
 
     private ?string $url = null;
 
+    private ?string $urlTitle = null;
+
     private ?string $label = null;
 
     public function getTitle(): ?string
@@ -57,6 +59,16 @@ class Notification implements NotificationInterface
     public function setLabel(?string $label): void
     {
         $this->label = $label;
+    }
+
+    public function getUrlTitle(): ?string
+    {
+        return $this->urlTitle;
+    }
+
+    public function setUrlTitle(?string $urlTitle): void
+    {
+        $this->urlTitle = $urlTitle;
     }
 
 }

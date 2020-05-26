@@ -5,10 +5,10 @@ Feature:
 
   Scenario: It gets list of all active notifications
     Given the following Notifications:
-      | id                                   | title             | text                                     | url                               | label     |
-      | 2cbb5590-3bb6-40a4-b388-c60289bfa188 | Test notification | Test notification text. Can be longer... | https://example.com/notifications | new       |
-      | 2cbb5590-3bb6-40a4-b388-c60289bfa199 | notification 32d5 | Test notification text                   | https://example.com/              | important |
-      | 2cbb5590-3bb6-40a4-b388-c60289bfa177 | notification 32d5 | Test notification text                   | null                              | important |
+      | id                                   | title             | text                                     | url                               | urlTitle   | label     |
+      | 2cbb5590-3bb6-40a4-b388-c60289bfa188 | Test notification | Test notification text. Can be longer... | https://example.com/notifications | test title | new       |
+      | 2cbb5590-3bb6-40a4-b388-c60289bfa199 | notification 32d5 | Test notification text                   | https://example.com/              |            | important |
+      | 2cbb5590-3bb6-40a4-b388-c60289bfa177 | notification 32d5 | Test notification text                   | null                              |            | important |
 
     Given the following Users:
       | firstName | lastName | email            | password     |
@@ -25,6 +25,7 @@ Feature:
     And the JSON node "notifications[0].title" should be equal to "Test notification"
     And the JSON node "notifications[0].text" should be equal to "Test notification text. Can be longer..."
     And the JSON node "notifications[0].url" should be equal to "https://example.com/notifications"
+    And the JSON node "notifications[0].url_title" should be equal to "test title"
     And the JSON node "notifications[0].created" should exist
     And the JSON node "notifications[0].label" should be equal to "new"
     And the JSON node "notifications[1].label" should be equal to "important"
