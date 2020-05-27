@@ -33,6 +33,6 @@ final class JWTTokenAuthenticator extends LexikJWTTokenAuthenticator
             $this->entityManager->flush();
         }
 
-        return;
+        return null;
     }
 }
