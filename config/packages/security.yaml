@@ -51,7 +51,7 @@ security:
             guard:
                 provider: chain_provider
                 authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+                    - App\Security\JWTTokenAuthenticator
 
         admin:
             pattern:   ^/admin
