@@ -65,8 +65,10 @@ App\Entity\User:
                 joinColumns:
                     user_id:
                         referencedColumnName: uuid
+                        onDelete: CASCADE
                 inverseJoinColumns:
                     notification_id:
                         referencedColumnName: uuid
+                        onDelete: CASCADE
             cascade:
                 - all
