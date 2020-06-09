@@ -29,6 +29,21 @@ class AdminSettingsType extends AbstractType
                     new NotNull(), new Length(['min' => 3]),
                 ],
             ])
+            ->add('new_course_email_template', SimpleFormatterType::class, [
+                'format' => 'richhtml',
+                'label' => 'New course email template',
+                'attr' => ['class' => 'ckeditor'],
+                'constraints' => [
+                    new NotNull(),
+                ],
+            ])
+            ->add('new_course_email_title', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label' => 'New course email title',
+                'constraints' => [
+                    new NotNull(), new Length(['min' => 3]),
+                ],
+            ])
             ->add('password_reset_email_template', SimpleFormatterType::class, [
                 'format' => 'richhtml',
                 'label' => 'Password reset email template',

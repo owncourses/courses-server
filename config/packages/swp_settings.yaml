@@ -13,6 +13,12 @@ swp_settings:
         new_user_email_title:
             type: string
             scope: global
+        new_course_email_template:
+            type: string
+            scope: global
+        new_course_email_title:
+            type: string
+            scope: global
         password_reset_email_template:
             type: string
             scope: global

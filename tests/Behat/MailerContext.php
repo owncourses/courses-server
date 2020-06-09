@@ -39,13 +39,24 @@ final class MailerContext extends BaseContext
     }
 
     /**
-     * @Then At least :number email should be sent
+     * @Then At least :number email(s) should be sent
      */
     public function mailShouldBeSent(int $number): void
     {
         $messagesCount = $this->getSentMessagesCount();
-        if ($number < $messagesCount) {
+        if ($number > $messagesCount) {
             throw new \Exception(sprintf('Only %s email(s) was sent.', $messagesCount));
+        }
+    }
+
+    /**
+     * @Then Exactly :number email(s) should be sent
+     */
+    public function mailsShouldBeSent(int $number): void
+    {
+        $messagesCount = $this->getSentMessagesCount();
+        if ($number !== $messagesCount) {
+            throw new \Exception(sprintf('Number of sent emails (%s) is not equal to expected (%s).', $messagesCount, $number));
         }
     }
 

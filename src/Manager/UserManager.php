@@ -45,16 +45,16 @@ final class UserManager implements UserManagerInterface
         $course = $this->courseRepository->getOneByTitleOrSku($courseTitleOrSku);
         if (null !== $course) {
             $user->addCourse($course);
-            $this->eventDispatcher->dispatch(new NewCourseAddedEvent($user, null === $user->getId()));
-        }
+            $this->eventDispatcher->dispatch(new NewCourseAddedEvent($user, $course));
 
-        /** @var CourseInterface $userCourse */
-        foreach ($user->getCourses() as $userCourse) {
-            if (
+            /** @var CourseInterface $userCourse */
+            foreach ($user->getCourses() as $userCourse) {
+                if (
                 null !== $userCourse->getParent() &&
                 $userCourse->getParent()->getId() === $course->getId()
             ) {
-                $user->removeCourse($userCourse);
+                    $user->removeCourse($userCourse);
+                }
             }
         }
     }

@@ -2,6 +2,8 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Course;
+use App\Event\NewCourseAddedEvent;
 use App\Event\UserCreateEvent;
 use App\Event\UserPasswordChangeRequestEvent;
 use App\Model\UserInterface;
@@ -55,6 +57,7 @@ class UserSubscriber implements EventSubscriberInterface
             UserCreateEvent::class => 'onUserCreated',
             UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
             SecurityEvents::INTERACTIVE_LOGIN => 'onUserSuccessfulLogin',
+            NewCourseAddedEvent::class => 'onCourseCreated',
         ];
     }
 
@@ -70,6 +73,32 @@ class UserSubscriber implements EventSubscriberInterface
                     'lastName' => $user->getLastName(),
                     'email' => $user->getEmail(),
                     'temporaryPassword' => $user->getPlainPassword(),
+                ])
+            )
+        ;
+
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            $this->sentryClient->captureException($e);
+        }
+    }
+
+    public function onCourseCreated(NewCourseAddedEvent $event): void
+    {
+        $user = $event->user;
+        /** @var Course[] $userCourses */
+        $course = $event->course;
+
+        $email = $this->createEmail($user);
+        $email
+            ->subject($this->getSetting('new_course_email_title', 'New course was added to your account'))
+            ->html(
+                $this->renderTemplateFromString($this->getSetting('new_course_email_template', 'CHANGE THIS EMAIL CONTENT IN OwnCourses SETTINGS! '), [
+                    'firstName' => $user->getFirstName(),
+                    'lastName' => $user->getLastName(),
+                    'email' => $user->getEmail(),
+                    'course' => $course->getTitle(),
                 ])
             )
         ;
