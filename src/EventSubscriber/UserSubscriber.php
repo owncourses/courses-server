@@ -6,8 +6,6 @@ use App\Event\UserCreateEvent;
 use App\Event\UserPasswordChangeRequestEvent;
 use App\Model\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
-use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Sentry\ClientInterface as SentryClient;
 use SWP\Bundle\SettingsBundle\Context\ScopeContext;
 use SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
@@ -49,6 +47,15 @@ class UserSubscriber implements EventSubscriberInterface
         $this->studentsAppUrl = $studentsAppUrl;
         $this->sentryClient = $sentryClient;
         $this->entityManager = $entityManager;
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            UserCreateEvent::class => 'onUserCreated',
+            UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onUserSuccessfulLogin',
+        ];
     }
 
     public function onUserCreated(UserCreateEvent $event): void
@@ -97,7 +104,6 @@ class UserSubscriber implements EventSubscriberInterface
         }
     }
 
-
     public function onUserSuccessfulLogin(InteractiveLoginEvent $event): void
     {
         $user = $event->getAuthenticationToken()->getUser();
@@ -105,15 +111,6 @@ class UserSubscriber implements EventSubscriberInterface
             $user->setLastLoginDate(new \DateTime());
             $this->entityManager->flush();
         }
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            UserCreateEvent::class => 'onUserCreated',
-            UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
-            SecurityEvents::INTERACTIVE_LOGIN => 'onUserSuccessfulLogin',
-        ];
     }
 
     private function createEmail($user): TemplatedEmail

@@ -57,6 +57,8 @@ Feature:
     """
     Then the response should be in JSON
     And the response status code should be 201
+    And At least 1 email should be sent
+    And Mail with title "Welcome in OwnCourses" should be sent
 
   Scenario: It should fail on not signed request
     And I add 'content-type' header equal to 'application/json'

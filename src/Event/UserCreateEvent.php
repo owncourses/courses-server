@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 final class UserCreateEvent extends Event
 {
-    protected $user;
+    protected UserInterface $user;
 
     public function __construct(UserInterface $user)
     {

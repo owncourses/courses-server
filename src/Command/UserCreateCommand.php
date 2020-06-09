@@ -2,9 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\User;
-use App\Repository\CourseRepositoryInterface;
-use App\Repository\UserRepositoryInterface;
+use App\Manager\UserManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use InvalidArgumentException;
@@ -20,22 +18,19 @@ class UserCreateCommand extends Command
 {
     protected static $defaultName = 'app:user:create';
 
-    private $courseRepository;
-    private $userRepository;
-    private $entityManager;
-    private $passwordEncoder;
+    private EntityManagerInterface $entityManager;
+    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserManagerInterface $userManager;
 
     public function __construct(
-        CourseRepositoryInterface $courseRepository,
-        UserRepositoryInterface $userRepository,
         UserPasswordEncoderInterface $passwordEncoder,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        UserManagerInterface $userManager
     ) {
         parent::__construct();
-        $this->courseRepository = $courseRepository;
-        $this->userRepository = $userRepository;
         $this->passwordEncoder = $passwordEncoder;
         $this->entityManager = $entityManager;
+        $this->userManager = $userManager;
     }
 
     protected function configure()
@@ -58,12 +53,11 @@ class UserCreateCommand extends Command
             throw new InvalidArgumentException('Provided email must be string!');
         }
 
-        $user = $this->userRepository->getOneByEmail($email);
-        if (null !== $user) {
+        $user = $this->userManager->getOrCreateUser($email);
+        if (null !== $user->getId()) {
             throw new Exception('User with provided email already exists!');
         }
 
-        $user = new User();
         $user->setEmail($email);
         $user->setRoles(['ROLE_USER']);
         $generatedPassword = $this->passwordEncoder->encodePassword($user, (string) $input->getArgument('password'));
@@ -74,10 +68,7 @@ class UserCreateCommand extends Command
         if ($input->hasOption('courses')) {
             $coursesTitles = explode(',', $input->getOption('courses'));
             foreach ($coursesTitles as $coursesTitle) {
-                $course = $this->courseRepository->findOneBy(['title' => $coursesTitle]);
-                if (null !== $course) {
-                    $user->addCourse($course);
-                }
+                $this->userManager->addCourseByTitleOrSku($user, $coursesTitle);
             }
         }
 

@@ -9,4 +9,4 @@ services:
 
     App\Tests\Behat\:
         resource: '../tests/Behat/*'
-        exclude: '../tests/Behat/RestJwtContext.php'
+        exclude: '../tests/Behat/{RestJwtContext,MailerContext}.php'
