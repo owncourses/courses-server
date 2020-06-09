@@ -139,8 +139,6 @@ class User implements UserInterface
         if ($this->courses->contains($course)) {
             $this->courses->removeElement($course);
         }
-
-        $this->courses = new ArrayCollection(array_values($this->courses->toArray()));
     }
 
     public function getNotifications(): Collection

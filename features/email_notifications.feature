@@ -47,7 +47,10 @@ Feature:
     """
     Then the response should be in JSON
     And the response status code should be 201
-    And the JSON node "courses" should have 1 element
-    And the JSON node "courses[0].title" should be equal to "Test course"
     And At least 1 email should be sent
     And Mail with title "New course was added to your account" should be sent
+
+    When I am authenticated as "newuser@example.com"
+    And I send a "GET" request to "/api/users/me"
+    And the JSON node "courses" should have 1 element
+    And the JSON node "courses[0].title" should be equal to "Test course"
