@@ -20,10 +20,10 @@ class UserCreateCommand extends Command
 {
     protected static $defaultName = 'app:user:create';
 
-    private $courseRepository;
-    private $userRepository;
-    private $entityManager;
-    private $passwordEncoder;
+    private CourseRepositoryInterface $courseRepository;
+    private UserRepositoryInterface $userRepository;
+    private EntityManagerInterface $entityManager;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         CourseRepositoryInterface $courseRepository,

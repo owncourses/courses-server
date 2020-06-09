@@ -16,8 +16,8 @@ class UserPromoteCommand extends Command
 {
     protected static $defaultName = 'app:user:promote';
 
-    private $userRepository;
-    private $entityManager;
+    private UserRepositoryInterface $userRepository;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(UserRepositoryInterface $userRepository, EntityManagerInterface $entityManager)
     {
