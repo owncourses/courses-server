@@ -9,9 +9,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFactory implements UserFactoryInterface
 {
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
-    protected $stringGenerator;
+    protected StringGeneratorInterface $stringGenerator;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder, StringGeneratorInterface $stringGenerator)
     {

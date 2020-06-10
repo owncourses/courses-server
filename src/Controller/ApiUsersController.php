@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class ApiUsersController extends AbstractController
 {
-    protected $serializer;
+    protected SerializerInterface $serializer;
 
     public function __construct(SerializerInterface $serializer)
     {

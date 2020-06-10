@@ -6,7 +6,7 @@ namespace App\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterface, TimestampableInterface
+interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterface, TimestampableInterface, PersistableInterface
 {
     public const EVENT_USER_CREATED = 'app.user.created';
 

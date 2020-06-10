@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "friends-of-behat/mink-browserkit-driver": "^1.4",
         "league/flysystem-aws-s3-v3": "^1.0",
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/cors-bundle": "^1.5",
@@ -45,8 +46,7 @@
         "vich/uploader-bundle": "^1.13"
     },
     "require-dev": {
-        "behat/mink": "1.7.x-dev",
-        "behat/mink-goutte-driver": "^1.2",
+        "friends-of-behat/mink": "^1.8",
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.3",
         "friends-of-behat/symfony-extension": "^2.1",

@@ -2,12 +2,12 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Course;
+use App\Event\NewCourseAddedEvent;
 use App\Event\UserCreateEvent;
 use App\Event\UserPasswordChangeRequestEvent;
 use App\Model\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
-use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Sentry\ClientInterface as SentryClient;
 use SWP\Bundle\SettingsBundle\Context\ScopeContext;
 use SWP\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
@@ -51,6 +51,16 @@ class UserSubscriber implements EventSubscriberInterface
         $this->entityManager = $entityManager;
     }
 
+    public static function getSubscribedEvents()
+    {
+        return [
+            UserCreateEvent::class => 'onUserCreated',
+            UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onUserSuccessfulLogin',
+            NewCourseAddedEvent::class => 'onCourseCreated',
+        ];
+    }
+
     public function onUserCreated(UserCreateEvent $event): void
     {
         $user = $event->getUser();
@@ -63,6 +73,32 @@ class UserSubscriber implements EventSubscriberInterface
                     'lastName' => $user->getLastName(),
                     'email' => $user->getEmail(),
                     'temporaryPassword' => $user->getPlainPassword(),
+                ])
+            )
+        ;
+
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            $this->sentryClient->captureException($e);
+        }
+    }
+
+    public function onCourseCreated(NewCourseAddedEvent $event): void
+    {
+        $user = $event->user;
+        /** @var Course[] $userCourses */
+        $course = $event->course;
+
+        $email = $this->createEmail($user);
+        $email
+            ->subject($this->getSetting('new_course_email_title', 'New course was added to your account'))
+            ->html(
+                $this->renderTemplateFromString($this->getSetting('new_course_email_template', 'CHANGE THIS EMAIL CONTENT IN OwnCourses SETTINGS! '), [
+                    'firstName' => $user->getFirstName(),
+                    'lastName' => $user->getLastName(),
+                    'email' => $user->getEmail(),
+                    'course' => $course->getTitle(),
                 ])
             )
         ;
@@ -97,7 +133,6 @@ class UserSubscriber implements EventSubscriberInterface
         }
     }
 
-
     public function onUserSuccessfulLogin(InteractiveLoginEvent $event): void
     {
         $user = $event->getAuthenticationToken()->getUser();
@@ -105,15 +140,6 @@ class UserSubscriber implements EventSubscriberInterface
             $user->setLastLoginDate(new \DateTime());
             $this->entityManager->flush();
         }
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            UserCreateEvent::class => 'onUserCreated',
-            UserPasswordChangeRequestEvent::class => 'onUserPasswordRequestReset',
-            SecurityEvents::INTERACTIVE_LOGIN => 'onUserSuccessfulLogin',
-        ];
     }
 
     private function createEmail($user): TemplatedEmail
