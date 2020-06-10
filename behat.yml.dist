@@ -10,7 +10,9 @@ default:
                 - App\Tests\Behat\AuthorContext
                 - App\Tests\Behat\UserContext
                 - App\Tests\Behat\CommandContext
+                - App\Tests\Behat\NotificationContext
                 - Behatch\Context\JsonContext
+                - App\Tests\Behat\MailerContext
                 - App\Tests\Behat\RestJwtContext:
                       jwtEncoder: "@lexik_jwt_authentication.encoder"
                       securitySecret: "%%security_secret%%"
