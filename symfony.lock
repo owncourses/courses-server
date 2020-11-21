@@ -141,6 +141,9 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "friends-of-behat/mink": {
+        "version": "v1.8.0"
+    },
     "friends-of-behat/mink-browserkit-driver": {
         "version": "v1.4.0"
     },
