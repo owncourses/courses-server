@@ -1,11 +1,14 @@
 {
     "type": "project",
+    "name": "owncourses/courses-server",
+    "description": "OwnCourses Server",
     "license": "proprietary",
     "require": {
         "php": "^7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "async-aws/ses": "^1.4",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
         "league/flysystem-aws-s3-v3": "^1.0",

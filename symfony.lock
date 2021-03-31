@@ -1,4 +1,10 @@
 {
+    "async-aws/core": {
+        "version": "1.9.1"
+    },
+    "async-aws/ses": {
+        "version": "1.4.0"
+    },
     "aws/aws-sdk-php": {
         "version": "3.138.5"
     },
@@ -620,6 +626,9 @@
     },
     "symfony/dependency-injection": {
         "version": "v4.4.8"
+    },
+    "symfony/deprecation-contracts": {
+        "version": "v2.2.0"
     },
     "symfony/doctrine-bridge": {
         "version": "v4.4.8"
