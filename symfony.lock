@@ -77,6 +77,9 @@
     "doctrine/dbal": {
         "version": "2.10.2"
     },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
     "doctrine/doctrine-bundle": {
         "version": "1.12",
         "recipe": {
@@ -171,6 +174,9 @@
             "tests/Behat/DemoContext.php"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "1.2.0"
     },
@@ -261,6 +267,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"
     },
+    "lcobucci/clock": {
+        "version": "2.0.0"
+    },
     "lcobucci/jwt": {
         "version": "3.3.1"
     },
@@ -269,6 +278,9 @@
     },
     "league/flysystem-aws-s3-v3": {
         "version": "1.0.24"
+    },
+    "league/mime-type-detection": {
+        "version": "1.7.0"
     },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
