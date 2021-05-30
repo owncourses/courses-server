@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 trait PersistableAwareTrait
 {
@@ -12,7 +12,7 @@ trait PersistableAwareTrait
 
     public function getId(): ?string
     {
-        if ($this->id instanceof Uuid) {
+        if ($this->id instanceof UuidInterface) {
             return (string) $this->id;
         }
 

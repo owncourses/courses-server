@@ -9,6 +9,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class JWTTokenAuthenticator extends LexikJWTTokenAuthenticator
@@ -19,9 +20,10 @@ final class JWTTokenAuthenticator extends LexikJWTTokenAuthenticator
         JWTTokenManagerInterface $jwtManager,
         EventDispatcherInterface $dispatcher,
         TokenExtractorInterface $tokenExtractor,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        TokenStorageInterface $preAuthenticationTokenStorage
     ) {
-        parent::__construct($jwtManager, $dispatcher, $tokenExtractor);
+        parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $preAuthenticationTokenStorage);
         $this->entityManager = $entityManager;
     }
 
