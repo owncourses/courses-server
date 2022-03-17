@@ -77,5 +77,7 @@ class UserCreateCommand extends Command
 
         $io->success(sprintf('User was created successfully.'));
         $io->note('Use app:user:promote to add new roles for this user');
+
+        return 1;
     }
 }
