@@ -50,12 +50,20 @@ final class UserManager implements UserManagerInterface
             /** @var CourseInterface $userCourse */
             foreach ($user->getCourses() as $userCourse) {
                 if (
-                null !== $userCourse->getParent() &&
-                $userCourse->getParent()->getId() === $course->getId()
-            ) {
-                    $user->removeCourse($userCourse);
+                    null !== $userCourse->getParent() &&
+                    $userCourse->getParent()->getId() === $course->getId()
+                ) {
+                        $user->removeCourse($userCourse);
+                    }
                 }
-            }
+        }
+    }
+
+    public function removeCourseByTitleOrSku(UserInterface $user, string $courseTitleOrSku): void
+    {
+        $course = $this->courseRepository->getOneByTitleOrSku($courseTitleOrSku);
+        if (null !== $course) {
+            $user->removeCourse($course);
         }
     }
 

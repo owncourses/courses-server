@@ -10,6 +10,8 @@ interface UserManagerInterface
 {
     public function addCourseByTitleOrSku(UserInterface $user, string $courseTitleOrSku): void;
 
+    public function removeCourseByTitleOrSku(UserInterface $user, string $courseTitleOrSku): void;
+
     public function getOrCreateUser(string $email): UserInterface;
 
     public function setGeneratedPasswordResetToken(UserInterface $user): void;
