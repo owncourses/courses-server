@@ -102,6 +102,7 @@ final class ApiUsersController extends AbstractController
             $userManager->removeCourseByTitleOrSku($user, $courseTitle);
 
             $entityManager->flush();
+            $entityManager->refresh($user);
         }
 
 
