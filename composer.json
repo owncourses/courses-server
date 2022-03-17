@@ -122,6 +122,9 @@
         "symfony": {
             "allow-contrib": true,
             "require": "4.4.*"
+        },
+        "platform": {
+            "php": "7.4"
         }
     }
 }

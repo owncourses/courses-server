@@ -336,6 +336,9 @@
     "phpspec/prophecy": {
         "version": "v1.10.3"
     },
+    "phpstan/phpdoc-parser": {
+        "version": "1.2.0"
+    },
     "phpstan/phpstan": {
         "version": "0.11.19"
     },
