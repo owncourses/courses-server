@@ -9,13 +9,18 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "async-aws/ses": "^1.4",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^1.12",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.7",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
         "league/flysystem-aws-s3-v3": "^1.0",
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/cors-bundle": "^1.5",
         "nyholm/psr7": "^1.4",
         "oneup/flysystem-bundle": "^3.4",
+        "phpdocumentor/reflection-docblock": "^5.1",
         "pixassociates/sortable-behavior-bundle": "^1.5",
         "ramsey/uuid-doctrine": "^1.6",
         "sensio/framework-extra-bundle": "^5.5",
@@ -37,11 +42,12 @@
         "symfony/http-client": "5.2.*",
         "symfony/mailer": "4.4.*",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/orm-pack": "*",
         "symfony/process": "4.4.*",
+        "symfony/property-access": "4.4.*",
+        "symfony/property-info": "4.4.*",
+        "symfony/proxy-manager-bridge": "4.4.*",
         "symfony/security-bundle": "4.4.*",
         "symfony/serializer": "4.4.*",
-        "symfony/serializer-pack": "*",
         "symfony/translation": "4.4.*",
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
@@ -50,23 +56,27 @@
         "vich/uploader-bundle": "^1.13"
     },
     "require-dev": {
-        "friends-of-behat/mink": "^1.8",
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.3",
+        "friends-of-behat/mink": "^1.8",
         "friends-of-behat/symfony-extension": "^2.1",
         "phpspec/phpspec": "^6.1",
-        "phpstan/phpstan": "^0.11.2",
-        "phpstan/phpstan-symfony": "^0.11.1",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-symfony": "^0.12",
         "roave/security-advisories": "dev-master",
-        "symfony/debug-pack": "*",
+        "symfony/debug-bundle": "^4.4",
         "symfony/maker-bundle": "^1.17",
-        "symfony/profiler-pack": "*"
+        "symfony/stopwatch": "^4.4",
+        "symfony/web-profiler-bundle": "^4.4"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {

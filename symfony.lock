@@ -5,6 +5,9 @@
     "async-aws/ses": {
         "version": "1.4.0"
     },
+    "aws/aws-crt-php": {
+        "version": "v1.0.2"
+    },
     "aws/aws-sdk-php": {
         "version": "3.138.5"
     },
@@ -13,9 +16,6 @@
     },
     "behat/gherkin": {
         "version": "v4.6.2"
-    },
-    "behat/mink": {
-        "version": "1.7.x-dev"
     },
     "behat/symfony2-extension": {
         "version": "2.1",
@@ -47,8 +47,8 @@
     "cocur/slugify": {
         "version": "v4.0.0"
     },
-    "composer/xdebug-handler": {
-        "version": "1.4.1"
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -192,45 +192,6 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
-    "hoa/compiler": {
-        "version": "3.17.08.08"
-    },
-    "hoa/consistency": {
-        "version": "1.17.05.02"
-    },
-    "hoa/event": {
-        "version": "1.17.01.13"
-    },
-    "hoa/exception": {
-        "version": "1.17.01.16"
-    },
-    "hoa/file": {
-        "version": "1.17.07.11"
-    },
-    "hoa/iterator": {
-        "version": "2.17.01.10"
-    },
-    "hoa/math": {
-        "version": "1.17.05.16"
-    },
-    "hoa/protocol": {
-        "version": "1.17.01.14"
-    },
-    "hoa/regex": {
-        "version": "1.17.01.13"
-    },
-    "hoa/stream": {
-        "version": "1.17.02.21"
-    },
-    "hoa/ustring": {
-        "version": "4.17.01.16"
-    },
-    "hoa/visitor": {
-        "version": "2.17.01.16"
-    },
-    "hoa/zformat": {
-        "version": "1.17.01.10"
-    },
     "http-interop/http-factory-guzzle": {
         "version": "1.0.0"
     },
@@ -260,12 +221,6 @@
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
-    },
-    "laminas/laminas-eventmanager": {
-        "version": "3.2.1"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.0.3"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -318,30 +273,6 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
-    "nette/bootstrap": {
-        "version": "v3.0.1"
-    },
-    "nette/di": {
-        "version": "v3.0.4"
-    },
-    "nette/finder": {
-        "version": "v2.5.2"
-    },
-    "nette/neon": {
-        "version": "v3.1.2"
-    },
-    "nette/php-generator": {
-        "version": "v3.3.4"
-    },
-    "nette/robot-loader": {
-        "version": "v3.2.3"
-    },
-    "nette/schema": {
-        "version": "v1.0.2"
-    },
-    "nette/utils": {
-        "version": "v3.1.1"
-    },
     "nikic/php-parser": {
         "version": "v4.4.0"
     },
@@ -357,12 +288,6 @@
             "config/packages/nyholm_psr7.yaml"
         ]
     },
-    "ocramius/package-versions": {
-        "version": "1.8.0"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.8.0"
-    },
     "oneup/flysystem-bundle": {
         "version": "3.0",
         "recipe": {
@@ -375,17 +300,11 @@
             "config/packages/oneup_flysystem.yaml"
         ]
     },
-    "php": {
-        "version": "7.4"
-    },
     "php-http/client-common": {
         "version": "2.1.0"
     },
     "php-http/discovery": {
         "version": "1.7.4"
-    },
-    "php-http/guzzle6-adapter": {
-        "version": "v2.0.1"
     },
     "php-http/httplug": {
         "version": "2.1.0"
@@ -416,9 +335,6 @@
     },
     "phpspec/prophecy": {
         "version": "v1.10.3"
-    },
-    "phpstan/phpdoc-parser": {
-        "version": "0.3.5"
     },
     "phpstan/phpstan": {
         "version": "0.11.19"
@@ -645,9 +561,6 @@
             "config/packages/dev/debug.yaml"
         ]
     },
-    "symfony/debug-pack": {
-        "version": "v1.0.8"
-    },
     "symfony/dependency-injection": {
         "version": "v4.4.8"
     },
@@ -787,9 +700,6 @@
     "symfony/options-resolver": {
         "version": "v4.4.8"
     },
-    "symfony/orm-pack": {
-        "version": "v1.0.8"
-    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.16.0"
     },
@@ -814,14 +724,14 @@
     "symfony/polyfill-php80": {
         "version": "v1.17.0"
     },
+    "symfony/polyfill-php81": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-uuid": {
         "version": "v1.17.0"
     },
     "symfony/process": {
         "version": "v4.4.8"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.4"
     },
     "symfony/property-access": {
         "version": "v4.4.8"
@@ -869,9 +779,6 @@
     },
     "symfony/serializer": {
         "version": "v4.4.8"
-    },
-    "symfony/serializer-pack": {
-        "version": "v1.0.3"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"
@@ -989,9 +896,6 @@
         "files": [
             "config/packages/vich_uploader.yaml"
         ]
-    },
-    "webimpress/safe-writer": {
-        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.8.0"
