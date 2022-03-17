@@ -87,7 +87,7 @@ class UserSubscriber implements EventSubscriberInterface
     public function onCourseCreated(NewCourseAddedEvent $event): void
     {
         $user = $event->user;
-        /** @var Course[] $userCourses */
+        /** @var Course $course */
         $course = $event->course;
 
         $email = $this->createEmail($user);

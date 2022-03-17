@@ -82,6 +82,33 @@ final class ApiUsersController extends AbstractController
         return new Response($this->serializer->serialize(ErrorHandler::getErrorsFromForm($form), 'json'), Response::HTTP_BAD_REQUEST);
     }
 
+    public function removeCourseFromUser(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserManagerInterface $userManager
+    ): Response
+    {
+        if (!$request->request->has('email')) {
+            return new JsonResponse(['message' => 'User email is not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (!$request->request->has('course')) {
+            return new JsonResponse(['message' => 'Course title is not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $user = $userManager->getOrCreateUser($request->request->get('email'));
+
+        if (null !== $courseTitle = $request->request->get('course')) {
+            $userManager->removeCourseByTitleOrSku($user, $courseTitle);
+
+            $entityManager->flush();
+        }
+
+
+        return new Response($this->serializer->serialize($user, 'json', ['groups' => ['user_details']]), Response::HTTP_OK);
+    }
+
+
     public function requestPasswordReset(
         Request $request,
         FormFactoryInterface $formFactory,

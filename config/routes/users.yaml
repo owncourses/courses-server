@@ -13,6 +13,11 @@ api_integration_register:
     methods: POST
     controller: App\Controller\ApiUsersController::registerOrUpdateUser
 
+api_integration_remove_course:
+    path: /api/integration/users/courses
+    methods: DELETE
+    controller: App\Controller\ApiUsersController::removeCourseFromUser
+
 api_users_pasword_reset_request:
     path: /api/users/password/reset_request
     methods: POST
