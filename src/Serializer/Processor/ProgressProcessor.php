@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Serializer\Processor;
 
+use App\Entity\User;
 use App\Model\CourseInterface;
 use App\Model\LessonInterface;
 use App\Model\ModuleInterface;
@@ -31,8 +32,9 @@ final class ProgressProcessor
 
     public function process(object $object, array $data): array
     {
+        /** @var User $user */
         $user = $this->security->getUser();
-        if (null === $user) {
+        if (null === $user || !$user->getId()) {
             return $data;
         }
 

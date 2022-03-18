@@ -1,4 +1,4 @@
-FROM ahilles107/php-docker:7.4
+FROM ahilles107/php-docker:8.0
 
 ENV APP_ENV=prod
 ENV APP_DEBUG=0

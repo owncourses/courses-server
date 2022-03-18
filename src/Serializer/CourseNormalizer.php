@@ -28,6 +28,10 @@ class CourseNormalizer implements NormalizerInterface
 
     public function normalize($object, $format = null, array $context = [])
     {
+        if (!$object instanceof CourseInterface) {
+            return [];
+        }
+
         $data = $this->normalizer->normalize($object, $format, $context);
         $data = $this->fileHrefProcessor->process($object, $data);
         $data = $this->progressProcessor->process($object, $data);
